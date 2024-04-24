@@ -13,6 +13,10 @@ config_version=4
 config/name="Space Shooter Redux"
 config/icon="res://icon.png"
 
+[autoload]
+
+ToolBar="*res://sigletons/tool_bar/ToolBarSigleton.gd"
+
 [display]
 
 window/size/resizable=false

@@ -3,6 +3,7 @@ extends Node2D
 onready var player = $PlayerShip1Orange
 
 func _input(event):
+	return
 	if event is InputEventKey:
 		if event.scancode == KEY_ESCAPE and event.pressed:
 			OS.window_maximized = false
