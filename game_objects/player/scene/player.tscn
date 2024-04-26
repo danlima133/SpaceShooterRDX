@@ -12,23 +12,18 @@ script = ExtResource( 1 )
 [node name="texture" type="Sprite" parent="."]
 texture = ExtResource( 4 )
 
-[node name="visibility" type="VisibilityNotifier2D" parent="texture"]
-position = Vector2( -5, -5 )
-rect = Rect2( 0, 0, 10, 10 )
-
 [node name="attributes" type="Node" parent="."]
 script = ExtResource( 2 )
 _velocity = 200
 
 [node name="player_flags" type="Node" parent="."]
 script = ExtResource( 3 )
-Flags = {
-0: true,
-1: false
-}
 
 [node name="contetion" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[connection signal="screen_entered" from="texture/visibility" to="contetion" method="_on_visibility_screen_entered"]
-[connection signal="screen_exited" from="texture/visibility" to="contetion" method="_on_visibility_screen_exited"]
+[node name="visibility" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -5, -5, 10, 10 )
+
+[connection signal="screen_entered" from="visibility" to="contetion" method="_on_visibility_screen_entered"]
+[connection signal="screen_exited" from="visibility" to="contetion" method="_on_visibility_screen_exited"]
