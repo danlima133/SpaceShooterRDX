@@ -1,4 +1,4 @@
-extends Node
+extends Componet
 
 export var _velocity:int
 
