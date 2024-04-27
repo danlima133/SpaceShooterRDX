@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/playerShip2_green.png-fc3dc7fb7f5cc1d837ad3a8075b135f6.stex"
+path="res://.import/playerShip3_green.png-fd1f7581a8ed2e1d58cd84cf33b93c62.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/playerShip2_green.png"
-dest_files=[ "res://.import/playerShip2_green.png-fc3dc7fb7f5cc1d837ad3a8075b135f6.stex" ]
+source_file="res://assets/sprites/player/nvl_3/playerShip3_green.png"
+dest_files=[ "res://.import/playerShip3_green.png-fd1f7581a8ed2e1d58cd84cf33b93c62.stex" ]
 
 [params]
 

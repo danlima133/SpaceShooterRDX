@@ -9,12 +9,24 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Componet",
+"language": "GDScript",
+"path": "res://interfaces/Componet.gd"
+}, {
+"base": "Node",
+"class": "ManagerComponets",
+"language": "GDScript",
+"path": "res://manager_componets/scripts/manager_componets.gd"
+}, {
 "base": "Node2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://game_objects/player/script/player.gd"
 } ]
 _global_script_class_icons={
+"Componet": "",
+"ManagerComponets": "",
 "Player": ""
 }
 
