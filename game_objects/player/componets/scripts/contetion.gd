@@ -29,4 +29,3 @@ func _init_componet():
 
 func _process(_delta):
 	visibility.position = (player.playerLastDir * texture.texture.get_size()) * Vector2(rangeMax, rangeMax)
-	print(getWaring())
