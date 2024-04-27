@@ -13,7 +13,7 @@ var _warning = false
 
 var player_flags:Componet
 
-func getWaring() -> bool:
+func getWarning() -> bool:
 	return _warning
 
 func _on_visibility_screen_exited():

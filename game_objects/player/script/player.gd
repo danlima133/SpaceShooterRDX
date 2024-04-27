@@ -30,11 +30,13 @@ func _movement(delta):
 	translate(playerDir.normalized() * manager_componets.getComponet(0).getVelocity() * delta)
 
 func _draw():
-	draw_rect(Rect2(visibility.position.x, visibility.position.y, 10, 10), Color.red, true)
+	draw_rect(Rect2(visibility.position.x + (-5), visibility.position.y + (-5), 10, 10), Color.red, true)
 
 func _physics_process(delta):
 	if manager_componets.getComponet(1).getFlagState(manager_componets.getComponet(1).MOVEMENT):
 		_movement(delta)
 	
 	update()
+	
+	get_parent().get_node("debug").text = "warning = " + str(manager_componets.getComponet(2).getWarning())
 	
