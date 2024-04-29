@@ -1,7 +1,7 @@
 extends Node
 class_name ManagerComponets
 
-signal MangerComponetsInitialize(componetsInit)
+signal MangerComponetsInitialize(componetsInit, manager)
 
 var _componets:Array
 
@@ -24,4 +24,4 @@ func getComponet(id:int):
 func _initialazeComponets():
 	for componet in _componets:
 		componet._init_componet()
-	emit_signal("MangerComponetsInitialize", _componets.size())
+	emit_signal("MangerComponetsInitialize", _componets.size(), self)

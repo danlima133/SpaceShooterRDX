@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game_objects/player/script/player.gd" type="Script" id=1]
 [ext_resource path="res://game_objects/player/componets/scripts/attributes.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/sprites/player/nvl_2/playerShip2_green.png" type="Texture" id=4]
 [ext_resource path="res://game_objects/player/componets/scripts/contetion.gd" type="Script" id=5]
 [ext_resource path="res://manager_componets/componets/manager_componets.tscn" type="PackedScene" id=6]
+[ext_resource path="res://manager_componets/scripts/object_pooling.gd" type="Script" id=7]
 
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )
@@ -30,5 +31,21 @@ _id = 1
 script = ExtResource( 5 )
 _id = 2
 
+[node name="object_pooling" type="Node" parent="."]
+script = ExtResource( 7 )
+configPooling = {
+"bullets": {
+"count": 3,
+"object": "res://tests/scenes/poolings/teste_poopling2.tscn"
+},
+"powerUps": {
+"count": 10,
+"object": "res://tests/scenes/poolings/teste_poopling.tscn"
+}
+}
+
+[node name="data" type="Node" parent="object_pooling"]
+
 [connection signal="screen_entered" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_entered"]
 [connection signal="screen_exited" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_exited"]
+[connection signal="MangerComponetsInitialize" from="manager_componets" to="." method="_on_manager_componets_MangerComponetsInitialize"]
