@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game_objects/player/script/player.gd" type="Script" id=1]
 [ext_resource path="res://game_objects/player/componets/scripts/attributes.gd" type="Script" id=2]
 [ext_resource path="res://game_objects/player/componets/scripts/player_flags.gd" type="Script" id=3]
-[ext_resource path="res://assets/sprites/player/nvl_2/playerShip2_green.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/player/nvl_2/B.png" type="Texture" id=4]
 [ext_resource path="res://game_objects/player/componets/scripts/contetion.gd" type="Script" id=5]
 [ext_resource path="res://manager_componets/componets/manager_componets.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game_objects/player/componets/scripts/player_skin.gd" type="Script" id=7]
+[ext_resource path="res://assets/sprites/player/nvl_1/A.png" type="Texture" id=8]
 
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )
@@ -29,6 +31,10 @@ _id = 1
 [node name="contetion" type="Node" parent="manager_componets"]
 script = ExtResource( 5 )
 _id = 2
+
+[node name="player_skin" type="Node" parent="manager_componets"]
+script = ExtResource( 7 )
+spriteDefault = ExtResource( 8 )
 
 [connection signal="screen_entered" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_entered"]
 [connection signal="screen_exited" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_exited"]
