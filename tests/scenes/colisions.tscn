@@ -53,16 +53,6 @@ _timerToHit = 1.0
 modulate = Color( 0.94902, 0.0823529, 0.0392157, 1 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="hit_box"]
-modulate = Color( 0.94902, 0.0823529, 0.0392157, 1 )
-position = Vector2( -1, 19 )
-shape = SubResource( 2 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="hit_box"]
-modulate = Color( 0.94902, 0.0823529, 0.0392157, 1 )
-position = Vector2( -2, -26 )
-shape = SubResource( 2 )
-
 [connection signal="hurtEvent" from="hurt_box" to="." method="_on_hurt_box_hurtEvent"]
 [connection signal="hurtNoValue" from="hurt_box" to="." method="_on_hurt_box_hurtNoValue"]
 [connection signal="hurtEvent" from="hurt_box2" to="." method="_on_hurt_box2_hurtEvent"]

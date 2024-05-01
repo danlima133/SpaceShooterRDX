@@ -19,7 +19,7 @@ func setActive(value:bool, config:Dictionary = {}):
 	
 	match config.all:
 		true:
-			_controllerShapes(range(get_child_count()-1), value)
+			_controllerShapes(range(get_child_count()), value)
 		false:
 			_controllerShapes(config.shapeIdx, value)
 	
@@ -39,7 +39,7 @@ func _collisionExitBox(box):
 func _controllerShapes(indexs:Array, value:bool):
 	for index in indexs:
 		var shape = get_child(index) as CollisionShape2D
-		shape.set_deferred("disabled", value)
+		shape.set_deferred("disabled", !value)
 
 func _setDicValuesDefault(dic):
 	if !dic.has("all"):

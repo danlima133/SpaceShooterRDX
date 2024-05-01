@@ -21,11 +21,8 @@ func _input(event):
 					hurt_box2.hurt(200)
 				KEY_3:
 					hit_box.setHitContinues(!hit_box.getHitContinues())
-			#hit_box.setTimerHit(0.3)
-			#hit_box.setActive(!hit_box.getActive(), {
-				#"all": false,
-				#"shapeIdx": [ 1, 2 ]
-			#})
+				KEY_4:
+					hit_box.setActive(!hit_box.getActive())
 
 func _process(delta):
 	hit_box.global_position = get_global_mouse_position()
