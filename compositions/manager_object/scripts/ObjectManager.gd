@@ -13,7 +13,7 @@ func _initObject():
 		_objectProcess = get_node(objectProcess)
 		_objectProcess._objectManager = self
 		_objectProcess._objectRoot = get_parent()
-		_objectProcess.emit_signal("initObjectProcess")
+		_objectProcess.emit_signal("objectProcessInit")
 		return true
 	return false
 
