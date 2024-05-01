@@ -9,6 +9,8 @@ export(float) var _hitValue
 export(bool) var _hitContinues
 export(float) var _timerToHit
 
+var _currentHurtBox:HurtBox
+
 var timer:Timer
 
 func _ready():
@@ -16,27 +18,29 @@ func _ready():
 
 func _collisionEnterBox(box):
 	if !checkColliders(box.id, filterHurtBox):
+		_currentHurtBox = box
 		emit_signal("hitEvent", self)
 		box.hurt(_hitValue)
 		emit_signal("hitEvent", self)
 		if _hitContinues:
-			_createTimerOrActive([ box ])
+			_createTimerOrActive()
 
 func _collisionExitBox(box):
+	_currentHurtBox = null
 	if timer != null:
 		timer.stop()
 
-func _hitOnTime(box):
+func _hitOnTime():
 	emit_signal("hitEvent", self)
-	box.hurt(_hitValue)
+	_currentHurtBox.hurt(_hitValue)
 	timer.start()
 
-func _createTimerOrActive(args):
+func _createTimerOrActive():
 	if timer == null:
 		timer = Timer.new()
 		timer.one_shot = true
 		timer.wait_time = _timerToHit
-		var erro = timer.connect("timeout", self, "_hitOnTime", [ args[0] ])
+		var erro = timer.connect("timeout", self, "_hitOnTime")
 		add_child(timer)
 		timer.start()
 	else:

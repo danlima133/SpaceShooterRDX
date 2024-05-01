@@ -11,7 +11,10 @@ onready var label_2 = $Label2
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			hit_box.setActive(!hit_box.getActive())
+			hit_box.setActive(!hit_box.getActive(), {
+				"all": false,
+				"shapeIdx": [ 1, 2 ]
+			})
 
 func _process(delta):
 	hit_box.global_position = get_global_mouse_position()

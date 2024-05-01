@@ -12,22 +12,16 @@ func initCollisionBox(colisionBox:CollisionBox):
 	connect("area_exited", colisionBox, "_collisionExitBox")
 	emit_signal("boxInit", colisionBox)
 
-func setActive(value:bool, indexs = -1) -> Dictionary:
+func setActive(value:bool, config:Dictionary = {}):
 	_active = value
-	var shapesChange = {}
+	_setDicValuesDefault(config)
 	
-	if indexs is int:
-		if indexs == -1:
-			indexs = get_child_count() - 1
+	match config.all:
+		true:
+			_controllerShapes(range(get_child_count()), value)
+		false:
+			_controllerShapes(config.shapeIdx, value)
 	
-	for index in indexs:
-		var shape = get_child(index) as CollisionShape2D
-		if !shape.disabled == value:
-			continue
-		shape.set_deferred("disabled", !value)
-		shapesChange[index] = shape.disabled
-	
-	return shapesChange
 
 func getActive() -> bool:
 	return _active
@@ -37,3 +31,14 @@ func _collisionEnterBox(box):
 
 func _collisionExitBox(box):
 	pass
+
+func _controllerShapes(indexs:Array, value:bool):
+	for index in indexs:
+		var shape = get_child(index) as CollisionShape2D
+		shape.set_deferred("disabled", value)
+
+func _setDicValuesDefault(dic):
+	if !dic.has("all"):
+		dic["all"] = true
+	if !dic.has("shapeIdx"):
+		dic["shapeIdx"] = []
