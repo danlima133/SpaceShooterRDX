@@ -104,11 +104,6 @@ player_right={
  ]
 }
 
-[layer_names]
-
-2d_physics/layer_2="hurtBox"
-2d_physics/layer_3="hitBox"
-
 [physics]
 
 common/enable_pause_aware_picking=true

@@ -1,9 +1,9 @@
 extends CollisionBox
 class_name HitBox
 
-signal hitEvent(hurtBox)
+signal hitEvent(hitBox)
 
-export(Array, int) var colliders
+export(Array, int) var filterHurtBox
 
 export(float) var _hitValue
 export(bool) var _hitContinues
@@ -15,9 +15,10 @@ func _ready():
 	initCollisionBox(self)
 
 func _collisionEnterBox(box):
-	if checkColliders(box.id, colliders):
-		emit_signal("hitEvent", box)
-		box.hurt(_hitValue, self)
+	if !checkColliders(box.id, filterHurtBox):
+		emit_signal("hitEvent", self)
+		box.hurt(_hitValue)
+		emit_signal("hitEvent", self)
 		if _hitContinues:
 			_createTimerOrActive([ box ])
 
@@ -26,6 +27,7 @@ func _collisionExitBox(box):
 		timer.stop()
 
 func _hitOnTime(box):
+	emit_signal("hitEvent", self)
 	box.hurt(_hitValue)
 	timer.start()
 
@@ -34,15 +36,13 @@ func _createTimerOrActive(args):
 		timer = Timer.new()
 		timer.one_shot = true
 		timer.wait_time = _timerToHit
-		timer.connect("timeout", self, "_hitOnTime", [ args[0] ])
+		var erro = timer.connect("timeout", self, "_hitOnTime", [ args[0] ])
 		add_child(timer)
 		timer.start()
 	else:
 		timer.start()
 
 func checkColliders(idCollider:int, groupCollider:Array):
-	if groupCollider.size() == 0:
-		return true
 	return (idCollider in groupCollider)
 
 func setHit(value):

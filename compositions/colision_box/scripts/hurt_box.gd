@@ -1,7 +1,8 @@
 extends CollisionBox
 class_name HurtBox
 
-signal hurtEvent(hitBox)
+signal hurtEvent(hurtBox)
+signal hurtNoValue(hurtBox)
 
 enum {
 	PLUS,
@@ -22,12 +23,16 @@ func setHurtLimit(value):
 func getHurtLimit() -> float:
 	return _hurtLimit
 
+func setHurtMax(value):
+	_hurtMaxValue = value
+
+func getHurtMax():
+	return _hurtMaxValue
+
 func getHurt() -> float:
 	return _hurtValue
 
-func hurt(value:float, hitBox, operation:int = SUBTRACT):
-	emit_signal("hurtEvent", hitBox)
-	
+func hurt(value:float, operation:int = SUBTRACT):
 	match operation:
 		PLUS:
 			_hurtValue += value
@@ -35,3 +40,8 @@ func hurt(value:float, hitBox, operation:int = SUBTRACT):
 			_hurtValue -= value
 	
 	_hurtValue = clamp(_hurtValue, _hurtLimit, _hurtMaxValue)
+	
+	emit_signal("hurtEvent", self)
+	
+	if _hurtValue <= _hurtLimit:
+		emit_signal("hurtNoValue", self)
