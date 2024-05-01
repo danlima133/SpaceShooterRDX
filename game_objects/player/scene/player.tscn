@@ -33,16 +33,6 @@ _id = 2
 
 [node name="object_pooling" type="Node" parent="."]
 script = ExtResource( 7 )
-configPooling = {
-"bullets": {
-"count": 3,
-"object": "res://tests/scenes/poolings/teste_poopling2.tscn"
-},
-"powerUps": {
-"count": 10,
-"object": "res://tests/scenes/poolings/teste_poopling.tscn"
-}
-}
 
 [node name="data" type="Node" parent="object_pooling"]
 

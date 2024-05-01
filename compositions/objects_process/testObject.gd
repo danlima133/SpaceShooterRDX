@@ -4,7 +4,6 @@ onready var lifetime = $"../lifetime"
 
 func _objectEnter():
 	getObjetcRoot().hide()
-	print_debug()
 
 func _reset(data:Dictionary):
 	get_parent().hide()
