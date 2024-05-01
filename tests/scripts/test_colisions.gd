@@ -9,12 +9,23 @@ onready var label = $Label
 onready var label_2 = $Label2
 
 func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed:
-			hit_box.setActive(!hit_box.getActive(), {
-				"all": false,
-				"shapeIdx": [ 1, 2 ]
-			})
+	if event is InputEventKey:
+		if event.pressed:
+			match event.scancode:
+				KEY_0:
+					hurt_box2.setHurtMax(300)
+				KEY_1:
+					hurt_box2.hurt(20, hurt_box2.PLUS)
+					hurt_box2.setHurtLimit(-100)
+				KEY_2:
+					hurt_box2.hurt(200)
+				KEY_3:
+					hit_box.setHitContinues(!hit_box.getHitContinues())
+			#hit_box.setTimerHit(0.3)
+			#hit_box.setActive(!hit_box.getActive(), {
+				#"all": false,
+				#"shapeIdx": [ 1, 2 ]
+			#})
 
 func _process(delta):
 	hit_box.global_position = get_global_mouse_position()
@@ -37,4 +48,16 @@ func _on_hurt_box2_hurtEvent(hurtBox):
 
 func _on_hurt_box2_hurtNoValue(hurtBox):
 	hurtBox.hide()
-	
+
+func _on_hurt_box2_update(property, value, box:HurtBox):
+	match property:
+		box.propertyNames.HURT_MAX:
+			print("set max hurt")
+			label_2.text = str(box.getHurt()) + "/" + str(value)
+		box.propertyNames.HURT_LIMIT:
+			print("set limit hurt")
+
+func _on_hit_box_updateProperty(property, value, box:HitBox):
+	match property:
+		box.propertyNames.HIT_CONTINUES:
+			print("set hit continues")

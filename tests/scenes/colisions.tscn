@@ -67,3 +67,4 @@ shape = SubResource( 2 )
 [connection signal="hurtNoValue" from="hurt_box" to="." method="_on_hurt_box_hurtNoValue"]
 [connection signal="hurtEvent" from="hurt_box2" to="." method="_on_hurt_box2_hurtEvent"]
 [connection signal="hurtNoValue" from="hurt_box2" to="." method="_on_hurt_box2_hurtNoValue"]
+[connection signal="updateProperty" from="hit_box" to="." method="_on_hit_box_updateProperty"]

@@ -2,6 +2,7 @@ extends Area2D
 class_name CollisionBox
 
 signal boxInit(box)
+signal updateProperty(property, value, box)
 
 export(int) var id
 
@@ -18,10 +19,13 @@ func setActive(value:bool, config:Dictionary = {}):
 	
 	match config.all:
 		true:
-			_controllerShapes(range(get_child_count()), value)
+			_controllerShapes(range(get_child_count()-1), value)
 		false:
 			_controllerShapes(config.shapeIdx, value)
 	
+
+func updateProperty(property:int, value, box:CollisionBox):
+	emit_signal("updateProperty", property, value, box)
 
 func getActive() -> bool:
 	return _active
