@@ -53,7 +53,7 @@ func _makeObjectsByConfig():
 				objectManager._setGroup(group)
 				var isOk = objectManager._initObject()
 				if isOk:
-					objectManager._reset()
+					objectManager._objectEnter()
 			
 			controllerObjects[group].append(objectManager)
 			groupNode.add_child(object)

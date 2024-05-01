@@ -13,6 +13,7 @@ func _initObject():
 		_objectProcess = get_node(objectProcess)
 		_objectProcess._objectManager = self
 		_objectProcess._objectRoot = get_parent()
+		_objectProcess.emit_signal("initObjectProcess")
 		return true
 	return false
 
@@ -35,6 +36,10 @@ func _spaw(data:Dictionary = {}) -> ObjectManager:
 	_setActive(true)
 	_objectProcess._spaw(data)
 	return self
+
+func _objectEnter():
+	_setActive(false)
+	_objectProcess._objectEnter()
 
 func _reset(data:Dictionary = {}) -> ObjectManager:
 	_setActive(false)

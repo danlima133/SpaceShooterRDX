@@ -5,6 +5,10 @@ onready var lifetime = $"../lifetime"
 func _ready():
 	randomize()
 
+func _objectEnter():
+	get_parent().hide()
+	get_parent().global_position = Vector2.ZERO
+
 func _reset(data:Dictionary):
 	get_parent().hide()
 	get_parent().global_position = Vector2.ZERO
