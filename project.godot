@@ -9,10 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "CollisionBox",
+"language": "GDScript",
+"path": "res://interfaces/ColisionBox.gd"
+}, {
 "base": "Node",
 "class": "Componet",
 "language": "GDScript",
 "path": "res://interfaces/Componet.gd"
+}, {
+"base": "CollisionBox",
+"class": "HitBox",
+"language": "GDScript",
+"path": "res://compositions/colision_box/scripts/hit_box.gd"
+}, {
+"base": "CollisionBox",
+"class": "HurtBox",
+"language": "GDScript",
+"path": "res://compositions/colision_box/scripts/hurt_box.gd"
 }, {
 "base": "Node",
 "class": "ManagerComponets",
@@ -40,7 +55,10 @@ _global_script_classes=[ {
 "path": "res://game_objects/player/script/player.gd"
 } ]
 _global_script_class_icons={
+"CollisionBox": "",
 "Componet": "",
+"HitBox": "",
+"HurtBox": "",
 "ManagerComponets": "",
 "ObjectManager": "",
 "ObjectPooling": "",
@@ -85,6 +103,11 @@ player_right={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_2="hurtBox"
+2d_physics/layer_3="hitBox"
 
 [physics]
 
