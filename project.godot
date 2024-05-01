@@ -19,6 +19,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://manager_componets/scripts/manager_componets.gd"
 }, {
+"base": "Node",
+"class": "ObjectManager",
+"language": "GDScript",
+"path": "res://compositions/manager_object/scripts/ObjectManager.gd"
+}, {
+"base": "Node",
+"class": "ObjectPooling",
+"language": "GDScript",
+"path": "res://manager_componets/scripts/object_pooling.gd"
+}, {
+"base": "Node",
+"class": "ObjectProcess",
+"language": "GDScript",
+"path": "res://interfaces/ObjetcProcess.gd"
+}, {
 "base": "Node2D",
 "class": "Player",
 "language": "GDScript",
@@ -27,6 +42,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Componet": "",
 "ManagerComponets": "",
+"ObjectManager": "",
+"ObjectPooling": "",
+"ObjectProcess": "",
 "Player": ""
 }
 

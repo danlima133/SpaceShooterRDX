@@ -13,7 +13,7 @@ var _warning = false
 
 var player_flags:Componet
 
-func getWaring() -> bool:
+func getWarning() -> bool:
 	return _warning
 
 func _on_visibility_screen_exited():
@@ -29,4 +29,3 @@ func _init_componet():
 
 func _process(_delta):
 	visibility.position = (player.playerLastDir * texture.texture.get_size()) * Vector2(rangeMax, rangeMax)
-	print(getWaring())
