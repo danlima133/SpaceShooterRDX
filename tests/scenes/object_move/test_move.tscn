@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://compositions/motion_engine/scenes/motion_engine.tscn" type="PackedScene" id=1]
+[ext_resource path="res://compositions/motion_engine/motion_configs/test_config.tres" type="Resource" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://tests/scripts/test_motion_engine.gd" type="Script" id=4]
+[ext_resource path="res://compositions/motion_engine/motion_configs/test_2.tres" type="Resource" id=5]
+[ext_resource path="res://compositions/motion_engine/motion_configs/player_laser.tres" type="Resource" id=6]
+[ext_resource path="res://assets/sprites/laser/laserBlue01.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/laser/laserBlue05.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/laser/laserBlue07.png" type="Texture" id=9]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 269, 77 )
+texture = ExtResource( 3 )
+
+[node name="motion_engine" parent="Sprite" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 2 )
+
+[node name="Sprite7" type="Sprite" parent="."]
+position = Vector2( 402, 83 )
+texture = ExtResource( 3 )
+
+[node name="motion_engine" parent="Sprite7" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+modulate = Color( 0.960784, 0.0980392, 0.0980392, 1 )
+position = Vector2( 486, 320 )
+texture = ExtResource( 3 )
+
+[node name="motion_engine" parent="Sprite2" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 5 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+modulate = Color( 0.960784, 0.0980392, 0.0980392, 1 )
+position = Vector2( 591, 317 )
+texture = ExtResource( 3 )
+
+[node name="motion_engine" parent="Sprite5" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 5 )
+
+[node name="Sprite6" type="Sprite" parent="."]
+modulate = Color( 0.960784, 0.0980392, 0.0980392, 1 )
+position = Vector2( 534, 410 )
+texture = ExtResource( 3 )
+
+[node name="motion_engine" parent="Sprite6" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 5 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 555, 88 )
+texture = ExtResource( 3 )
+
+[node name="motion_engine" parent="Sprite3" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 2 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 730, 102 )
+texture = ExtResource( 3 )
+
+[node name="motion_engine" parent="Sprite4" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 2 )
+
+[node name="Sprite8" type="Sprite" parent="."]
+position = Vector2( 277.5, 669 )
+texture = ExtResource( 7 )
+
+[node name="motion_engine" parent="Sprite8" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 6 )
+
+[node name="Sprite9" type="Sprite" parent="."]
+position = Vector2( 192.5, 669 )
+texture = ExtResource( 7 )
+
+[node name="motion_engine" parent="Sprite9" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 6 )
+
+[node name="Sprite10" type="Sprite" parent="."]
+position = Vector2( 842.5, 669 )
+texture = ExtResource( 8 )
+
+[node name="motion_engine" parent="Sprite10" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 6 )
+
+[node name="Sprite11" type="Sprite" parent="."]
+position = Vector2( 775, 669 )
+texture = ExtResource( 9 )
+
+[node name="motion_engine" parent="Sprite11" instance=ExtResource( 1 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 6 )

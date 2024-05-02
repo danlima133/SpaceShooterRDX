@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://manager_componets/scripts/manager_componets.gd"
 }, {
+"base": "Resource",
+"class": "MotionConfig",
+"language": "GDScript",
+"path": "res://compositions/motion_engine/scripts/MotionConfig.gd"
+}, {
 "base": "Node",
 "class": "ObjectManager",
 "language": "GDScript",
@@ -60,6 +65,7 @@ _global_script_class_icons={
 "HitBox": "",
 "HurtBox": "",
 "ManagerComponets": "",
+"MotionConfig": "",
 "ObjectManager": "",
 "ObjectPooling": "",
 "ObjectProcess": "",
