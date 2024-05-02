@@ -31,7 +31,6 @@ func _collisionExitBox(box):
 
 func _hurtOnTime(hitBox):
 	if hitBox.getHitContinues():
-		emit_signal("hurtEvent", self)
 		hurt(hitBox._hitValue)
 		timer.start()
 	else:
