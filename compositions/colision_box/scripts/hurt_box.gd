@@ -58,7 +58,7 @@ func getHurtLimit() -> float:
 
 func setHurtMax(value):
 	_hurtMaxValue = value
-	updateProperty(propertyNames.HURT_LIMIT, _hurtMaxValue, self)
+	updateProperty(propertyNames.HURT_MAX, _hurtMaxValue, self)
 	
 func getHurtMax():
 	return _hurtMaxValue

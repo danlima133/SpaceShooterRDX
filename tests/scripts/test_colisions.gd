@@ -15,7 +15,6 @@ func _input(event):
 				KEY_0:
 					hurt_box2.setHurtMax(300)
 				KEY_1:
-					hurt_box2.hurt(20, hurt_box2.PLUS)
 					hurt_box2.setHurtLimit(-100)
 				KEY_2:
 					hurt_box2.hurt(200)
@@ -23,6 +22,10 @@ func _input(event):
 					hit_box.setHitContinues(!hit_box.getHitContinues())
 				KEY_4:
 					hit_box.setActive(!hit_box.getActive())
+				KEY_5:
+					hit_box.setHit(20)
+				KEY_6:
+					hurt_box2.hurt(50, hurt_box2.PLUS)
 
 func _process(delta):
 	hit_box.global_position = get_global_mouse_position()
@@ -42,6 +45,7 @@ func _on_hurt_box_hurtNoValue(hurtBox):
 
 func _on_hurt_box2_hurtEvent(hurtBox):
 	label_2.text = str(hurtBox.getHurt()) + "/" + str(hurtBox.getHurtMax())
+	print("set hurt")
 
 func _on_hurt_box2_hurtNoValue(hurtBox):
 	hurtBox.hide()
@@ -58,3 +62,5 @@ func _on_hit_box_updateProperty(property, value, box:HitBox):
 	match property:
 		box.propertyNames.HIT_CONTINUES:
 			print("set hit continues")
+		box.propertyNames.HIT_VALUE:
+			print("set hit value")
