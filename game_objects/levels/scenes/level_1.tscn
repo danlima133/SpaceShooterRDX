@@ -6,9 +6,9 @@
 [node name="level_1" type="Node2D"]
 
 [node name="background" parent="." instance=ExtResource( 1 )]
-backgroundType = 1
+backgroundType = 2
 configBackground = {
-"imageIdx": 4,
+"imageIdx": 1,
 "random": false
 }
 
