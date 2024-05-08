@@ -25,12 +25,12 @@ func getMoveByRulesAndConfig() -> Vector2:
 		_xDir = rand_range(-1, 1)
 		_yDir = rand_range(-1, 1)
 	
-	if motionConfig.axioFix["axioX"]["fix"]:
-		_xDir = motionConfig.axioFix["axioX"]["value"]
+	if motionConfig.xFix:
+		_xDir = motionConfig.direction.x
 	elif !motionConfig.directionRandom:
 		_xDir = motionConfig.direction.x
-	if motionConfig.axioFix["axioY"]["fix"]:
-		_yDir = motionConfig.axioFix["axioY"]["value"]
+	if motionConfig.yFix:
+		_yDir = motionConfig.direction.y
 	elif !motionConfig.directionRandom:
 		_yDir = motionConfig.direction.y
 	

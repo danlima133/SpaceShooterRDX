@@ -6,17 +6,8 @@ export(int) var velocityMin
 export(int) var velocityMax
 
 export(Vector2) var direction
+export(bool) var xFix = false
+export(bool) var yFix = false
 
 export(bool) var directionRandom = true
 export(bool) var velocityRandom = true
-
-export(Dictionary) var axioFix = {
-	"axioX": {
-		"fix": false,
-		"value": 0
-	},
-	"axioY": {
-		"fix": false,
-		"value": 0
-	}
-}
