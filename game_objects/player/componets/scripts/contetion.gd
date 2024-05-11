@@ -17,12 +17,14 @@ func getWarning() -> bool:
 	return _warning
 
 func _on_visibility_screen_exited():
-	if player_flags.getFlagState(player_flags.BOUNDS):
-		_warning = true
-		
+	_setterWarnig(true)
+	
 func _on_visibility_screen_entered():
-	if player_flags.getFlagState(player_flags.BOUNDS):
-		_warning = false
+	_setterWarnig(false)
+
+func _setterWarnig(value):
+	if player_flags.getFlagState("bounds"):
+		_warning = value
 
 func _init_componet():
 	player_flags = currentManager.getComponet(1)

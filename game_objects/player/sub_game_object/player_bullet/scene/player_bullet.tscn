@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://compositions/motion_engine/motion_configs/player_laser.tres" type="Resource" id=1]
+[ext_resource path="res://compositions/motion_engine/scenes/motion_engine.tscn" type="PackedScene" id=2]
+[ext_resource path="res://compositions/colision_box/scenes/hit_box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sprites/laser/laserGreen09.png" type="Texture" id=4]
+[ext_resource path="res://compositions/manager_object/scripts/ObjectManager.gd" type="Script" id=5]
+[ext_resource path="res://game_objects/player/sub_game_object/player_bullet/script/laser_process.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.0
+height = 28.0
+
+[node name="player_bullet" type="Node2D"]
+
+[node name="texture" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="ObjectManager" type="Node" parent="."]
+script = ExtResource( 5 )
+objectProcess = NodePath("../laser_process")
+
+[node name="laser_process" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="hit_box" parent="." instance=ExtResource( 3 )]
+id = 50
+_hitValue = 1.0
+
+[node name="shape" type="CollisionShape2D" parent="hit_box"]
+shape = SubResource( 1 )
+
+[node name="motion_engine" parent="." instance=ExtResource( 2 )]
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 1 )
+initActive = false
+
+[node name="controller_reset" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -9.53674e-07, -63 )
+scale = Vector2( 0.35, 0.35 )
+
+[connection signal="hitEvent" from="hit_box" to="laser_process" method="_on_hit_box_hitEvent"]
+[connection signal="screen_exited" from="controller_reset" to="laser_process" method="_on_controller_reset_screen_exited"]

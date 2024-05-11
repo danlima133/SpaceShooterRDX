@@ -15,22 +15,6 @@ var playerLastDir = Vector2.ZERO
 var attributes:Componet
 var player_flgas:Componet
 
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_T:
-			var objects = $object_pooling.spaw({
-				"group": "powerUps",
-				"count": 1
-			})
-			print(objects)
-		
-		if event.pressed and event.scancode == KEY_Y:
-			var objects = $object_pooling.spaw({
-				"group": "bullets",
-				"count": 1
-			}, { "position": global_position })
-			print(objects)
-
 func gameOver(die:String, _data:Dictionary):
 	print('player die: ' + die)
 
@@ -52,13 +36,10 @@ func _draw():
 	draw_rect(Rect2(visibility.position.x + (-5), visibility.position.y + (-5), 10, 10), Color.red, true)
 
 func _physics_process(delta):
-	if player_flgas.getFlagState(player_flgas.MOVEMENT):
+	if player_flgas.getFlagState("movement"):
 		_movement(delta)
 	
 	update()
-	
-	if get_parent().has_node("debug"):
-		get_parent().get_node("debug").text = "warning = " + str(manager_componets.getComponet(2).getWarning())
 	
 func _on_manager_componets_MangerComponetsInitialize(componetsInit:int, manager:ManagerComponets):
 	attributes = manager.getComponet(0)

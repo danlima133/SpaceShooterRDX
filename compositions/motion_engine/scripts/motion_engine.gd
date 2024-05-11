@@ -2,6 +2,7 @@ extends Node
 
 export(NodePath) var rootMotionPath
 export(Resource) var motionConfig
+export(bool) var initActive = true
 
 var _dir:Vector2
 var _velocity:float
@@ -49,8 +50,9 @@ func _move(delta):
 func _ready():
 	if motionConfig is MotionConfig:
 		_dir = getMoveByRulesAndConfig()
-		print(_dir)
 	else: printerr("The motion engine: %s not have motion config" % self)
+	
+	setActive(initActive)
 
 func _physics_process(delta):
 	_move(delta)
