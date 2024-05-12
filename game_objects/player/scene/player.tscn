@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game_objects/player/script/player.gd" type="Script" id=1]
 [ext_resource path="res://game_objects/player/componets/scripts/attributes.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://manager_componets/componets/manager_componets.tscn" type="PackedScene" id=6]
 [ext_resource path="res://manager_componets/scripts/object_pooling.gd" type="Script" id=7]
 [ext_resource path="res://game_objects/player/componets/scripts/shoot_manager.gd" type="Script" id=8]
+[ext_resource path="res://game_objects/player/componets/scripts/dash.gd" type="Script" id=9]
 
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )
@@ -43,6 +44,13 @@ _id = 2
 script = ExtResource( 8 )
 _id = 10
 
+[node name="dash" type="Node" parent="manager_componets"]
+script = ExtResource( 9 )
+_id = 34
+dashForce = 150
+
+[node name="move" type="Tween" parent="manager_componets/dash"]
+
 [node name="object_pooling" type="Node" parent="."]
 script = ExtResource( 7 )
 configPooling = {
@@ -57,3 +65,5 @@ configPooling = {
 [connection signal="screen_entered" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_entered"]
 [connection signal="screen_exited" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_exited"]
 [connection signal="MangerComponetsInitialize" from="manager_componets" to="." method="_on_manager_componets_MangerComponetsInitialize"]
+[connection signal="MangerComponetsInitialize" from="manager_componets" to="manager_componets/dash" method="_on_manager_componets_MangerComponetsInitialize"]
+[connection signal="tween_all_completed" from="manager_componets/dash/move" to="manager_componets/dash" method="_on_move_tween_all_completed"]
