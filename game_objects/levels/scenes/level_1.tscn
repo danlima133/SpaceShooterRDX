@@ -6,7 +6,10 @@
 [node name="level_1" type="Node2D"]
 
 [node name="background" parent="." instance=ExtResource( 1 )]
-backgroundType = 2
+__meta__ = {
+"_edit_lock_": true
+}
+backgroundType = 1
 configBackground = {
 "imageIdx": 1,
 "random": false
@@ -14,11 +17,3 @@ configBackground = {
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 512, 547 )
-
-[node name="debug" type="Label" parent="."]
-margin_left = 10.0
-margin_top = 14.0
-margin_right = 105.0
-margin_bottom = 28.0
-rect_scale = Vector2( 2, 2 )
-text = "warning = false"

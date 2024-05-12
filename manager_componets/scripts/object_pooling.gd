@@ -24,6 +24,7 @@ func spaw(config:Dictionary, data:Dictionary = {}) -> Array:
 			if config.has("count"):
 				if counter == config["count"]:
 					break
+			else: break
 	
 	return objectsManagersSpaw
 

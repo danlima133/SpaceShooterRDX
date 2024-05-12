@@ -1,13 +1,9 @@
 extends Componet
 
-enum {
-	MOVEMENT
-	BOUNDS
-}
-
 export(Dictionary) var Flags = {
-	MOVEMENT: true,
-	BOUNDS: true
+	"movement": true,
+	"bounds": true,
+	"shoot": true
 }
 
 func getFlagState(flagId:int) -> int:

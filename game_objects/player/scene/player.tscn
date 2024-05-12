@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game_objects/player/script/player.gd" type="Script" id=1]
 [ext_resource path="res://game_objects/player/componets/scripts/attributes.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://game_objects/player/componets/scripts/contetion.gd" type="Script" id=5]
 [ext_resource path="res://manager_componets/componets/manager_componets.tscn" type="PackedScene" id=6]
 [ext_resource path="res://manager_componets/scripts/object_pooling.gd" type="Script" id=7]
+[ext_resource path="res://game_objects/player/componets/scripts/shoot_manager.gd" type="Script" id=8]
 
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,6 +18,12 @@ texture = ExtResource( 4 )
 
 [node name="visibility" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -5, -5, 10, 10 )
+
+[node name="shoot_point" type="Position2D" parent="."]
+position = Vector2( 0, -44 )
+__meta__ = {
+"_gizmo_extents_": 20.0
+}
 
 [node name="manager_componets" parent="." instance=ExtResource( 6 )]
 
@@ -32,8 +39,18 @@ _id = 1
 script = ExtResource( 5 )
 _id = 2
 
+[node name="shoot_manager" type="Node" parent="manager_componets"]
+script = ExtResource( 8 )
+_id = 10
+
 [node name="object_pooling" type="Node" parent="."]
 script = ExtResource( 7 )
+configPooling = {
+"bullets": {
+"count": 3,
+"object": "res://game_objects/player/sub_game_object/player_bullet/scene/player_bullet.tscn"
+}
+}
 
 [node name="data" type="Node" parent="object_pooling"]
 
