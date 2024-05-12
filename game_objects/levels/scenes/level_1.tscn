@@ -9,9 +9,9 @@
 __meta__ = {
 "_edit_lock_": true
 }
-backgroundType = 1
+backgroundType = 2
 configBackground = {
-"imageIdx": 1,
+"imageIdx": 5,
 "random": false
 }
 
