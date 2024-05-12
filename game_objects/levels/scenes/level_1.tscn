@@ -11,7 +11,7 @@ __meta__ = {
 }
 backgroundType = 1
 configBackground = {
-"imageIdx": 4,
+"imageIdx": 1,
 "random": false
 }
 

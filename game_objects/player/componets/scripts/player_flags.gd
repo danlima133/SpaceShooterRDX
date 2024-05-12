@@ -6,8 +6,11 @@ export(Dictionary) var Flags = {
 	"shoot": true
 }
 
-func getFlagState(flagId:String) -> bool:
-	return Flags[flagId]
+func getFlagState(flagId:int) -> int:
+	return Flags.get(flagId, ERR_DOES_NOT_EXIST)
 
-func setFlagState(flagId:String) -> bool:
-	return Flags.get(flagId, false)
+func setFlagState(flagId:int, state:bool) -> int:
+	if Flags.has(flagId):
+		Flags[flagId] = state
+		return OK
+	return ERR_DOES_NOT_EXIST
