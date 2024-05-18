@@ -18,7 +18,7 @@ enum {
 export(float) var _hurtValue
 export(float) var _hurtLimit
 
-onready var _hurtMaxValue = _hurtValue
+var _hurtMaxValue = _hurtValue
 
 var timer:Timer
 
@@ -55,8 +55,9 @@ func setHurtLimit(value):
 func getHurtLimit() -> float:
 	return _hurtLimit
 
-func setHurtMax(value):
+func setHurtMax(value, updateHurt = false):
 	_hurtMaxValue = value
+	if updateHurt: _hurtValue = _hurtMaxValue
 	updateProperty(propertyNames.HURT_MAX, _hurtMaxValue, self)
 	
 func getHurtMax():
