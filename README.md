@@ -7,6 +7,14 @@ Caso queira jogo o primeiro jogo <a href="https://daniel-lima.itch.io/space-shoo
 ## Tecnologias
 ![Godot Engine](https://img.shields.io/badge/-Godot_Engine-blue?style=for-the-badge&logo=godot-engine&logoColor=white)
 ![GDScript](https://img.shields.io/badge/-GDScript-brightgreen?style=for-the-badge&logo=godot-engine&logoColor=white)
+## Informações Tecnicas
+Para mais informações Tecnicas do Space Shooter Redux acesse a <a href="https://github.com/danlima133/SpaceShooterRDX/wiki/Introdu%C3%A7%C3%A3o">documentação</a>. Descubra um pouco mais sobre aquitetura GCC, feita especialmente para esse projeto.
+## Ajude nesse projeto
+Quer contribuir de alguma forma com esse projeto, acesse a pagina feita especialmente para o <a href="https://danlima133.github.io/SpaceShooterRDX-LandingPage/">Space Shooter RDX</a>. Descubra um pouco mais sobre esse projeto e entre em contato, qulquer ajuda é bem vinda (:
+### Como você pode contribuir?
+- Envie uma dica de como pode melhorar o codigo do jogo.
+- O que acha dos metodos utilizados no projeto.
+- Alguma ideia de mecanica que vocé queira ver nesse jogo.
 ## Redes Socias
 Me siga no Instragam e Itch.io para ficar por dentro das novidades:
 - <a href="https://daniel-lima.itch.io/">Itch.io</a>
