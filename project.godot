@@ -77,6 +77,10 @@ _global_script_class_icons={
 config/name="Space Shooter Redux"
 config/icon="res://icon.png"
 
+[autoload]
+
+ToolBar="*res://sigletons/tool_bar/ToolBarSigleton.gd"
+
 [display]
 
 window/size/resizable=false
