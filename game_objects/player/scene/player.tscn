@@ -30,6 +30,7 @@ __meta__ = {
 [node name="attributes" type="Node" parent="manager_componets"]
 script = ExtResource( 2 )
 _velocity = 200
+_damage = 5
 
 [node name="player_flags" type="Node" parent="manager_componets"]
 script = ExtResource( 3 )
@@ -54,3 +55,4 @@ configPooling = {
 [connection signal="screen_entered" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_entered"]
 [connection signal="screen_exited" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_exited"]
 [connection signal="MangerComponetsInitialize" from="manager_componets" to="." method="_on_manager_componets_MangerComponetsInitialize"]
+[connection signal="MangerComponetsInitialize" from="manager_componets" to="manager_componets/shoot_manager" method="_on_manager_componets_MangerComponetsInitialize"]

@@ -15,7 +15,6 @@ export(Dictionary) var data = {
 }
 
 func setMeteor(meteor:Dictionary = {}):
-	_currentData = meteor
 	randomize()
 	
 	var meteorData:Dictionary
@@ -26,6 +25,8 @@ func setMeteor(meteor:Dictionary = {}):
 	if meteor.empty():
 		meteorData = data.meteor_base[meteorIndex]
 	else: meteorData = meteor
+	
+	_currentData = meteorData
 	
 	texture.texture = meteorData["image"]
 	

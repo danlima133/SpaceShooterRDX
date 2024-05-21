@@ -5,7 +5,11 @@ func _objectEnter():
 
 func _spaw(data:Dictionary):
 	getObjetcRoot().get_node("motion_engine").setActive(true)
+	
 	getObjetcRoot().get_node("hit_box").setActive(true)
+	if data.has("damage"):
+		getObjetcRoot().get_node("hit_box").setHit(data["damage"])
+	
 	getObjetcRoot().show()
 	getObjetcRoot().global_position = data["position"]
 
