@@ -18,7 +18,7 @@ enum {
 export(float) var _hurtValue
 export(float) var _hurtLimit
 
-var _hurtMaxValue = _hurtValue
+onready var _hurtMaxValue = _hurtValue
 
 var timer:Timer
 

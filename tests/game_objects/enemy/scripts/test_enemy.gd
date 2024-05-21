@@ -11,7 +11,8 @@ func _ready():
 func _on_hurt_box_hurtEvent(hurtBox:HurtBox):
 	_setLabel(hurtBox.getHurt(), hurtBox.getHurtMax())
 
-func _on_hurt_box_hurtNoValue(_hurtBox):
+func _on_hurt_box_hurtNoValue(_hurtBox:HurtBox):
+	print(_hurtBox.getHurt())
 	queue_free()
 
 func _setLabel(value:float, maxValue:float):
