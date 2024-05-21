@@ -7,12 +7,15 @@ onready var texture = $"../../texture"
 onready var hurt_box = $"../../hurt_box"
 onready var hit_box = $"../../hit_box"
 
+var _currentData:Dictionary
+
 export(Dictionary) var data = {
 	"meteor_base": [],
 	"treshold_shape": 0
 }
 
 func setMeteor(meteor:Dictionary = {}):
+	_currentData = meteor
 	randomize()
 	
 	var meteorData:Dictionary
@@ -58,3 +61,6 @@ func getMeteorData(image:Texture, resistence:int, damage:int, height = 1, fragam
 		"resistence": resistence,
 		"damage": damage
 	}
+
+func getCurrentData() -> Dictionary:
+	return _currentData

@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "ObjectPooling",
 "language": "GDScript",
-"path": "res://manager_componets/scripts/object_pooling.gd"
+"path": "res://compositions/object_pooling/scripts/object_pooling.gd"
 }, {
 "base": "Node",
 "class": "ObjectProcess",
