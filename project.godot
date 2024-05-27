@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "ObjectManager",
 "language": "GDScript",
-"path": "res://compositions/manager_object/scripts/ObjectManager.gd"
+"path": "res://compositions/manager_object/node/ObjectManagerNode.gd"
 }, {
 "base": "Node",
 "class": "ObjectPooling",
