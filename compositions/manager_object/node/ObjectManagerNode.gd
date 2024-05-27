@@ -1,6 +1,10 @@
 extends Node
 class_name ObjectManager
 
+signal activeObject(data)
+signal desactiveObject(data)
+signal objectInit
+
 export var objectProcess:NodePath
 
 var _group:String
@@ -35,14 +39,17 @@ func getGroup():
 func _spaw(data:Dictionary = {}) -> ObjectManager:
 	_setActive(true)
 	_objectProcess._spaw(data)
+	emit_signal("activeObject", data)
 	return self
 
 func _objectEnter():
 	_setActive(false)
 	_objectProcess._objectEnter()
+	emit_signal("objectInit")
 
 func _reset(data:Dictionary = {}) -> ObjectManager:
 	_setActive(false)
 	_objectProcess._reset(data)
+	emit_signal("desactiveObject", data)
 	return self
 
