@@ -1,5 +1,5 @@
 extends Node
-class_name ObjectManager
+class_name ObjectManager, "res://nodes/manager_object/icon/node.png"
 
 signal activeObject(data)
 signal desactiveObject(data)

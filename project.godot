@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "ObjectManager",
 "language": "GDScript",
-"path": "res://compositions/manager_object/node/ObjectManagerNode.gd"
+"path": "res://nodes/manager_object/node/ObjectManagerNode.gd"
 }, {
 "base": "Node",
 "class": "ObjectPooling",
@@ -66,7 +66,7 @@ _global_script_class_icons={
 "HurtBox": "",
 "ManagerComponets": "",
 "MotionConfig": "",
-"ObjectManager": "",
+"ObjectManager": "res://nodes/manager_object/icon/node.png",
 "ObjectPooling": "",
 "ObjectProcess": "",
 "Player": ""
