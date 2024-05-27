@@ -1,15 +1,27 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://manager_componets/scene/manager_componets.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/enemies/meteors/componets/scripts/meteor_control.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big4.png" type="Texture" id=3]
+[ext_resource path="res://compositions/manager_object/scripts/ObjectManager.gd" type="Script" id=4]
+[ext_resource path="res://game_objects/enemies/meteors/scripts/meteor.gd" type="Script" id=5]
 [ext_resource path="res://compositions/colision_box/scenes/hit_box.tscn" type="PackedScene" id=6]
 [ext_resource path="res://compositions/colision_box/scenes/hurt_box.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big2.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big3.png" type="Texture" id=9]
 
 [node name="meteor" type="Node2D"]
 
 [node name="texture" type="Sprite" parent="."]
+
+[node name="ObjectManager" type="Node" parent="."]
+script = ExtResource( 4 )
+objectProcess = NodePath("meteor")
+
+[node name="meteor" type="Node" parent="ObjectManager"]
+script = ExtResource( 5 )
+
+[node name="life_time" type="Timer" parent="ObjectManager/meteor"]
 
 [node name="manager_componets" parent="." instance=ExtResource( 1 )]
 
@@ -25,6 +37,10 @@ data = {
 "damage": 2.0,
 "image": ExtResource( 3 ),
 "resistence": 5.0
+}, {
+"damage": 2.0,
+"image": ExtResource( 9 ),
+"resistence": 5.0
 } ],
 "treshold_shape": 5
 }
@@ -39,3 +55,6 @@ id = 55
 filterHurtBox = [ 55 ]
 
 [node name="hit_shape" type="CollisionShape2D" parent="hit_box"]
+
+[connection signal="timeout" from="ObjectManager/meteor/life_time" to="ObjectManager/meteor" method="_on_life_time_timeout"]
+[connection signal="MangerComponetsInitialize" from="manager_componets" to="ObjectManager/meteor" method="_on_manager_componets_MangerComponetsInitialize"]
