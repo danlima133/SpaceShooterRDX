@@ -11,8 +11,8 @@ __meta__ = {
 }
 backgroundType = 2
 configBackground = {
-"imageIdx": 5,
-"random": false
+"imageIdx": 6,
+"random": true
 }
 
 [node name="player" parent="." instance=ExtResource( 2 )]

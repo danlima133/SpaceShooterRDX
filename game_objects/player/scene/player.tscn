@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/sprites/player/nvl_2/playerShip2_green.png" type="Texture" id=4]
 [ext_resource path="res://game_objects/player/componets/scripts/contetion.gd" type="Script" id=5]
 [ext_resource path="res://manager_componets/componets/manager_componets.tscn" type="PackedScene" id=6]
-[ext_resource path="res://manager_componets/scripts/object_pooling.gd" type="Script" id=7]
+[ext_resource path="res://compositions/object_pooling/scenes/object_pooling.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game_objects/player/componets/scripts/shoot_manager.gd" type="Script" id=8]
 
 [node name="player" type="Node2D"]
@@ -30,6 +30,7 @@ __meta__ = {
 [node name="attributes" type="Node" parent="manager_componets"]
 script = ExtResource( 2 )
 _velocity = 200
+_damage = 5
 
 [node name="player_flags" type="Node" parent="manager_componets"]
 script = ExtResource( 3 )
@@ -43,8 +44,7 @@ _id = 2
 script = ExtResource( 8 )
 _id = 10
 
-[node name="object_pooling" type="Node" parent="."]
-script = ExtResource( 7 )
+[node name="object_pooling" parent="." instance=ExtResource( 7 )]
 configPooling = {
 "bullets": {
 "count": 3,
@@ -52,8 +52,7 @@ configPooling = {
 }
 }
 
-[node name="data" type="Node" parent="object_pooling"]
-
 [connection signal="screen_entered" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_entered"]
 [connection signal="screen_exited" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_exited"]
 [connection signal="MangerComponetsInitialize" from="manager_componets" to="." method="_on_manager_componets_MangerComponetsInitialize"]
+[connection signal="MangerComponetsInitialize" from="manager_componets" to="manager_componets/shoot_manager" method="_on_manager_componets_MangerComponetsInitialize"]
