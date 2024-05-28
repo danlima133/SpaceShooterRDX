@@ -1,3 +1,30 @@
+/* O XML que vai passar pela Solução Json precisa que siga essa regra:
+- Para adicionar tags filhas é preciso que estejam dentro de um scope exmeplo:
+<hitBox> ---> Tag scope
+    <box/> ---> Tag filha
+</hitBox> ---> Tag de conlusão de Scope
+toda tag filha precisa ser fechada usando uma / no final, caso não tenham ela entrara para o scope main
+e pode afetar na solução esperado
+- Scope main
+toda tag Scope está no scope main
+- Tanto a tag scope e tag filhas podem ter atributos exemplo:
+<hitBox value="1">
+    <box shape="circle"/>
+</hitBox>
+tags de fechamento não podem ter atributos, caso tenham o parse vai ignorar os atributos
+- É possiviel escapar JSON em um atributo XML usando a palavra chave a seguir
+---- json?(conteudo json) ----
+- Dentro de um scope não pode conter duas tags com o mesmo nome
+caso tenha o parse vai ficar com a ultima lida por ele exemplo:
+<hitBox value="1">
+    <box shape="circle"/>
+</hitBox>
+<hitBox value="3">
+    <box shape="circle"/>
+</hitBox>
+nesse caso na solução final vai ficar a tag hitBox com atributo value="3"
+*/
+
 /*
 XML de exepmplo
 
@@ -10,49 +37,41 @@ XML de exepmplo
 
 */
 
-/* A solução json precisa que siga esse formato:
-- tag pai, as tags pais tem scope main
-- tag filhas que ficam nas tags pais, sendo o scope correspondente ao pai
-- tag filhas podem se repente dentro do pai somente uma vez, tags pais podem ter filhos iguais, 
-se repentindo uma vez só, seguindo o exemplo acima
-- tag pai pode existir somente uma e não pode se chamar main, caso o parse encontre uma tag 
-chamda main automaticamente ele para e retonara um erro
-- caso uma tag com mesmo nome se repita, tanto pai ou filha, o parse ficara com os dados da ultima tag encontrada
-*/
-
-// Solution json do xml acima
+// Solution json do XML acima
 
 // MODELO 1
 
 {
-        "hitBox": {
-            "name": "hitBox",
-            "attributes": {
-                "value": 1
-            },
-        "scope": "main"
+    "hitBox": {
+        "name": "hitBox",
+        "attributes": {
+            "value": 1
         },
-        "box": {
-            "name": "box",
-            "attributes": {
-                "shape": "circle"
-            },
-            "scope": "hitBox"
+        "scope": "main",
+        "childs": {
+            "box": {
+                "name": "box",
+                "attributes": {
+                    "shape": "circle"
+                },
+                "scope": "hitBox"
+            }
+        }
+    },
+    "hurtBox": {
+        "name": "hurtBox",
+        "attributes": {
+            "value": 2
         },
-        "hurtBox": {
-            "name": "hurtBox",
-            "attributes": {
-                "value": 2
-            },
-            "scope": "main",
-        "box": {
-            "name": "box",
-            "attributes": {
-                "shape": "square"
+        "scope": "main",
+        "childs": {
+            "box": {
+                "name": "box",
+                "attributes": {
+                    "shape": "square"
+                }
             },
             "scope": "hurtBox"
         }
     }
-}
-
- // Solução final
+}// Solução final

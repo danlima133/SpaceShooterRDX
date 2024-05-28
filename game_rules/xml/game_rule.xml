@@ -1,10 +1,6 @@
-<player position='json?[20, 20]'>
-    <texture path='json?{"texture": "...", 
-    "modulate": "red", 
-    "list": [1, 2, 3, 4, 5]}'/>
-    <size x="20" y="20"/>
-    <ai mode="static" target="self"/>
-</player>
-<enemy>
-    <ai mode="folow" target="player"/>
-</enemy>
+<hitBox value="1">
+    <box shape="circle"/>
+</hitBox>
+<hurtBox value="5">
+    <box shape="square"/>
+</hurtBox>
