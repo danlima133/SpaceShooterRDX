@@ -21,10 +21,15 @@ class RuleJson extends RuleInterface:
 
 class RuleXml extends RuleInterface:
 	static func _read(path:String):
-		return Rule.new(path.get_file(), "XML", " <rule a='20px' b='15px'>padding</rule> ")
+		var xml = XMLParser.new()
+		xml.open(path)
+		
+		var ruleData = Rule.new(path.get_file(), "XML", xml)
+		return ruleData
 
 const rulesPaths = {
-	"JSON": "res://game_rules/json/"
+	"JSON": "res://game_rules/json/",
+	"XML": "res://game_rules/xml/"
 }
 
 export var Rules = {}
