@@ -28,16 +28,7 @@ class JsonSolution:
 			var attributesCount = _xml.get_attribute_count()
 			for index in range(attributesCount):
 				var valueAttribute = _xml.get_attribute_value(index)
-				var isJson = valueAttribute.split("?")
-				if isJson.size() == 2:
-					var parse = JSON.parse(isJson[1])
-					if parse.error != OK:
-						valueAttribute = str(parse.error_line) + " - " + parse.error_string
-					else:
-						if isJson[0] == "json":
-							valueAttribute = parse.result
-						else:
-							valueAttribute = "json to parse not found: " + isJson[0] + "?" + isJson[1]
+				valueAttribute = _escapeString(valueAttribute)
 				tagAttributes[_xml.get_attribute_name(index)] = valueAttribute
 			
 			if _xml.is_empty():
@@ -64,6 +55,33 @@ class JsonSolution:
 		if tagChilds != null:
 			tag["childs"] = tagChilds
 		return tag
+	
+	func _escapeString(input:String):
+		var attributeParsed = input
+		
+		var inputSplint = input.split("?")
+		
+		if inputSplint.size() == 2:
+			var parseType = inputSplint[0]
+			var parseContent = inputSplint[1]
+		
+			if parseType == "json":
+				var parseJson = JSON.parse(parseContent)
+				if parseJson.error != OK:
+					attributeParsed = (parseJson.error_string + " - line: %s") % parseJson.error_line
+				else:
+					attributeParsed = parseJson.result
+			elif parseType == "ini":
+				var ini = ConfigFile.new()
+				var erro = ini.parse(parseContent)
+				if erro == OK:
+					attributeParsed = ini
+				else:
+					attributeParsed = "ini sintaxe erro"
+			else:
+				attributeParsed = "not found escape type: " + parseType
+		
+		return attributeParsed
 	
 	func getSolution():
 		return _solution
