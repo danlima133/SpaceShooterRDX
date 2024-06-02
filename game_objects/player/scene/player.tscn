@@ -5,9 +5,10 @@
 [ext_resource path="res://game_objects/player/componets/scripts/player_flags.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/player/nvl_2/playerShip2_green.png" type="Texture" id=4]
 [ext_resource path="res://game_objects/player/componets/scripts/contetion.gd" type="Script" id=5]
-[ext_resource path="res://manager_componets/componets/manager_componets.tscn" type="PackedScene" id=6]
+[ext_resource path="res://manager_componets/scene/manager_componets.tscn" type="PackedScene" id=6]
 [ext_resource path="res://compositions/object_pooling/scenes/object_pooling.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game_objects/player/componets/scripts/shoot_manager.gd" type="Script" id=8]
+
 
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )

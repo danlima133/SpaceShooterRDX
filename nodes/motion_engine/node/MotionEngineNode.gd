@@ -1,4 +1,5 @@
 extends Node
+class_name MotionEngine, "res://nodes/motion_engine/icon/node.png"
 
 export(NodePath) var rootMotionPath
 export(Resource) var motionConfig

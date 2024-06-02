@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://compositions/motion_engine/motion_configs/test_2.tres" type="Resource" id=1]
+[ext_resource path="res://nodes/motion_engine/meta/data/test_2.tres" type="Resource" id=1]
 [ext_resource path="res://tests/game_objects/enemy/scripts/test_enemy.gd" type="Script" id=2]
 [ext_resource path="res://compositions/colision_box/scenes/hurt_box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/enemies/enemyBlack2.png" type="Texture" id=4]
-[ext_resource path="res://compositions/motion_engine/scenes/motion_engine.tscn" type="PackedScene" id=5]
+[ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 40.1123
@@ -33,7 +33,8 @@ margin_bottom = 60.0
 text = "#/#"
 align = 1
 
-[node name="motion_engine" parent="." instance=ExtResource( 5 )]
+[node name="MotionEngine" type="Node" parent="."]
+script = ExtResource( 6 )
 rootMotionPath = NodePath("..")
 motionConfig = ExtResource( 1 )
 

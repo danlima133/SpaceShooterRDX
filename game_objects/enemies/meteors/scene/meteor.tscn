@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://manager_componets/componets/manager_componets.tscn" type="PackedScene" id=1]
+[ext_resource path="res://manager_componets/scene/manager_componets.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/enemies/meteors/componets/scripts/meteor_control.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big4.png" type="Texture" id=3]
 [ext_resource path="res://nodes/manager_object/node/ObjectManagerNode.gd" type="Script" id=4]

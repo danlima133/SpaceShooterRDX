@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var motionEngine = $Sprite/motion_engine
-onready var motionEngine2 = $Sprite5/motion_engine
+onready var motionEngine = $Sprite/MotionEngine
+onready var motionEngine2 = $Sprite5/MotionEngine
 
 func _input(event):
 	if event is InputEventKey:
