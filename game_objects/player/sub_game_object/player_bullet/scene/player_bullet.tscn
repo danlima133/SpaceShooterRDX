@@ -2,7 +2,7 @@
 
 [ext_resource path="res://nodes/motion_engine/meta/data/player_laser.tres" type="Resource" id=1]
 [ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=2]
-[ext_resource path="res://compositions/colision_box/scenes/hit_box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://compositions/collision_box/scenes/hit_box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/laser/laserGreen09.png" type="Texture" id=4]
 [ext_resource path="res://nodes/manager_object/node/ObjectManagerNode.gd" type="Script" id=5]
 [ext_resource path="res://game_objects/player/sub_game_object/player_bullet/behaviour/script/laser_process.gd" type="Script" id=6]

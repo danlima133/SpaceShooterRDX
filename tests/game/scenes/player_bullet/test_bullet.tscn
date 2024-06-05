@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tests/game/game_objects/enemy/scenes/test_enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tests/game/scripts/test_bullet.gd" type="Script" id=3]
+
+[node name="test_bullet" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 496, 530 )
+
+[node name="test_enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 166, -130 )
+
+[node name="test_enemy2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 826, -158 )
+
+[node name="test_enemy3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 528, -110 )

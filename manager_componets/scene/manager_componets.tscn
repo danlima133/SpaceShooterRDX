@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://manager_componets/scripts/manager_componets.gd" type="Script" id=1]
-
-[node name="manager_componets" type="Node"]
-script = ExtResource( 1 )

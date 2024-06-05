@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://compositions/colision_box/scripts/hit_box.gd" type="Script" id=1]
-
-[node name="hit_box" type="Area2D"]
-collision_layer = 4
-collision_mask = 2
-script = ExtResource( 1 )

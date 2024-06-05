@@ -36,7 +36,7 @@ func _setLifeTime():
 	life_time.wait_time = rand_range(4, 7)
 	life_time.start()
 
-func _on_manager_componets_MangerComponetsInitialize(componetsInit, manager:ManagerComponets):
+func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
 	meteorControl = manager.getComponet(45)
 
 func _on_life_time_timeout():

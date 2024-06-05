@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://compositions/collision_box/scenes/hurt_box.tscn" type="PackedScene" id=1]
+[ext_resource path="res://compositions/collision_box/scenes/hit_box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tests/game/scripts/test_colisions.gd" type="Script" id=3]
+
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 14.0357
+
+[node name="colisions" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 207.0
+margin_top = 186.0
+margin_right = 230.0
+margin_bottom = 200.0
+text = "#/#"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 207.0
+margin_top = 263.0
+margin_right = 230.0
+margin_bottom = 277.0
+text = "#/#"
+
+[node name="hurt_box" parent="." instance=ExtResource( 1 )]
+position = Vector2( 218, 168 )
+id = 23
+_hurtValue = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box"]
+shape = SubResource( 1 )
+
+[node name="hurt_box2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 218, 247 )
+id = 50
+_hurtValue = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box2"]
+shape = SubResource( 1 )
+
+[node name="hit_box" parent="." instance=ExtResource( 2 )]
+position = Vector2( 539, 169 )
+_hitValue = 5.0
+_hitContinues = true
+_timerToHit = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box"]
+modulate = Color( 0.94902, 0.0823529, 0.0392157, 1 )
+shape = SubResource( 2 )
+
+[connection signal="hurtEvent" from="hurt_box" to="." method="_on_hurt_box_hurtEvent"]
+[connection signal="hurtNoValue" from="hurt_box" to="." method="_on_hurt_box_hurtNoValue"]
+[connection signal="hurtEvent" from="hurt_box2" to="." method="_on_hurt_box2_hurtEvent"]
+[connection signal="hurtNoValue" from="hurt_box2" to="." method="_on_hurt_box2_hurtNoValue"]
+[connection signal="updateProperty" from="hurt_box2" to="." method="_on_hurt_box2_update"]
+[connection signal="updateProperty" from="hit_box" to="." method="_on_hit_box_updateProperty"]

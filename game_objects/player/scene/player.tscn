@@ -1,14 +1,13 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game_objects/player/script/player.gd" type="Script" id=1]
-[ext_resource path="res://game_objects/player/componets/scripts/attributes.gd" type="Script" id=2]
-[ext_resource path="res://game_objects/player/componets/scripts/player_flags.gd" type="Script" id=3]
+[ext_resource path="res://game_objects/player/componets/attributes.gd" type="Script" id=2]
+[ext_resource path="res://game_objects/player/componets/player_flags.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/player/nvl_2/playerShip2_green.png" type="Texture" id=4]
-[ext_resource path="res://game_objects/player/componets/scripts/contetion.gd" type="Script" id=5]
-[ext_resource path="res://manager_componets/scene/manager_componets.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game_objects/player/componets/contetion.gd" type="Script" id=5]
 [ext_resource path="res://compositions/object_pooling/scenes/object_pooling.tscn" type="PackedScene" id=7]
-[ext_resource path="res://game_objects/player/componets/scripts/shoot_manager.gd" type="Script" id=8]
-
+[ext_resource path="res://game_objects/player/componets/shoot_manager.gd" type="Script" id=8]
+[ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=9]
 
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )
@@ -26,25 +25,6 @@ __meta__ = {
 "_gizmo_extents_": 20.0
 }
 
-[node name="manager_componets" parent="." instance=ExtResource( 6 )]
-
-[node name="attributes" type="Node" parent="manager_componets"]
-script = ExtResource( 2 )
-_velocity = 200
-_damage = 5
-
-[node name="player_flags" type="Node" parent="manager_componets"]
-script = ExtResource( 3 )
-_id = 1
-
-[node name="contetion" type="Node" parent="manager_componets"]
-script = ExtResource( 5 )
-_id = 2
-
-[node name="shoot_manager" type="Node" parent="manager_componets"]
-script = ExtResource( 8 )
-_id = 10
-
 [node name="object_pooling" parent="." instance=ExtResource( 7 )]
 configPooling = {
 "bullets": {
@@ -53,7 +33,27 @@ configPooling = {
 }
 }
 
-[connection signal="screen_entered" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_entered"]
-[connection signal="screen_exited" from="visibility" to="manager_componets/contetion" method="_on_visibility_screen_exited"]
-[connection signal="MangerComponetsInitialize" from="manager_componets" to="." method="_on_manager_componets_MangerComponetsInitialize"]
-[connection signal="MangerComponetsInitialize" from="manager_componets" to="manager_componets/shoot_manager" method="_on_manager_componets_MangerComponetsInitialize"]
+[node name="ManagerComponets" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="attributes" type="Node" parent="ManagerComponets"]
+script = ExtResource( 2 )
+_velocity = 200
+_damage = 5
+
+[node name="contetion" type="Node" parent="ManagerComponets"]
+script = ExtResource( 5 )
+_id = 2
+
+[node name="shoot_manager" type="Node" parent="ManagerComponets"]
+script = ExtResource( 8 )
+_id = 10
+
+[node name="player_flags" type="Node" parent="ManagerComponets"]
+script = ExtResource( 3 )
+_id = 1
+
+[connection signal="screen_entered" from="visibility" to="ManagerComponets/contetion" method="_on_visibility_screen_entered"]
+[connection signal="screen_exited" from="visibility" to="ManagerComponets/contetion" method="_on_visibility_screen_exited"]
+[connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
+[connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ManagerComponets/shoot_manager" method="_on_ManagerComponets_MangerComponetsInitialize"]
