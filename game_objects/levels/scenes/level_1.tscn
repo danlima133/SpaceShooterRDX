@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://compositions/backgrounds/scenes/background.tscn" type="PackedScene" id=1]
+[ext_resource path="res://members/backgrounds/scenes/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=2]
 
 [node name="level_1" type="Node2D"]
@@ -9,10 +9,9 @@
 __meta__ = {
 "_edit_lock_": true
 }
-backgroundType = 2
 configBackground = {
-"imageIdx": 6,
-"random": true
+"imageIdx": 2,
+"random": false
 }
 
 [node name="player" parent="." instance=ExtResource( 2 )]

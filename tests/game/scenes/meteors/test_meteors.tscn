@@ -3,7 +3,6 @@
 [ext_resource path="res://tests/game/scripts/test_meteors.gd" type="Script" id=1]
 [ext_resource path="res://game_objects/enemies/meteors/scene/meteor.tscn" type="PackedScene" id=2]
 
-
 [node name="test_meteors" type="Node2D"]
 script = ExtResource( 1 )
 

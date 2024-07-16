@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://compositions/object_pooling/scripts/object_pooling.gd" type="Script" id=1]
+[ext_resource path="res://members/object_pooling/script/object_pooling.gd" type="Script" id=1]
 
 [node name="object_pooling" type="Node"]
 script = ExtResource( 1 )

@@ -4,7 +4,7 @@ func _objectEnter():
 	getObjetcRoot().hide()
 
 func _spaw(data:Dictionary):
-	getObjetcRoot().get_node("motion_engine").setActive(true)
+	getObjetcRoot().get_node("MotionEngine").setActive(true)
 	
 	getObjetcRoot().get_node("hit_box").setActive(true)
 	if data.has("damage"):
@@ -14,7 +14,7 @@ func _spaw(data:Dictionary):
 	getObjetcRoot().global_position = data["position"]
 
 func _reset(data:Dictionary):
-	getObjetcRoot().get_node("motion_engine").setActive(false)
+	getObjetcRoot().get_node("MotionEngine").setActive(false)
 	getObjetcRoot().get_node("hit_box").setActive(false)
 	getObjetcRoot().hide()
 	getObjetcRoot().global_position = Vector2.ZERO

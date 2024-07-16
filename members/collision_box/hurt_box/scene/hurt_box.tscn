@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://compositions/collision_box/scripts/hurt_box.gd" type="Script" id=1]
+[ext_resource path="res://members/collision_box/hurt_box/script/hurt_box.gd" type="Script" id=1]
 
 
 [node name="hurt_box" type="Area2D"]
