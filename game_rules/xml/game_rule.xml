@@ -1,6 +1,6 @@
-<hitBox value="1">
-    <box shape="circle"/>
-</hitBox>
-<hurtBox value="5">
+<hitBox>
     <box shape="square"/>
+</hitBox>
+<hurtBox>
+    <box shape="circle"/>
 </hurtBox>

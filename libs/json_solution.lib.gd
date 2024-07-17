@@ -5,7 +5,7 @@ class JsonSolution:
 	var _solution
 	
 	func _init(xml:XMLParser):
-		self._xml = xml
+		_xml = xml
 		_solution = _generateSolution()
 	
 	func _generateSolution():
@@ -39,11 +39,10 @@ class JsonSolution:
 				tagScope = "main"
 				childsTree[tagName] = {}
 				tagJson = _getTagJson(tagName, tagAttributes, tagScope, childsTree[tagName])
-			
-			solution[tagName] = tagJson
+				solution[tagName] = tagJson
 			
 			_xml.read()
-		
+			
 		return solution
 	
 	func _getTagJson(tagName, tagAttr, tagScope, tagChilds = null) -> Dictionary:
