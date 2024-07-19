@@ -1,0 +1,18 @@
+{
+    "hitBox": {
+        "data": {
+            "value": 1
+        },
+        "box": {
+            "shape": "cricle"
+        }
+    },
+    "hurtBox": {
+        "data": {
+            "value": 5
+        },
+        "box": {
+            "shape": "square"
+        }
+    }
+}
