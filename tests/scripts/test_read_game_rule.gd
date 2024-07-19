@@ -2,28 +2,29 @@ extends Node
 
 const JsonSolution = preload("res://libs/json_solution.lib.gd")
 
-func _on_manager_componets_MangerComponetsInitialize(componetsInit, manager:ManagerComponets):
-	var readRule = manager.getComponet(35)
+onready var readRule = $readGameRule
+
+func _ready():
 	
 	var paths = {
-		"json": readRule._getRulesAnvaliable("json"),
-		"ini": readRule._getRulesAnvaliable("ini"),
-		"xml": readRule._getRulesAnvaliable("xml")
+		"json": readRule.getRulesAnvaliable("json"),
+		"ini": readRule.getRulesAnvaliable("ini"),
+		"xml": readRule.getRulesAnvaliable("xml")
 	}
 	
-	var ruleJson = readRule.getRule(readRule.RuleJson, paths["json"][0])
+	var ruleJson = readRule.getRule(readRule.RuleJson, paths["json"]["game_rule"])
 	var contentJson = ruleJson.content
 	print(contentJson)
 	
 	print("\n")
 	
-	var ruleIni = readRule.getRule(readRule.RuleIni, paths["ini"][0])
+	var ruleIni = readRule.getRule(readRule.RuleIni, paths["ini"]["game_rule"])
 	var contentIni = ruleIni.content
 	print(contentIni)
 
 	print("\n")
 
-	var ruleXml = readRule.getRule(readRule.RuleXml, paths["xml"][0])
+	var ruleXml = readRule.getRule(readRule.RuleXml, paths["xml"]["game_rule"])
 	var contentXml = ruleXml.content
 	
 	var solutionData = JsonSolution.JsonSolution.new(contentXml)

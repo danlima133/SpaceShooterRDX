@@ -1,19 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://tests/scripts/test_read_game_rule.gd" type="Script" id=1]
-[ext_resource path="res://manager_componets/global_components/read_game_rule/object/readGameRule.tscn" type="PackedScene" id=2]
-[ext_resource path="res://manager_componets/scene/manager_componets.tscn" type="PackedScene" id=3]
+[ext_resource path="res://compositions/read_game_rule/scene/readGameRule.tscn" type="PackedScene" id=2]
 
 [node name="test_game_rule" type="Node"]
 script = ExtResource( 1 )
 
-[node name="manager_componets" parent="." instance=ExtResource( 3 )]
-
-[node name="readGameRule" parent="manager_componets" instance=ExtResource( 2 )]
-_id = 35
+[node name="readGameRule" parent="." instance=ExtResource( 2 )]
 Rules = {
 "test": true,
 "teste2": false
 }
-
-[connection signal="MangerComponetsInitialize" from="manager_componets" to="." method="_on_manager_componets_MangerComponetsInitialize"]

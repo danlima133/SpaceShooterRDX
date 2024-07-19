@@ -1,4 +1,4 @@
-extends Componet
+extends Node
 
 class Rule:
 	var ruleName:String
@@ -81,8 +81,8 @@ const rulesPaths = {
 
 export var Rules = {}
 
-func _getRulesAnvaliable(typeRule:String = "JSON"):
-	var files = []
+func getRulesAnvaliable(typeRule:String = "JSON"):
+	var files = {}
 	typeRule = typeRule.to_upper()
 	
 	var cursor = Directory.new()
@@ -95,11 +95,10 @@ func _getRulesAnvaliable(typeRule:String = "JSON"):
 		cursor.list_dir_begin(true)
 		var file = cursor.get_next()
 		while file != "":
-			files.append(path + file)
+			files[file.split(".")[0]] = (path + file)
 			file = cursor.get_next()
 	else:
 		return ERR_FILE_NOT_FOUND
-	
 	return files
 
 func getRule(rule, path:String) -> Rule:
