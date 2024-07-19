@@ -5,8 +5,9 @@
 [ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big4.png" type="Texture" id=3]
 [ext_resource path="res://compositions/manager_object/scripts/ObjectManager.gd" type="Script" id=4]
 [ext_resource path="res://game_objects/enemies/meteors/scripts/meteor.gd" type="Script" id=5]
-[ext_resource path="res://compositions/colision_box/scenes/hit_box.tscn" type="PackedScene" id=6]
-[ext_resource path="res://compositions/colision_box/scenes/hurt_box.tscn" type="PackedScene" id=7]
+
+[ext_resource path="res://members/collision_box/hit_box/scene/hit_box.tscn" type="PackedScene" id=6]
+[ext_resource path="res://members/collision_box/hurt_box/scene/hurt_box.tscn" type="PackedScene" id=7]
 
 [ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big2.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big3.png" type="Texture" id=9]

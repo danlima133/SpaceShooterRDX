@@ -22,12 +22,12 @@ _global_script_classes=[ {
 "base": "CollisionBox",
 "class": "HitBox",
 "language": "GDScript",
-"path": "res://compositions/collision_box/scripts/hit_box.gd"
+"path": "res://members/collision_box/hit_box/script/hit_box.gd"
 }, {
 "base": "CollisionBox",
 "class": "HurtBox",
 "language": "GDScript",
-"path": "res://compositions/collision_box/scripts/hurt_box.gd"
+"path": "res://members/collision_box/hurt_box/script/hurt_box.gd"
 }, {
 "base": "Node",
 "class": "ManagerComponets",
@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "ObjectPooling",
 "language": "GDScript",
-"path": "res://compositions/object_pooling/scripts/object_pooling.gd"
+"path": "res://members/object_pooling/script/object_pooling.gd"
 }, {
 "base": "Node",
 "class": "ObjectProcess",

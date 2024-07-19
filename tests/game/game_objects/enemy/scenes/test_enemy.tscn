@@ -2,7 +2,7 @@
 
 [ext_resource path="res://nodes/motion_engine/meta/data/test_2.tres" type="Resource" id=1]
 [ext_resource path="res://tests/game/game_objects/enemy/scripts/test_enemy.gd" type="Script" id=2]
-[ext_resource path="res://compositions/collision_box/scenes/hurt_box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://members/collision_box/hurt_box/scene/hurt_box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/enemies/enemyBlack2.png" type="Texture" id=4]
 [ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=6]
 
