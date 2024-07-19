@@ -36,6 +36,18 @@ func _setLifeTime():
 	life_time.wait_time = rand_range(4, 7)
 	life_time.start()
 
+func _reset(data:Dictionary):
+	getObjetcRoot().hide()
+	
+	hurt_box.setActive(false)
+	hit_box.setActive(false)
+
+func _setLifeTime():
+	randomize()
+	
+	life_time.wait_time = rand_range(4, 7)
+	life_time.start()
+
 func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
 	meteorControl = manager.getComponet(45)
 
