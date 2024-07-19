@@ -1,8 +1,6 @@
 extends Node2D
 class_name Player
 
-onready var manager_componets = $manager_componets
-
 onready var visibility = $visibility
 onready var texture = $texture
 
@@ -41,6 +39,6 @@ func _physics_process(delta):
 	
 	update()
 	
-func _on_manager_componets_MangerComponetsInitialize(componetsInit:int, manager:ManagerComponets):
+func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
 	attributes = manager.getComponet(0)
 	player_flgas = manager.getComponet(1)

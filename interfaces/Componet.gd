@@ -3,7 +3,7 @@ class_name Componet
 
 export(int, 0, 1000) var _id = 0
 
-onready var currentManager:ManagerComponets = get_parent()
+var currentManager:ManagerComponets
 
 func setId(value:int):
 	for componet in currentManager._componets:

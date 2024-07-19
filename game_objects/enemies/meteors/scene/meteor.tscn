@@ -7,6 +7,7 @@
 [ext_resource path="res://game_objects/enemies/meteors/scripts/meteor.gd" type="Script" id=5]
 [ext_resource path="res://compositions/colision_box/scenes/hit_box.tscn" type="PackedScene" id=6]
 [ext_resource path="res://compositions/colision_box/scenes/hurt_box.tscn" type="PackedScene" id=7]
+
 [ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big2.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big3.png" type="Texture" id=9]
 
@@ -25,7 +26,15 @@ script = ExtResource( 5 )
 
 [node name="manager_componets" parent="." instance=ExtResource( 1 )]
 
-[node name="meteor_control" type="Node" parent="manager_componets"]
+[node name="meteor" type="Node" parent="ObjectManager"]
+script = ExtResource( 5 )
+
+[node name="life_time" type="Timer" parent="ObjectManager/meteor"]
+
+[node name="ManagerComponets" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="meteor_control" type="Node" parent="ManagerComponets"]
 script = ExtResource( 2 )
 _id = 45
 data = {
@@ -57,4 +66,5 @@ filterHurtBox = [ 55 ]
 [node name="hit_shape" type="CollisionShape2D" parent="hit_box"]
 
 [connection signal="timeout" from="ObjectManager/meteor/life_time" to="ObjectManager/meteor" method="_on_life_time_timeout"]
+
 [connection signal="MangerComponetsInitialize" from="manager_componets" to="ObjectManager/meteor" method="_on_manager_componets_MangerComponetsInitialize"]

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://nodes/motion_engine/meta/bin/MotionConfig.gd" type="Script" id=1]
+
+
+[resource]
+script = ExtResource( 1 )
+velocity = 80
+velocityMin = 80
+velocityMax = 120
+direction = Vector2( 0, 1 )
+xFix = false
+yFix = true
+directionRandom = true
+velocityRandom = true
