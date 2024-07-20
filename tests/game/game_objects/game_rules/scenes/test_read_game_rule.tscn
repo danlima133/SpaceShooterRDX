@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://members/read_game_rule/scene/readGameRule.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tests/game/game_objects/game_rules/scripts/test_read_game_rule.gd" type="Script" id=2]
+
+[node name="test_game_rule" type="Node"]
+script = ExtResource( 2 )
+
+[node name="readGameRule" parent="." instance=ExtResource( 1 )]
+Rules = {
+"test": true,
+"teste2": false
+}

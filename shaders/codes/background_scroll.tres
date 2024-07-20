@@ -3,9 +3,16 @@
 [resource]
 code = "shader_type canvas_item;
 
+uniform bool scroll;
+
 uniform float velocity;
 uniform vec2 direction;
 
 void fragment() {
-	COLOR = texture(TEXTURE, UV + direction * TIME * velocity);
+	if (scroll) {
+		COLOR = texture(TEXTURE, UV + direction * TIME * velocity);
+	}
+	else {
+		COLOR = texture(TEXTURE, UV)
+	}
 }"

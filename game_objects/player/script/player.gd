@@ -33,11 +33,12 @@ func _movement(delta):
 func _draw():
 	draw_rect(Rect2(visibility.position.x + (-5), visibility.position.y + (-5), 10, 10), Color.red, true)
 
+func _process(delta):
+	update()
+
 func _physics_process(delta):
 	if player_flgas.getFlagState("movement"):
 		_movement(delta)
-	
-	update()
 	
 func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
 	attributes = manager.getComponet(0)
