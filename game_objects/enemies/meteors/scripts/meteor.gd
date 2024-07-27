@@ -3,6 +3,7 @@ extends ObjectProcess
 onready var hurt_box = $"../../hurt_box"
 onready var hit_box = $"../../hit_box"
 onready var motion_engine = $"../../MotionEngine"
+onready var texture = $"../../texture"
 
 var meteorControl:Componet
 
@@ -15,17 +16,23 @@ func _spaw(data:Dictionary):
 	hurt_box.setActive(true)
 	hit_box.setActive(true)
 	
-	if data.has("meteor_type"):
-		meteorControl.setMeteor(data["meteor_type"])
+	if data.has("meteor_data"):
+		meteorControl.setMeteor(data["meteor_data"])
+	else:
+		meteorControl.setMeteor()
 	
-	meteorControl.setMeteor()
-	
-	motion_engine.setActive(true)
-	
+	if data.has("motion_config"):
+		motion_engine.updateDir(data["motion_config"], false)
+		motion_engine.setActive(true)
+	else:
+		motion_engine.setActive(true)
+		
 	getObjetcRoot().show()
 
 func _reset(data:Dictionary):
 	getObjetcRoot().hide()
+	meteorControl._currentData = {}
+	texture.texture = null
 	
 	hurt_box.setActive(false)
 	hit_box.setActive(false)

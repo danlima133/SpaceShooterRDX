@@ -1,5 +1,7 @@
 extends Componet
 
+signal spaw(entity)
+
 onready var spawnerTimer = $spawnerTimer
 onready var spawConfig = $"../.."
 
@@ -26,8 +28,6 @@ func _setTimer():
 	
 	spawnerTimer.wait_time = timer
 	spawnerTimer.start()
-	
-	print("Spawner timer: %s" % timer)
 
 func _preCalc():
 	var count:int
@@ -44,8 +44,6 @@ func _preCalc():
 		_spaw()
 	
 	_setTimer()
-	
-	print("Spawner count at spaw: %s" % count)
 
 func _spaw():
 	var position:Vector2
@@ -58,9 +56,11 @@ func _spaw():
 	if not (spawConfig.positionsRandom["x"] and spawConfig.positionsRandom["y"]):
 		position += Vector2(spawConfig.getConfig().entityPosition["x"][0], spawConfig.getConfig().entityPosition["y"][0])
 		
-	object_pooling.spaw({ "group": "entities" }, {
+	var entities = object_pooling.spaw({ "group": "entities" }, {
 		"position": position + currentManager.get_parent().positionSpaw.global_position
 	})
+	
+	emit_signal("spaw", entities)
 
 func stop():
 	lastTimer = spawnerTimer.time_left

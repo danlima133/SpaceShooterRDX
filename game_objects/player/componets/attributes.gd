@@ -7,7 +7,6 @@ export var _damage:int
 export var _resistence:int
 
 func _init_componet():
-	print_debug()
 	hurtBox.setHurtMax(_resistence, true)
 
 func setVelocity(value:int):

@@ -1,0 +1,81 @@
+{
+    "meteors": [
+        {
+            "image": "brown/model_1",
+            "damage": 3,
+            "resistence": 8,
+            "velocity": [80, 120],
+            "data": {
+                "height": 2,
+                "fragments": [1, 3]
+            },
+            "color": "brown"
+        },
+        {
+            "image": "grey/model_4",
+            "damage": 2,
+            "resistence": 5,
+            "velocity": [120, 150],
+            "data": {
+                "height": 12,
+                "fragments": [2, 4]
+            },
+            "color": "grey"
+        }
+    ],
+    "meteors_small": {
+        "brown": [
+            {
+                "image": "brown/fragments/low/0",
+                "damage": 1,
+                "resistence": 1,
+                "velocity": [120, 150],
+                "data": {
+                    "height": 0,
+                    "fragments": [0]
+                }
+            }
+        ],
+        "grey": [
+            {
+                "image": "grey/fragments/low/0",
+                "damage": 1,
+                "resistence": 1,
+                "velocity": [120, 150],
+                "data": {
+                    "height": 0,
+                    "fragments": [0]
+                }
+            }
+        ]
+    },
+    "meteors_high": {
+        "brown": [
+            {
+                "image": "brown/fragments/high/0",
+                "damage": 1,
+                "resistence": 2,
+                "velocity": [100, 120],
+                "data": {
+                    "height": 0,
+                    "fragments": [0]
+                }
+            }
+        ],
+        "grey": [
+            {
+                "image": "grey/fragments/high/0",
+                "damage": 1,
+                "resistence": 2,
+                "velocity": [100, 120],
+                "data": {
+                    "height": 0,
+                    "fragments": [0]
+                }
+            }
+        ]
+    },
+    "configs": {
+        "treshold_shape": 4
+    }
+}
