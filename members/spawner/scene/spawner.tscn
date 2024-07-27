@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=1]
+[ext_resource path="res://members/spawner/script/spawner.gd" type="Script" id=2]
+[ext_resource path="res://members/spawner/componets/spaw_runner.gd" type="Script" id=3]
+[ext_resource path="res://members/object_pooling/scene/object_pooling.tscn" type="PackedScene" id=4]
+
+[node name="spawner" type="Node"]
+script = ExtResource( 2 )
+
+[node name="object_pooling" parent="." instance=ExtResource( 4 )]
+configOnStart = false
+
+[node name="ManagerComponets" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="spaw_runner" type="Node" parent="ManagerComponets"]
+script = ExtResource( 3 )
+_id = 45
+
+[node name="spawnerTimer" type="Timer" parent="ManagerComponets/spaw_runner"]
+one_shot = true
+
+[connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
+[connection signal="timeout" from="ManagerComponets/spaw_runner/spawnerTimer" to="ManagerComponets/spaw_runner" method="_on_spawnerTimer_timeout"]

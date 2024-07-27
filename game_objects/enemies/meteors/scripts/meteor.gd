@@ -2,8 +2,7 @@ extends ObjectProcess
 
 onready var hurt_box = $"../../hurt_box"
 onready var hit_box = $"../../hit_box"
-
-onready var life_time = $life_time
+onready var motion_engine = $"../../MotionEngine"
 
 var meteorControl:Componet
 
@@ -21,23 +20,29 @@ func _spaw(data:Dictionary):
 	
 	meteorControl.setMeteor()
 	
+	motion_engine.setActive(true)
+	
 	getObjetcRoot().show()
-	_setLifeTime()
 
 func _reset(data:Dictionary):
 	getObjetcRoot().hide()
 	
 	hurt_box.setActive(false)
 	hit_box.setActive(false)
-
-func _setLifeTime():
-	randomize()
 	
-	life_time.wait_time = rand_range(4, 7)
-	life_time.start()
+	motion_engine.setActive(false)
 
 func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
 	meteorControl = manager.getComponet(45)
 
-func _on_life_time_timeout():
+func _on_hurt_box_hurtEvent(hurtBox):
+	getObjetcRoot().global_position.y -= 20
+
+func _on_hit_box_hitEvent(hitBox):
+	getObjectManger()._reset()
+
+func _on_hurt_box_hurtNoValue(hurtBox):
+	getObjectManger()._reset()
+	
+func _on_checker_screen_exited():
 	getObjectManger()._reset()

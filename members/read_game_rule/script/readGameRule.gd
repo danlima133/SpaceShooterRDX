@@ -79,8 +79,6 @@ const rulesPaths = {
 	"INI": "res://game_rules/ini/"
 }
 
-export var Rules = {}
-
 func getRulesAnvaliable(typeRule:String = "JSON"):
 	var files = {}
 	typeRule = typeRule.to_upper()
