@@ -3,56 +3,84 @@ extends Componet
 const fragamentsBrown = "res://assets/meteors/fragaments/"
 
 onready var texture = $"../../texture"
+onready var motion_engine = $"../../MotionEngine"
 
 onready var hurt_box = $"../../hurt_box"
 onready var hit_box = $"../../hit_box"
 
+onready var readGameRule = $"../../readGameRule"
+
 var _currentData:Dictionary
 
-export(Dictionary) var data = {
-	"meteor_base": [],
-	"treshold_shape": 0
-}
+var meteorsData:Dictionary
+var treshold_shape:float
+
+func _init_componet():
+	var rulesAnvaliable = readGameRule.getRulesAnvaliable("json")
+	var rule = readGameRule.getRule(readGameRule.RuleJson, rulesAnvaliable["meteors_rule"])
+	
+	meteorsData = rule.content
+	treshold_shape = meteorsData["configs"]["treshold_shape"]
 
 func setMeteor(meteor:Dictionary = {}):
 	randomize()
 	
 	var meteorData:Dictionary
-	
-	var meteorsCount = data.meteor_base.size()
-	var meteorIndex = (randi() % meteorsCount)
+
+	var meteorIndex = (randi() % meteorsData["meteors"].size())
 	
 	if meteor.empty():
-		meteorData = data.meteor_base[meteorIndex]
+		meteorData = meteorsData["meteors"][meteorIndex]
 	else: meteorData = meteor
 	
 	_currentData = meteorData
 	
-	texture.texture = meteorData["image"]
+	var pathImage = "res://assets/sprites/meteors/%s.png" % meteorData["image"]
+	
+	texture.texture = load(pathImage)
 	
 	var shape = CircleShape2D.new()
-	shape.radius = (texture.texture.get_width()/2) - data.treshold_shape
+	shape.radius = (texture.texture.get_width()/2) - treshold_shape
 	
-	hurt_box.get_node("hurt_shape").shape = shape
-	hit_box.get_node("hit_shape").shape = shape
+	hurt_box.get_node("hurt_shape").set_deferred("shape", shape)
+	hit_box.get_node("hit_shape").set_deferred("shape", shape)
 	
 	hurt_box.setHurtMax(meteorData["resistence"], true)
 	hit_box.setHit(meteorData["damage"])
-
-func getFragamets(height:int, count:int) -> Array:
-	var fragaments = []
 	
-	for index in range(count):
+	var velocity:float
+	
+	if meteorData["velocity"].size() == 2:
+		velocity = rand_range(meteorData["velocity"][0], meteorData["velocity"][1])
+	else:
+		velocity = meteorData["velocity"][0]
+	
+	motion_engine.setVelocity(velocity)
+
+func getFragmets(height:int, count:Array, type:String) -> Array:
+	randomize()
+	
+	var fragaments = []
+	var indexs:int
+	
+	if count.size() == 2:
+		indexs = rand_range(count[0], count[1])
+	else:
+		indexs = count[0]
+	
+	for index in range(indexs):
 		randomize()
 		
 		var factor = (randi() % height) + 1
 		var value = height % factor
 		
 		if value == 0:
-			fragaments.append(getMeteorData(
-				load("res://assets/sprites/meteors/brown/fragaments/low/0.png"), 1, 1, 1, 0))
+			var meteorIndex = randi() % meteorsData["meteors_small"][type].size()
+			fragaments.append(meteorsData["meteors_small"][type][meteorIndex])
 			continue
-		fragaments.append("high")
+			
+		var meteorIndex = randi() % meteorsData["meteors_high"][type].size()
+		fragaments.append(meteorsData["meteors_high"][type][meteorIndex])
 	
 	return fragaments
 

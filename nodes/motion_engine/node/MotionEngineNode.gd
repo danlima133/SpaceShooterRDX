@@ -16,12 +16,13 @@ var _active = true
 func getRootMotion() -> Node2D:
 	return get_node(rootMotionPath) as Node2D
 
-func getMoveByRulesAndConfig() -> Vector2:
+func getMoveByRulesAndConfig(updateVelocity = true) -> Vector2:
 	randomize()
 	
-	_velocity = motionConfig.velocity
-	if motionConfig.velocityRandom:
-		_velocity = rand_range(motionConfig.velocityMin, motionConfig.velocityMax)
+	if updateVelocity:
+		_velocity = motionConfig.velocity
+		if motionConfig.velocityRandom:
+			_velocity = rand_range(motionConfig.velocityMin, motionConfig.velocityMax)
 	
 	if motionConfig.directionRandom:
 		_xDir = rand_range(-1, 1)
@@ -44,6 +45,16 @@ func setActive(value):
 
 func getActive() -> bool:
 	return _active
+
+func setVelocity(value:float):
+	_velocity = value
+
+func getVelocity() -> float:
+	return _velocity
+
+func updateDir(motionConfig:MotionConfig, updatedVelocity = true):
+	self.motionConfig = motionConfig
+	_dir = getMoveByRulesAndConfig(updatedVelocity)
 
 func _move(delta):
 	getRootMotion().translate(_dir * delta * _velocity)

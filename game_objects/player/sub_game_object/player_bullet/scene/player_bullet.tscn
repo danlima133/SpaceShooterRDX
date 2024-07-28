@@ -25,10 +25,10 @@ script = ExtResource( 6 )
 
 [node name="hit_box" parent="." instance=ExtResource( 3 )]
 id = 50
+filterHurtBox = [ 409 ]
 _hitValue = 1.0
 
 [node name="shape" type="CollisionShape2D" parent="hit_box"]
-visible = false
 shape = SubResource( 1 )
 
 [node name="MotionEngine" type="Node" parent="."]

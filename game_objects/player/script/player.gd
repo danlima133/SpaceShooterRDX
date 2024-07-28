@@ -13,8 +13,9 @@ var playerLastDir = Vector2.ZERO
 var attributes:Componet
 var player_flgas:Componet
 
-func gameOver(die:String, _data:Dictionary):
+func gameOver(die:String, _data:Dictionary = {}):
 	print('player die: ' + die)
+	queue_free()
 
 func _getVectorToInt(x:int, y:int) -> Vector2:
 	return Vector2(x, y)
@@ -43,3 +44,8 @@ func _physics_process(delta):
 func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
 	attributes = manager.getComponet(0)
 	player_flgas = manager.getComponet(1)
+
+# ---------- block is test ----------
+func _on_hurt_box_hurtNoValue(hurtBox):
+	gameOver("by ship")
+# --------------- end --------------

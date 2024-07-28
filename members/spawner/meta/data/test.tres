@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://members/spawner/meta/bin/spawData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+timeSpaw = PoolIntArray( 3, 5 )
+countToSpaw = PoolIntArray( 2, 4 )
+entityPosition = {
+"x": [ 0, 1024 ],
+"y": [ 0 ]
+}
+entity = "res://game_objects/enemies/meteors/scene/meteor.tscn"
+countEntities = 50
+useFunction = true
+functionData = {
+"deley": 60,
+"factor": 2,
+"limit": 8
+}

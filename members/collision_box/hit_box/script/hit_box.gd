@@ -19,11 +19,12 @@ func _ready():
 	initCollisionBox(self)
 
 func _collisionEnterBox(box):
-	if !checkColliders(box.id, filterHurtBox):
-		emit_signal("hitEvent", self)
-		box.hurt(_hitValue)
-		if _hitContinues:
-			box.createTimerOrActive(self)
+	if box != self:
+		if !checkColliders(box.id, filterHurtBox):
+			emit_signal("hitEvent", self)
+			box.hurt(_hitValue)
+			if _hitContinues:
+				box.createTimerOrActive(self)
 
 func checkColliders(idCollider:int, groupCollider:Array):
 	return (idCollider in groupCollider)

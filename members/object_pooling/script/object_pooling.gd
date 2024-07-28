@@ -6,6 +6,7 @@ signal objectPollingSetWithSucessfuly(config)
 onready var dataGroups = $data
 
 export(Dictionary) var configPooling
+export(bool) var configOnStart = true
 
 var controllerObjects:Dictionary
 
@@ -28,7 +29,14 @@ func spaw(config:Dictionary, data:Dictionary = {}) -> Array:
 	
 	return objectsManagersSpaw
 
+func reset(group:String):
+	var objects = getObjectsByGroup(group)
+	for object in objects:
+		if object.getActive():
+			object._reset()
+
 func makeGroupsByConfig(config:Dictionary):
+	configPooling = config
 	var groups = configPooling.keys()
 	for group in groups:
 		var node = Node2D.new()
@@ -60,4 +68,5 @@ func _makeObjectsByConfig():
 			groupNode.add_child(object)
 
 func _ready():
-	makeGroupsByConfig(configPooling)
+	if configOnStart:
+		makeGroupsByConfig(configPooling)

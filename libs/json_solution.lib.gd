@@ -77,6 +77,14 @@ class JsonSolution:
 					attributeParsed = ini
 				else:
 					attributeParsed = "ini sintaxe erro"
+			elif parseType == "exp":
+				var experssion = Expression.new()
+				experssion.parse(parseContent)
+				var output = experssion.execute()
+				if experssion.has_execute_failed():
+					attributeParsed = "error: " + experssion.get_error_text()
+				else:
+					attributeParsed = output
 			else:
 				attributeParsed = "not found escape type: " + parseType
 		
@@ -96,3 +104,12 @@ static func getTagJsonBySolution(solution:Dictionary, parent:String, child:Strin
 				return tagParent["childs"][child]
 		return solution[parent]
 	return ERR_INVALID_PARAMETER
+
+static func getChildsOfScope(solution:Dictionary, scope:String):
+	if solution.empty():
+		return ERR_INVALID_DATA
+	
+	if solution.has(scope):
+		var tag = solution[scope]
+		return tag["childs"]
+	else: return ERR_DOES_NOT_EXIST
