@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=1]
 [ext_resource path="res://members/spawner/script/spawner.gd" type="Script" id=2]
 [ext_resource path="res://members/spawner/componets/spaw_runner.gd" type="Script" id=3]
 [ext_resource path="res://members/object_pooling/scene/object_pooling.tscn" type="PackedScene" id=4]
+[ext_resource path="res://members/spawner/componets/spaw_functions.gd" type="Script" id=5]
 
 [node name="spawner" type="Node"]
 script = ExtResource( 2 )
@@ -21,5 +22,14 @@ _id = 45
 [node name="spawnerTimer" type="Timer" parent="ManagerComponets/spaw_runner"]
 one_shot = true
 
+[node name="spaw_function" type="Node" parent="ManagerComponets"]
+script = ExtResource( 5 )
+_id = 39
+
+[node name="deley" type="Timer" parent="ManagerComponets/spaw_function"]
+one_shot = true
+
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="timeout" from="ManagerComponets/spaw_runner/spawnerTimer" to="ManagerComponets/spaw_runner" method="_on_spawnerTimer_timeout"]
+[connection signal="grow" from="ManagerComponets/spaw_function" to="ManagerComponets/spaw_runner" method="_on_spaw_function_grow"]
+[connection signal="timeout" from="ManagerComponets/spaw_function/deley" to="ManagerComponets/spaw_function" method="_on_deley_timeout"]

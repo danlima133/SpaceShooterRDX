@@ -16,6 +16,12 @@ func run():
 func _on_spawnerTimer_timeout():
 	_preCalc()
 
+func _on_spaw_function_grow(value):
+	print_debug()
+	spawConfig.getConfig().countToSpaw[0] += value
+	spawConfig.getConfig().countToSpaw[1] += value
+	print(spawConfig.getConfig().countToSpaw[0], spawConfig.getConfig().countToSpaw[1])
+
 func _setTimer():
 	var timer:float
 	

@@ -21,7 +21,7 @@ positionSpawPath = NodePath("Position2D")
 spawnerPath = NodePath("..")
 
 [node name="Position2D" type="Position2D" parent="spawner"]
-position = Vector2( 0, -30 )
+position = Vector2( 3, -84 )
 
 [node name="player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 509, 537 )

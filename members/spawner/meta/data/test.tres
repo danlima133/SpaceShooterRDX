@@ -11,6 +11,10 @@ entityPosition = {
 "y": [ 0 ]
 }
 entity = "res://game_objects/enemies/meteors/scene/meteor.tscn"
-countEntities = 20
-useFunction = false
-typeModel = 0
+countEntities = 50
+useFunction = true
+functionData = {
+"deley": 60,
+"factor": 2,
+"limit": 8
+}

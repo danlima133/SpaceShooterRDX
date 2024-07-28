@@ -1,0 +1,32 @@
+extends Componet
+
+signal grow(factor)
+
+onready var spawnerConfig = $"../.."
+onready var deley = $deley
+
+var _counts:int
+var _lastTime:float
+
+func _init_componet():
+	if spawnerConfig.getConfig().useFunction:
+		deley.wait_time = spawnerConfig.getConfig().functionData["deley"]
+		deley.start()
+	
+func _on_deley_timeout():
+	_counts += 1
+	
+	if _counts == spawnerConfig.getConfig().functionData["limit"]:
+		deley.stop()
+		return
+	
+	emit_signal("grow", spawnerConfig.getConfig().functionData["factor"])
+	
+	deley.start()
+
+func stopFunction():
+	_lastTime = deley.time_left
+	deley.stop()
+
+func resumeFunction():
+	deley.start(_lastTime)
