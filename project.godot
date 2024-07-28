@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interfaces/Componet.gd"
 }, {
+"base": "Node",
+"class": "Event",
+"language": "GDScript",
+"path": "res://interfaces/Event.gd"
+}, {
 "base": "CollisionBox",
 "class": "HitBox",
 "language": "GDScript",
@@ -33,6 +38,11 @@ _global_script_classes=[ {
 "class": "ManagerComponets",
 "language": "GDScript",
 "path": "res://nodes/manager_componets/node/ManagerComponetsNode.gd"
+}, {
+"base": "Node",
+"class": "ManagerEvents",
+"language": "GDScript",
+"path": "res://nodes/manager_events/node/ManagerEventsNode.gd"
 }, {
 "base": "Resource",
 "class": "MotionConfig",
@@ -72,9 +82,11 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CollisionBox": "",
 "Componet": "",
+"Event": "",
 "HitBox": "",
 "HurtBox": "",
 "ManagerComponets": "res://nodes/manager_componets/icon/node.png",
+"ManagerEvents": "res://nodes/manager_events/icon/node.png",
 "MotionConfig": "",
 "MotionEngine": "res://nodes/motion_engine/icon/node.png",
 "ObjectManager": "res://nodes/manager_object/icon/node.png",
