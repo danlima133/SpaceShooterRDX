@@ -28,12 +28,12 @@ configPooling = {
 "object": "res://game_objects/enemies/meteors/scene/meteor.tscn"
 }
 }
-positionSpawPath = NodePath("Position2D")
+positionSpawPath = NodePath("spaw_position")
 
 [node name="meteors_fragments" parent="spawner" instance=ExtResource( 5 )]
 spawnerPath = NodePath("..")
 
-[node name="Position2D" type="Position2D" parent="spawner"]
+[node name="spaw_position" type="Position2D" parent="spawner"]
 position = Vector2( 0, -100 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
