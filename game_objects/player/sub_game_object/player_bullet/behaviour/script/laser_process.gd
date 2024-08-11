@@ -14,8 +14,8 @@ func _spaw(data:Dictionary):
 	getObjetcRoot().global_position = data["position"]
 
 func _reset(data:Dictionary):
-	getObjetcRoot().get_node("MotionEngine").setActive(false)
 	getObjetcRoot().get_node("hit_box").setActive(false)
+	getObjetcRoot().get_node("MotionEngine").setActive(false)
 	getObjetcRoot().hide()
 	getObjetcRoot().global_position = Vector2.ZERO
 

@@ -20,10 +20,7 @@ func getComponetsId() -> Array:
 	return ids
 
 func getComponet(id:int):
-	for componet in _componets:
-		if id == componet.getId():
-			return componet
-	return null
+	return get_node(str(id))
 
 func _getComponetsByPath(paths:Array) -> Array:
 	var componets:Array
@@ -37,5 +34,6 @@ func _getComponetsByPath(paths:Array) -> Array:
 func _initialazeComponets():
 	for componet in _componets:
 		componet.currentManager = self
+		componet.name = str(componet.getId())
 		componet._init_componet()
 	emit_signal("MangerComponetsInitialize", _componets.size(), self)

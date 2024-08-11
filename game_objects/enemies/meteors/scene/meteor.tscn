@@ -1,18 +1,26 @@
 [gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=1]
 [ext_resource path="res://game_objects/enemies/meteors/componets/meteor_control.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big4.png" type="Texture" id=3]
+[ext_resource path="res://members/read_game_rule/scene/readGameRule.tscn" type="PackedScene" id=3]
 [ext_resource path="res://nodes/manager_object/node/ObjectManagerNode.gd" type="Script" id=4]
 [ext_resource path="res://game_objects/enemies/meteors/scripts/meteor.gd" type="Script" id=5]
 [ext_resource path="res://members/collision_box/hit_box/scene/hit_box.tscn" type="PackedScene" id=6]
 [ext_resource path="res://members/collision_box/hurt_box/scene/hurt_box.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big2.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/meteors/brown/meteorBrown_big3.png" type="Texture" id=9]
 [ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=10]
+[ext_resource path="res://nodes/motion_engine/meta/data/meteor.tres" type="Resource" id=11]
 
 [node name="meteor" type="Node2D"]
 
+[node name="readGameRule" parent="." instance=ExtResource( 3 )]
+
 [node name="texture" type="Sprite" parent="."]
+
+[node name="MotionEngine" type="Node" parent="."]
+script = ExtResource( 1 )
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 11 )
+initActive = false
 
 [node name="ObjectManager" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -21,30 +29,12 @@ objectProcess = NodePath("meteor")
 [node name="meteor" type="Node" parent="ObjectManager"]
 script = ExtResource( 5 )
 
-[node name="life_time" type="Timer" parent="ObjectManager/meteor"]
-
 [node name="ManagerComponets" type="Node" parent="."]
 script = ExtResource( 10 )
 
 [node name="meteor_control" type="Node" parent="ManagerComponets"]
 script = ExtResource( 2 )
 _id = 45
-data = {
-"meteor_base": [ {
-"damage": 3,
-"image": ExtResource( 8 ),
-"resistence": 10.0
-}, {
-"damage": 2.0,
-"image": ExtResource( 3 ),
-"resistence": 5.0
-}, {
-"damage": 2.0,
-"image": ExtResource( 9 ),
-"resistence": 5.0
-} ],
-"treshold_shape": 5
-}
 
 [node name="hurt_box" parent="." instance=ExtResource( 7 )]
 monitoring = false
@@ -57,5 +47,11 @@ filterHurtBox = [ 55 ]
 
 [node name="hit_shape" type="CollisionShape2D" parent="hit_box"]
 
-[connection signal="timeout" from="ObjectManager/meteor/life_time" to="ObjectManager/meteor" method="_on_life_time_timeout"]
+[node name="checker" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -5, -5, 10, 10 )
+
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ObjectManager/meteor" method="_on_ManagerComponets_MangerComponetsInitialize"]
+[connection signal="hurtEvent" from="hurt_box" to="ObjectManager/meteor" method="_on_hurt_box_hurtEvent"]
+[connection signal="hurtNoValue" from="hurt_box" to="ObjectManager/meteor" method="_on_hurt_box_hurtNoValue"]
+[connection signal="hitEvent" from="hit_box" to="ObjectManager/meteor" method="_on_hit_box_hitEvent"]
+[connection signal="screen_exited" from="checker" to="ObjectManager/meteor" method="_on_checker_screen_exited"]

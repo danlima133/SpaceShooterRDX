@@ -17,11 +17,11 @@ func setActive(value:bool, config:Dictionary = {}):
 	_active = value
 	_setDicValuesDefault(config)
 	
-	match config.all:
+	match config["all"]:
 		true:
 			_controllerShapes(range(get_child_count()), value)
 		false:
-			_controllerShapes(config.shapeIdx, value)
+			_controllerShapes(config["shapeIdx"], value)
 	
 
 func updateProperty(property:int, value, box:CollisionBox):

@@ -22,12 +22,12 @@ func _on_visibility_screen_exited():
 func _on_visibility_screen_entered():
 	_setterWarnig(false)
 
+func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
+	player_flags = currentManager.getComponet(1)
+
 func _setterWarnig(value):
 	if player_flags.getFlagState("bounds"):
 		_warning = value
-
-func _init_componet():
-	player_flags = currentManager.getComponet(1)
 
 func _process(_delta):
 	visibility.position = (player.playerLastDir * texture.texture.get_size()) * Vector2(rangeMax, rangeMax)

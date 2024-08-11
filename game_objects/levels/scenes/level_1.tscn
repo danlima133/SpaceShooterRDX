@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://members/backgrounds/scenes/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://members/spawner/scene/spawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://members/spawner/meta/data/test.tres" type="Resource" id=4]
+[ext_resource path="res://members/meteors_fragments/scene/meteors_fragments.tscn" type="PackedScene" id=5]
 
 [node name="level_1" type="Node2D"]
 
@@ -10,9 +13,28 @@ __meta__ = {
 "_edit_lock_": true
 }
 configBackground = {
-"imageIdx": 2,
+"imageIdx": 5,
 "random": false
 }
+
+[node name="spawner" parent="." instance=ExtResource( 3 )]
+__meta__ = {
+"_editor_description_": ""
+}
+_spawData = ExtResource( 4 )
+configPooling = {
+"entities": {
+"count": 20,
+"object": "res://game_objects/enemies/meteors/scene/meteor.tscn"
+}
+}
+positionSpawPath = NodePath("Position2D")
+
+[node name="meteors_fragments" parent="spawner" instance=ExtResource( 5 )]
+spawnerPath = NodePath("..")
+
+[node name="Position2D" type="Position2D" parent="spawner"]
+position = Vector2( 0, -100 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 512, 547 )
