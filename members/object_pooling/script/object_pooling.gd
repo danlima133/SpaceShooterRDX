@@ -66,6 +66,7 @@ func _makeObjectsByConfig():
 			
 			controllerObjects[group].append(objectManager)
 			groupNode.add_child(object)
+			objectManager._reset()
 
 func _ready():
 	if configOnStart:

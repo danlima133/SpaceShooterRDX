@@ -20,22 +20,39 @@ func startEvent(eventName:String):
 		set_process(true)
 		
 		event.emit_signal("eventStart", event)
+		return OK
+	return ERR_UNAVAILABLE
 
 func stopEvent():
-	set_process(false)
-	currentEvent._stop()
-	emit_signal("eventStop", currentEvent)
+	if canPaused(currentEvent):
+		if hasEvent():
+			set_process(false)
+			currentEvent._stop()
+			currentEvent.setStop(true)
+			emit_signal("eventStop", currentEvent)
+			return OK
+		return ERR_UNAVAILABLE
+	return ERR_UNAUTHORIZED
 
 func resumeEvent():
-	set_process(true)
-	currentEvent._resume()
-	emit_signal("eventResume", currentEvent)
+	if canPaused(currentEvent):
+		if hasEvent() and currentEvent.isStop():
+			set_process(true)
+			currentEvent._resume()
+			currentEvent.setStop(false)
+			emit_signal("eventResume", currentEvent)
+			return OK
+		return ERR_UNAVAILABLE
+	return ERR_UNAUTHORIZED
 
 func getEvent(eventName:String) -> Event:
 	return get_node(eventName) as Event
 
 func getCurrentEvent() -> Event:
 	return currentEvent
+
+func canPaused(event:Event) -> bool:
+	return event._eventCanPaused
 
 func hasEvent() -> bool:
 	return (currentEvent != null)

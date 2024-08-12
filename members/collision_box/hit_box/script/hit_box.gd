@@ -26,9 +26,6 @@ func _collisionEnterBox(box):
 			if _hitContinues:
 				box.createTimerOrActive(self)
 
-func checkColliders(idCollider:int, groupCollider:Array):
-	return (idCollider in groupCollider)
-
 func setHit(value):
 	_hitValue = value
 	updateProperty(propertyNames.HIT_VALUE, _hitValue, self)

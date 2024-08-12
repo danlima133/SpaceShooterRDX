@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://members/spawner/scene/spawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://nodes/manager_events/behaviour/scripts/events/event_meteors.gd" type="Script" id=2]
+[ext_resource path="res://members/spawner/meta/data/meteors_flames.tres" type="Resource" id=3]
+
+[node name="event_meteors" type="Node"]
+script = ExtResource( 2 )
+_eventName = "meteorsFlame"
+
+[node name="duration" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[node name="spawner" parent="." instance=ExtResource( 1 )]
+_spawData = ExtResource( 3 )
+configPooling = {
+"entities": {
+"count": 10,
+"object": "res://game_objects/enemies/meteor_flame/scene/meteor_flame.tscn"
+}
+}
+positionSpawPath = NodePath("position")
+initActive = false
+
+[node name="position" type="Position2D" parent="spawner"]
+position = Vector2( 0, -50 )
+
+[connection signal="timeout" from="duration" to="." method="_on_duration_timeout"]

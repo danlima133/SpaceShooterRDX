@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource( 1 )
-timeSpaw = PoolIntArray( 3, 5 )
+timeSpaw = PoolIntArray( 2, 3 )
 countToSpaw = PoolIntArray( 2, 4 )
 entityPosition = {
 "x": [ 0, 1024 ],
 "y": [ 0 ]
 }
-useFunction = true
+useFunction = false
 functionData = {
-"deley": 60,
-"factor": 2,
-"limit": 8
+"deley": 0,
+"factor": 0,
+"limit": 0
 }

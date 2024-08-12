@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://nodes/manager_events/node/ManagerEventsNode.gd" type="Script" id=1]
+[ext_resource path="res://tests/game/scripts/test_event_meteors_flame.gd" type="Script" id=2]
+[ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://nodes/manager_events/behaviour/scenes/events/event_meteors.tscn" type="PackedScene" id=4]
+
+[node name="test_event_meteors_flame" type="Node"]
+script = ExtResource( 2 )
+
+[node name="ManagerEvents" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="event_meteors" parent="ManagerEvents" instance=ExtResource( 4 )]
+_eventCanPaused = false
+
+[node name="player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 515, 532 )
+
+[connection signal="eventFinished" from="ManagerEvents/event_meteors" to="." method="_on_event_meteors_eventFinished"]
+[connection signal="eventStart" from="ManagerEvents/event_meteors" to="." method="_on_event_meteors_eventStart"]

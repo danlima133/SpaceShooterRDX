@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game_objects/enemies/meteor_flame/scene/meteor_flame.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=2]
+
+[node name="test_meteor_flame" type="Node"]
+
+[node name="meteor_flame" parent="." instance=ExtResource( 1 )]
+position = Vector2( 300, -223 )
+
+[node name="meteor_flame5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 690, -254 )
+
+[node name="meteor_flame2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 515, -161 )
+
+[node name="meteor_flame3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 122, -130 )
+
+[node name="meteor_flame4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 919, -124 )
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 532, 532 )

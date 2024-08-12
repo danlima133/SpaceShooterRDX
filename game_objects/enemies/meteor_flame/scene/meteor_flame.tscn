@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://nodes/motion_engine/meta/data/meteor_flame.tres" type="Resource" id=1]
+[ext_resource path="res://members/collision_box/hit_box/scene/hit_box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=3]
+[ext_resource path="res://assets/sprites/meteors/brown/model_3.png" type="Texture" id=4]
+[ext_resource path="res://members/collision_box/action_box/scene/action_box.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game_objects/enemies/meteor_flame/behaviour/script/meteor_flame_process.gd" type="Script" id=6]
+[ext_resource path="res://nodes/manager_object/node/ObjectManagerNode.gd" type="Script" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 58.0775
+
+[node name="meteor_flame" type="Node2D"]
+
+[node name="texture" type="Sprite" parent="."]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="ObjectManager" type="Node" parent="."]
+script = ExtResource( 7 )
+objectProcess = NodePath("meteor_flame_process")
+
+[node name="meteor_flame_process" type="Node" parent="ObjectManager"]
+script = ExtResource( 6 )
+
+[node name="hit_box" parent="." instance=ExtResource( 2 )]
+id = 329
+_hitValue = -1.0
+
+[node name="shape" type="CollisionShape2D" parent="hit_box"]
+position = Vector2( -3, 2 )
+shape = SubResource( 1 )
+
+[node name="action_box" parent="." instance=ExtResource( 5 )]
+id = 459
+action = "killPlayerBullet"
+
+[node name="shape" type="CollisionShape2D" parent="action_box"]
+shape = SubResource( 1 )
+
+[node name="MotionEngine" type="Node" parent="."]
+script = ExtResource( 3 )
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 1 )
+initActive = false
+
+[node name="checker" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="checker" to="ObjectManager/meteor_flame_process" method="_on_checker_screen_exited"]

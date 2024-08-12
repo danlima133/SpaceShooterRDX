@@ -12,3 +12,6 @@ func _input(event):
 				KEY_R:
 					spawner.get_node("ManagerComponets").getComponet(45).resume()
 					print("Resume spawner")
+				KEY_Q:
+					spawner.init()
+					print("Init spawner")

@@ -69,6 +69,7 @@ func _spaw():
 	emit_signal("spaw", entities)
 
 func stop():
+	print_debug()
 	lastTimer = spawnerTimer.time_left
 	spawnerTimer.stop()
 

@@ -5,8 +5,10 @@ signal eventStart(event)
 signal eventFinished(event)
 
 export(String) var _eventName
+export(bool) var _eventCanPaused = true
 
 var _currentManager
+var _stop
 
 func _config():
 	pass
@@ -23,7 +25,11 @@ func _stop():
 func _resume():
 	pass
 
+func _eventFinished():
+	pass
+
 func eventFinished():
+	_eventFinished()
 	emit_signal("eventFinished", self)
 
 func getEventName() -> String:
@@ -34,3 +40,9 @@ func getManager():
 
 func setEventName(value):
 	_eventName = value
+
+func isStop() -> bool:
+	return _stop
+
+func setStop(value:bool):
+	_stop = value

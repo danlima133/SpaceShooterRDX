@@ -10,6 +10,7 @@ export(Dictionary) var configPooling = {
 	}
 }
 export(NodePath) var positionSpawPath
+export(bool) var initActive = true
 
 var positionSpaw:Position2D
 
@@ -47,6 +48,10 @@ func _configSpaw():
 	
 	objectPooling.makeGroupsByConfig(configPooling)
 	
+	if initActive:
+		spawRunner.run()
+
+func init():
 	spawRunner.run()
 
 func getConfig() -> SpawData:

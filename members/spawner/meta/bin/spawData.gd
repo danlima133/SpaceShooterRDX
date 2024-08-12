@@ -9,9 +9,6 @@ export(Dictionary) var entityPosition = {
 	"y": []
 }
 
-export(String, FILE, "*.tscn") var entity
-export(int) var countEntities
-
 export(bool) var useFunction
 export(Dictionary) var functionData = {
 	"deley": 0,
