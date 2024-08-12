@@ -7,9 +7,10 @@
 [node name="event_meteors" type="Node"]
 script = ExtResource( 2 )
 _eventName = "meteorsFlame"
+_eventCanPaused = false
 
 [node name="duration" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 25.0
 one_shot = true
 
 [node name="spawner" parent="." instance=ExtResource( 1 )]

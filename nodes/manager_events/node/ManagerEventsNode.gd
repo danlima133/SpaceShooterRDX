@@ -24,26 +24,26 @@ func startEvent(eventName:String):
 	return ERR_UNAVAILABLE
 
 func stopEvent():
-	if canPaused(currentEvent):
-		if hasEvent():
+	if hasEvent():
+		if canPaused(currentEvent):
 			set_process(false)
 			currentEvent._stop()
 			currentEvent.setStop(true)
 			emit_signal("eventStop", currentEvent)
 			return OK
-		return ERR_UNAVAILABLE
-	return ERR_UNAUTHORIZED
+		return ERR_UNAUTHORIZED
+	return ERR_UNAVAILABLE
 
 func resumeEvent():
-	if canPaused(currentEvent):
-		if hasEvent() and currentEvent.isStop():
+	if hasEvent():
+		if currentEvent.isStop() and canPaused(currentEvent):
 			set_process(true)
 			currentEvent._resume()
 			currentEvent.setStop(false)
 			emit_signal("eventResume", currentEvent)
 			return OK
-		return ERR_UNAVAILABLE
-	return ERR_UNAUTHORIZED
+		return ERR_UNAUTHORIZED
+	return ERR_UNAVAILABLE
 
 func getEvent(eventName:String) -> Event:
 	return get_node(eventName) as Event

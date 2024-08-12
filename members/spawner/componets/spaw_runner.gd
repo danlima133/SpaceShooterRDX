@@ -9,18 +9,19 @@ onready var object_pooling = $"../../object_pooling"
 
 var lastTimer:float
 
+var spawnerFunction:Componet
+
 func run():
 	randomize()
 	_setTimer()
-	
+	spawnerFunction._start()
+
 func _on_spawnerTimer_timeout():
 	_preCalc()
 
 func _on_spaw_function_grow(value):
-	print_debug()
 	spawConfig.getConfig().countToSpaw[0] += value
 	spawConfig.getConfig().countToSpaw[1] += value
-	print(spawConfig.getConfig().countToSpaw[0], spawConfig.getConfig().countToSpaw[1])
 
 func _setTimer():
 	var timer:float
@@ -34,6 +35,9 @@ func _setTimer():
 	
 	spawnerTimer.wait_time = timer
 	spawnerTimer.start()
+
+func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager:ManagerComponets):
+	spawnerFunction = manager.getComponet(39)
 
 func _preCalc():
 	var count:int
@@ -69,12 +73,13 @@ func _spaw():
 	emit_signal("spaw", entities)
 
 func stop():
-	print_debug()
 	lastTimer = spawnerTimer.time_left
 	spawnerTimer.stop()
+	spawnerFunction._stopFunction()
 
 func resume():
 	spawnerTimer.start(lastTimer)
+	spawnerFunction._resumeFunction()
 
 func clearSpawner():
 	object_pooling.reset("entities")

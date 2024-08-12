@@ -10,8 +10,8 @@ var _lastTime:float
 
 func _init_componet():
 	if spawnerConfig.getConfig().useFunction:
-		deley.wait_time = spawnerConfig.getConfig().functionData["deley"]
-		deley.start()
+		if spawnerConfig.initActive:
+			_start()
 	
 func _on_deley_timeout():
 	_counts += 1
@@ -24,9 +24,14 @@ func _on_deley_timeout():
 	
 	deley.start()
 
-func stopFunction():
+func _start():
+	randomize()
+	deley.wait_time = spawnerConfig.getConfig().functionData["deley"]
+	deley.start()
+
+func _stopFunction():
 	_lastTime = deley.time_left
 	deley.stop()
 
-func resumeFunction():
+func _resumeFunction():
 	deley.start(_lastTime)

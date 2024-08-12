@@ -6,15 +6,15 @@ func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
 			match event.scancode:
-				KEY_M:
+				KEY_0:
 					var err = manager_events.startEvent("meteorsFlame")
 					if err != OK:
 						print("err - event start")
-				KEY_S:
+				KEY_1:
 					var err = manager_events.stopEvent()
 					if err != OK:
 						print("err - event stop")
-				KEY_R:
+				KEY_2:
 					var err = manager_events.resumeEvent()
 					if err != OK:
 						print("err - event resume")
