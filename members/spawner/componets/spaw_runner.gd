@@ -2,6 +2,8 @@ extends Componet
 
 signal spaw(entity)
 
+const dynamicResource = preload("res://libs/resource_dynamic.lib.gd")
+
 onready var spawnerTimer = $spawnerTimer
 onready var spawConfig = $"../.."
 
@@ -9,46 +11,41 @@ onready var object_pooling = $"../../object_pooling"
 
 var lastTimer:float
 
-var spawnerFunction:Componet
+var controllerFunctions:ControllerFunctions
 
 func run():
 	randomize()
 	_setTimer()
-	spawnerFunction._start()
+	
+	controllerFunctions.start()
+	
+	spawConfig.getConfig().resetResource()
 
 func _on_spawnerTimer_timeout():
 	_preCalc()
 
-func _on_spaw_function_grow(value):
-	spawConfig.getConfig().countToSpaw[0] += value
-	spawConfig.getConfig().countToSpaw[1] += value
-
 func _setTimer():
 	var timer:float
 	
-	if spawConfig.timeIsRandom:
-		var timeMin = spawConfig.getConfig().timeSpaw[0]
-		var timeMax = spawConfig.getConfig().timeSpaw[1]
-		timer = rand_range(timeMin, timeMax)
+	if dynamicResource.isRangeValue(spawConfig.getConfig().getValue("timeSpaw")):
+		timer = dynamicResource.generateRangeValue(spawConfig.getConfig().getValue("timeSpaw"), dynamicResource.TypeRand.FLOAT)
 	else:
-		timer = spawConfig.getConfig().timeSpaw[0]
+		timer = dynamicResource.getValueFromRand(spawConfig.getConfig().getValue("timeSpaw"), dynamicResource.Value.DEFAULT)
 	
 	spawnerTimer.wait_time = timer
 	spawnerTimer.start()
 
 func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager:ManagerComponets):
-	spawnerFunction = manager.getComponet(39)
+	controllerFunctions = manager.getComponet(874)
 
 func _preCalc():
 	var count:int
 	var position = currentManager.get_parent().positionSpaw.global_position
 	
-	if spawConfig.countIsRandom:
-		var countMin = spawConfig.getConfig().countToSpaw[0]
-		var countMax = spawConfig.getConfig().countToSpaw[1]
-		count = round(rand_range(countMin, countMax))
+	if dynamicResource.isRangeValue(spawConfig.getConfig().getValue("countToSpaw")):
+		count = dynamicResource.generateRangeValue(spawConfig.getConfig().getValue("countToSpaw"), dynamicResource.TypeRand.INT)
 	else:
-		count = spawConfig.getConfig().countToSpaw[0]
+		count = dynamicResource.getValueFromRand(spawConfig.getConfig().getValue("countToSpaw"), dynamicResource.Value.DEFAULT)
 	
 	for index in range(count):
 		_spaw()
@@ -58,13 +55,22 @@ func _preCalc():
 func _spaw():
 	var position:Vector2
 	
-	if spawConfig.positionsRandom["x"]:
-		position.x += rand_range(spawConfig.getConfig().entityPosition["x"][0], spawConfig.getConfig().entityPosition["x"][1])
-	if spawConfig.positionsRandom["y"]:
-		position.y += rand_range(spawConfig.getConfig().entityPosition["y"][0], spawConfig.getConfig().entityPosition["y"][1])
+	var entityPosition:Dictionary
+	entityPosition = spawConfig.getConfig().getValue("entityPosition")
 	
-	if not (spawConfig.positionsRandom["x"] and spawConfig.positionsRandom["y"]):
-		position += Vector2(spawConfig.getConfig().entityPosition["x"][0], spawConfig.getConfig().entityPosition["y"][0])
+	var positionXRand:bool
+	var positionYRand:bool
+	
+	positionXRand = dynamicResource.isRangeValue(entityPosition["x"])
+	positionYRand = dynamicResource.isRangeValue(entityPosition["y"])
+	
+	if positionXRand:
+		position.x += dynamicResource.generateRangeValue(entityPosition["x"], dynamicResource.TypeRand.FLOAT)
+	if positionYRand:
+		position.y += dynamicResource.generateRangeValue(entityPosition["y"], dynamicResource.TypeRand.FLOAT)
+	
+	if not (positionXRand and positionYRand):
+		position += Vector2(dynamicResource.getValueFromRand(entityPosition["x"], dynamicResource.Value.DEFAULT), dynamicResource.getValueFromRand(entityPosition["y"], dynamicResource.Value.DEFAULT))
 		
 	var entities = object_pooling.spaw({ "group": "entities" }, {
 		"position": position + currentManager.get_parent().positionSpaw.global_position
@@ -75,11 +81,11 @@ func _spaw():
 func stop():
 	lastTimer = spawnerTimer.time_left
 	spawnerTimer.stop()
-	spawnerFunction._stopFunction()
+	controllerFunctions.stop()
 
 func resume():
 	spawnerTimer.start(lastTimer)
-	spawnerFunction._resumeFunction()
+	controllerFunctions.resume()
 
 func clearSpawner():
 	object_pooling.reset("entities")

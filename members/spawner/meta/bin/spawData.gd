@@ -10,8 +10,3 @@ export(Dictionary) var entityPosition = {
 }
 
 export(bool) var useFunction
-export(Dictionary) var functionData = {
-	"deley": 0,
-	"factor": 0,
-	"limit": 0
-}

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://members/functions/script/controller_functions.gd" type="Script" id=1]
+
+[node name="controller_functions" type="Node"]
+script = ExtResource( 1 )
+function = "test"
+
+[node name="functions" type="Node" parent="."]
+
+[node name="deley" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="deley" to="." method="_on_deley_timeout"]

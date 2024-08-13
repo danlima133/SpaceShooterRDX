@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://members/functions/scene/controller_functions.tscn" type="PackedScene" id=1]
+[ext_resource path="res://members/functions/behaviour/scenes/functions/func_const.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tests/game/scripts/test_functions_spawner.gd" type="Script" id=4]
+
+[node name="test_functions_spawner" type="Node"]
+script = ExtResource( 4 )
+
+[node name="controller_functions" parent="." instance=ExtResource( 1 )]
+function = "constValue"
+
+[node name="func_const" parent="controller_functions/functions" index="0" instance=ExtResource( 2 )]
+headData = [ 5, 10, 0 ]
+offset = 2
+
+[connection signal="restartFunction" from="controller_functions" to="." method="_on_controller_functions_restartFunction"]
+[connection signal="resumeFunction" from="controller_functions" to="." method="_on_controller_functions_resumeFunction"]
+[connection signal="startFunction" from="controller_functions" to="." method="_on_controller_functions_startFunction"]
+[connection signal="stopFunction" from="controller_functions" to="." method="_on_controller_functions_stopFunction"]
+[connection signal="step" from="controller_functions/functions/func_const" to="." method="_on_func_const_step"]
+
+[editable path="controller_functions"]

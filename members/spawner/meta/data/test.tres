@@ -11,8 +11,3 @@ entityPosition = {
 "y": [ 0 ]
 }
 useFunction = true
-functionData = {
-"deley": 60,
-"factor": 2,
-"limit": 8
-}
