@@ -23,10 +23,14 @@ func _ready():
 
 func _configFunctions():
 	for function in functions.get_children():
-		function._config(function.getFunctionData(), function.getHead())
+		function._config(function.getFunctionData().getTargetData(), function.getHead())
 	emit_signal("functionsInit")
 
 func _on_deley_timeout():
+	if getCurrentFunction()._count == -1:
+		getCurrentFunction()._lastDeley = 0
+	else:
+		getCurrentFunction()._lastDeley += getCurrentFunction().getDeley()
 	getCurrentFunction()._count += 1
 	getCurrentFunction()._action()
 	getCurrentFunction().step()
@@ -51,7 +55,7 @@ func restart(full:bool):
 		_currentFunction._start()
 		deley.start()
 		if full:
-			_currentFunction._count = 0
+			_currentFunction.resetCount()
 		emit_signal("restartFunction", getCurrentFunction().getFunctionName())
 
 func getFunction(functionName:String):

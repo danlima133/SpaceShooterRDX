@@ -4,7 +4,6 @@
 
 [node name="controller_functions" type="Node"]
 script = ExtResource( 1 )
-function = "test"
 
 [node name="functions" type="Node" parent="."]
 

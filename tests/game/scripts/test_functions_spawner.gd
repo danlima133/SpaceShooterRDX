@@ -12,6 +12,8 @@ func _input(event):
 					controllerFunctions.stop()
 				KEY_2:
 					controllerFunctions.resume()
+				KEY_F:
+					controllerFunctions.start("constValue")
 
 func _on_controller_functions_resumeFunction(function):
 	print("resume - %s" % function)
