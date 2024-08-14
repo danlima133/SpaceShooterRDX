@@ -36,6 +36,3 @@ func _setData():
 		_intervalTime = getFunctionData().getValue("deley")
 	if getFunctionData().hasValue("limit"):
 		_rateMax = getFunctionData().getValue("limit")
-
-func _on_func_const_toLimit():
-	getFunctionsController().restart(false)

@@ -39,6 +39,7 @@ func start(functionName:String):
 	_currentFunction = getFunction(functionName)
 	_currentFunction._start()
 	deley.start()
+	_currentFunction._clearGraph()
 	emit_signal("startFunction", getCurrentFunction().getFunctionName())
 
 func stop():
@@ -56,6 +57,8 @@ func restart(full:bool):
 		deley.start()
 		if full:
 			_currentFunction.resetCount()
+			_currentFunction._data.empty()
+			_currentFunction._functionGraphObject = null
 		emit_signal("restartFunction", getCurrentFunction().getFunctionName())
 
 func getFunction(functionName:String):

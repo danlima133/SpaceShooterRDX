@@ -11,7 +11,7 @@ script = ExtResource( 4 )
 
 [node name="func_const" parent="controller_functions/functions" index="0" instance=ExtResource( 2 )]
 _functionData = {
-"deley": [ 5, 10 ],
+"deley": [ 3 ],
 "limit": 5,
 "offset": [ 1, 3 ]
 }
@@ -21,6 +21,6 @@ _functionData = {
 [connection signal="startFunction" from="controller_functions" to="." method="_on_controller_functions_startFunction"]
 [connection signal="stopFunction" from="controller_functions" to="." method="_on_controller_functions_stopFunction"]
 [connection signal="step" from="controller_functions/functions/func_const" to="." method="_on_func_const_step"]
-[connection signal="toLimit" from="controller_functions/functions/func_const" to="controller_functions/functions/func_const" method="_on_func_const_toLimit"]
+[connection signal="toLimit" from="controller_functions/functions/func_const" to="." method="_on_func_const_toLimit"]
 
 [editable path="controller_functions"]

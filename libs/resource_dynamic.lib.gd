@@ -62,7 +62,7 @@ static func generateRangeValue(value:Array, randType:int, algorithm:RandomNumber
 	else: return ERR_INVALID_PARAMETER
 
 static func getValueFromRand(rand:Array, value:int):
-	if isRangeValue(rand):
+	if rand.size() == 2 or rand.size() == 1:
 		match value:
 			Value.MIN:
 				return rand[0]
