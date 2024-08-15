@@ -39,9 +39,7 @@ class ResourceDynamic:
 		else: ERR_UNAVAILABLE
 	
 	func resetResource():
-		if isUnique:
-			_resourceBase = _resourceOrigem
-		else:
+		if not isUnique:
 			_resourceBase = _resourceOrigem.duplicate()
 
 static func isRangeValue(value:Array):
@@ -71,3 +69,6 @@ static func getValueFromRand(rand:Array, value:int):
 			Value.DEFAULT:
 				return rand[0]
 	return ERR_INVALID_PARAMETER
+
+static func createNewRand(a, b = null):
+	return [a, b] if b != null else [a]

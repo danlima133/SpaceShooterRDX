@@ -11,14 +11,10 @@ onready var object_pooling = $"../../object_pooling"
 
 var lastTimer:float
 
-var controllerFunctions:ControllerFunctions
-
 func run():
 	randomize()
 	_setTimer()
-	
-	controllerFunctions.start()
-	
+	spawConfig.controllerFunctions.start("constValue")
 	spawConfig.getConfig().resetResource()
 
 func _on_spawnerTimer_timeout():
@@ -34,9 +30,6 @@ func _setTimer():
 	
 	spawnerTimer.wait_time = timer
 	spawnerTimer.start()
-
-func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager:ManagerComponets):
-	controllerFunctions = manager.getComponet(874)
 
 func _preCalc():
 	var count:int
@@ -81,11 +74,11 @@ func _spaw():
 func stop():
 	lastTimer = spawnerTimer.time_left
 	spawnerTimer.stop()
-	controllerFunctions.stop()
+	spawConfig.controllerFunctions.stop()
 
 func resume():
 	spawnerTimer.start(lastTimer)
-	controllerFunctions.resume()
+	spawConfig.controllerFunctions.resume()
 
 func clearSpawner():
 	object_pooling.reset("entities")

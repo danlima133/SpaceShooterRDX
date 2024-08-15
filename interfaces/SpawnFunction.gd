@@ -5,10 +5,12 @@ signal toLimit(function)
 signal step(value, function, metadado)
 
 export(String) var _functionName
-export(String, FILE, "*.functiondata") var _functionData
+export(String, FILE, "*.functiondata") var _functionDataPath
 
 export(Array) var headData
 export(bool) var isLoop
+
+onready var gameReadRule = $"../../readGameRule"
 
 var _functionsController
 
@@ -82,9 +84,10 @@ class GraphData:
 			return Vector2(value, _data[value])
 		return ERR_DOES_NOT_EXIST
 
-func _config(data:Dictionary, head:Array):
+func _config(dataPath:String, head:Array):
 	name = _functionName
 	_functionsController = $"../.."
+	setDataPath(dataPath)
 	if not head.empty():
 		_deley = head[0]
 		_limit = head[1]
@@ -93,7 +96,7 @@ func _config(data:Dictionary, head:Array):
 func _setStep():
 	_data[_lastDeley + getDeley()] = getStepValue()
 	_setDeleyTimer()
-	emit_signal("step", getStepValue(), getFunctionName(), metaDado)
+	emit_signal("step", getStepValue(), self, metaDado)
 
 func _clearGraph():
 	_data = {}
@@ -122,16 +125,23 @@ func step():
 	metaDado.clear()
 
 func getFunctionData() -> FunctionData:
-	if _functionDataObject == null:
-		var parser = $"../..".get_node("readGameRule")
-		var rule = parser.RuleJson._read(_functionData)
-		return FunctionData.new(rule.content)
 	return _functionDataObject
 
 func getFunctionGraph() -> GraphData:
 	if _functionGraphObject == null:
 		return GraphData.new(_data)
 	return _functionGraphObject
+
+func getDataPath() -> String:
+	return _functionDataPath
+
+func setDataPath(path:String):
+	var parser = $"../..".get_node("readGameRule")
+	var rule = parser.RuleJson._read(path)
+	if rule.err != OK:
+		printerr("Data Path Invalid to %s" % self)
+		return ERR_FILE_BAD_PATH
+	_functionDataObject = FunctionData.new(rule.content)
 
 func getHead() -> Array:
 	return headData

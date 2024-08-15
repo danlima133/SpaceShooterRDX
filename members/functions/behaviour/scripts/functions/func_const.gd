@@ -9,6 +9,7 @@ var _rateMax:int
 func _start():
 	_setData()
 	
+	setStepValue(0)
 	setDeley(_getInterval(_intervalTime, dynamicResources.TypeRand.FLOAT))
 	setLimit(_rateMax)
 

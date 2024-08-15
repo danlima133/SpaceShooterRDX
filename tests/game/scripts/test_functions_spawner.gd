@@ -32,7 +32,7 @@ func _on_controller_functions_restartFunction(function):
 	print("restart - %s" % function)
 
 func _on_func_const_step(value, function, metadado):
-	print(str(value) + " - " + function + " - " + str(metadado))
+	print(str(value) + " - " + str(function) + " - " + str(metadado))
 
 func _on_func_const_toLimit(function:Function):
 	var graphFunction = function.getFunctionGraph()
@@ -50,3 +50,6 @@ func _on_func_variation_step(value, function, metadado):
 
 func _on_controller_functions_changeFunction(function:Function):
 	print("change function to %s" % function.getFunctionName())
+
+func _on_controller_functions_functionsInit(controller:ControllerFunctions):
+	print(controller.getFunction("deltaValue"))

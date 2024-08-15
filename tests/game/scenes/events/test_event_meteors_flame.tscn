@@ -4,7 +4,7 @@
 [ext_resource path="res://tests/game/scripts/test_event_meteors_flame.gd" type="Script" id=2]
 [ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://nodes/manager_events/behaviour/scenes/events/event_meteors.tscn" type="PackedScene" id=4]
-[ext_resource path="res://members/spawner/meta/data/test.tres" type="Resource" id=5]
+[ext_resource path="res://members/spawner/meta/data/meteors.tres" type="Resource" id=5]
 [ext_resource path="res://members/spawner/scene/spawner.tscn" type="PackedScene" id=6]
 
 [node name="test_event_meteors_flame" type="Node"]

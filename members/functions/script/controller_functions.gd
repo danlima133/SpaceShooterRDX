@@ -1,7 +1,7 @@
 extends Node
 class_name ControllerFunctions
 
-signal functionsInit()
+signal functionsInit(controller)
 signal stopFunction(function)
 signal resumeFunction(function)
 signal startFunction(function)
@@ -11,21 +11,9 @@ signal changeFunction(function)
 onready var deley = $deley
 onready var functions = $functions
 
-export(String) var function
-
 var _lastDeley:float
 
 var _currentFunction
-
-func _ready():
-	_configFunctions()
-	if isFunctionValid(function):
-		start(function)
-
-func _configFunctions():
-	for function in functions.get_children():
-		function._config(function.getFunctionData().getTargetData(), function.getHead())
-	emit_signal("functionsInit")
 
 func _on_deley_timeout():
 	if getCurrentFunction()._count == -1:
@@ -35,6 +23,18 @@ func _on_deley_timeout():
 	getCurrentFunction()._count += 1
 	getCurrentFunction()._action()
 	getCurrentFunction().step()
+
+func setFunctionData(functionName:String, dataPath:String):
+	if isFunctionValid(functionName):
+		var function:Function = getFunction(functionName)
+		function.setDataPath(dataPath)
+	else:
+		return ERR_INVALID_PARAMETER
+
+func configFunctions():
+	for function in functions.get_children():
+		function._config(function.getDataPath(), function.getHead())
+	emit_signal("functionsInit", self)
 
 func start(functionName:String):
 	if hasFunction():

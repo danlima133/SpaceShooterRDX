@@ -10,3 +10,4 @@ export(Dictionary) var entityPosition = {
 }
 
 export(bool) var useFunction
+export(String, FILE, "*.functiondata") var functionData

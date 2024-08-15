@@ -11,3 +11,4 @@ entityPosition = {
 "y": [ 0 ]
 }
 useFunction = true
+functionData = "res://members/functions/game_rules/json/functions_data/funcdata_meteorsGeneric.functiondata"
