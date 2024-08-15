@@ -13,6 +13,8 @@ func _input(event):
 				KEY_2:
 					controllerFunctions.resume()
 				KEY_F:
+					controllerFunctions.start("deltaValue")
+				KEY_G:
 					controllerFunctions.start("constValue")
 				KEY_9:
 					controllerFunctions.restart(true)
@@ -39,3 +41,12 @@ func _on_func_const_toLimit(function:Function):
 	print("point | for X = 12: %s" % graphFunction.getPoint(12.0))
 	print("Axis X = " + str(graphFunction.getDataByAxis(graphFunction.Axis.X)))
 	print("Axis Y = " + str(graphFunction.getDataByAxis(graphFunction.Axis.Y)))
+
+func _on_func_variation_toLimit(function:Function):
+	print(function.getFunctionName())
+
+func _on_func_variation_step(value, function, metadado):
+	print(value)
+
+func _on_controller_functions_changeFunction(function:Function):
+	print("change function to %s" % function.getFunctionName())

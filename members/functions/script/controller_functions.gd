@@ -6,6 +6,7 @@ signal stopFunction(function)
 signal resumeFunction(function)
 signal startFunction(function)
 signal restartFunction(function)
+signal changeFunction(function)
 
 onready var deley = $deley
 onready var functions = $functions
@@ -36,20 +37,23 @@ func _on_deley_timeout():
 	getCurrentFunction().step()
 
 func start(functionName:String):
+	if hasFunction():
+		_currentFunction.resetCount()
+		_currentFunction._clearGraph()
+		emit_signal("changeFunction", getFunction(functionName))
 	_currentFunction = getFunction(functionName)
 	_currentFunction._start()
-	deley.start()
-	_currentFunction._clearGraph()
-	emit_signal("startFunction", getCurrentFunction().getFunctionName())
+	_currentFunction._setDeleyTimer()
+	emit_signal("startFunction", _currentFunction)
 
 func stop():
 	_lastDeley = deley.time_left
 	deley.stop()
-	emit_signal("stopFunction", getCurrentFunction().getFunctionName())
+	emit_signal("stopFunction", _currentFunction)
 
 func resume():
 	deley.start(_lastDeley)
-	emit_signal("resumeFunction", getCurrentFunction().getFunctionName())
+	emit_signal("resumeFunction", _currentFunction)
 
 func restart(full:bool):
 	if hasFunction():
@@ -59,7 +63,7 @@ func restart(full:bool):
 			_currentFunction.resetCount()
 			_currentFunction._data.empty()
 			_currentFunction._functionGraphObject = null
-		emit_signal("restartFunction", getCurrentFunction().getFunctionName())
+		emit_signal("restartFunction", _currentFunction)
 
 func getFunction(functionName:String):
 	if isFunctionValid(functionName):

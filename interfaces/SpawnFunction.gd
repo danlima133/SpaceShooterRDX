@@ -5,7 +5,7 @@ signal toLimit(function)
 signal step(value, function, metadado)
 
 export(String) var _functionName
-export(Dictionary) var _functionData
+export(String, FILE, "*.functiondata") var _functionData
 
 export(Array) var headData
 export(bool) var isLoop
@@ -84,7 +84,6 @@ class GraphData:
 
 func _config(data:Dictionary, head:Array):
 	name = _functionName
-	_functionData = data
 	_functionsController = $"../.."
 	if not head.empty():
 		_deley = head[0]
@@ -93,13 +92,16 @@ func _config(data:Dictionary, head:Array):
 
 func _setStep():
 	_data[_lastDeley + getDeley()] = getStepValue()
-	getFunctionsController().deley.wait_time = getDeley()
-	getFunctionsController().deley.start()
+	_setDeleyTimer()
 	emit_signal("step", getStepValue(), getFunctionName(), metaDado)
 
 func _clearGraph():
-	_data.empty()
+	_data = {}
 	_functionGraphObject = null
+
+func _setDeleyTimer():
+	getFunctionsController().deley.wait_time = getDeley()
+	getFunctionsController().deley.start()
 
 func _start():
 	pass
@@ -121,7 +123,9 @@ func step():
 
 func getFunctionData() -> FunctionData:
 	if _functionDataObject == null:
-		return FunctionData.new(_functionData)
+		var parser = $"../..".get_node("readGameRule")
+		var rule = parser.RuleJson._read(_functionData)
+		return FunctionData.new(rule.content)
 	return _functionDataObject
 
 func getFunctionGraph() -> GraphData:

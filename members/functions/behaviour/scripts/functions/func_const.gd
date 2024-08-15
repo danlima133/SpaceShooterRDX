@@ -16,12 +16,6 @@ func _action():
 	var _offset = _getInterval(_intervalOffset, dynamicResources.TypeRand.INT)
 	setStepValue(getStepValue() + _offset)
 	setDeley(_getInterval(_intervalTime, dynamicResources.TypeRand.FLOAT))
-	metaDado = {
-		"deley": getDeley(),
-		"limit": getLimit(),
-		"offset": _offset,
-		"stepValue": getStepValue()
-	}
 
 func _getInterval(_interval:Array, typeRand:int):
 	if dynamicResources.isRangeValue(_interval):
