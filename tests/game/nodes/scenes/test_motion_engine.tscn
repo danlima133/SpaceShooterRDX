@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=1]
+[ext_resource path="res://tests/game/nodes/script/test_motion_engine.gd" type="Script" id=2]
+[ext_resource path="res://nodes/motion_engine/meta/data/test_2.tres" type="Resource" id=3]
+[ext_resource path="res://assets/sprites/meteors/brown/model_3.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 41.0122
+
+[node name="test_motion_engine" type="Node2D"]
+
+[node name="body" type="RigidBody2D" parent="."]
+position = Vector2( 66, 134 )
+gravity_scale = 0.0
+contacts_reported = 100
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 2 )
+
+[node name="MotionEngine" type="Node" parent="body"]
+script = ExtResource( 1 )
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 3 )
+typeMotionBody = 1
+
+[node name="Sprite" type="Sprite" parent="body"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body"]
+shape = SubResource( 1 )
+
+[connection signal="start" from="body/MotionEngine" to="body" method="_on_MotionEngine_start"]
