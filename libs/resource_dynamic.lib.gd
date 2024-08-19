@@ -31,12 +31,12 @@ class ResourceDynamic:
 	func setValue(property:String, value):
 		if isResouceValid():
 			_resourceBase.set(property, value)
-		else: ERR_UNAVAILABLE
+		return ERR_UNAVAILABLE
 	
 	func getValue(property):
 		if isResouceValid():
 			return _resourceBase.get(property)
-		else: ERR_UNAVAILABLE
+		return ERR_UNAVAILABLE
 	
 	func resetResource():
 		if not isUnique:

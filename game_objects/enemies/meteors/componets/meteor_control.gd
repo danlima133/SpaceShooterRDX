@@ -42,8 +42,13 @@ func setMeteor(meteor:Dictionary = {}):
 	var shape = CircleShape2D.new()
 	shape.radius = (texture.texture.get_width()/2) - treshold_shape
 	
-	hurt_box.get_node("hurt_shape").set_deferred("shape", shape)
-	hit_box.get_node("hit_shape").set_deferred("shape", shape)
+	$"../../shape".set_deferred("shape", shape)
+	
+	var shape2 = shape.duplicate()
+	shape2.radius = shape.radius + 8
+	
+	hurt_box.get_node("shape").set_deferred("shape", shape2)
+	hit_box.get_node("shape").set_deferred("shape", shape2)
 	
 	hurt_box.setHurtMax(meteorData["resistence"], true)
 	hit_box.setHit(meteorData["damage"])
@@ -55,7 +60,7 @@ func setMeteor(meteor:Dictionary = {}):
 	else:
 		velocity = meteorData["velocity"][0]
 	
-	motion_engine.setVelocity(velocity)
+	motion_engine.getObjectMove().setVelocity(velocity)
 
 func getFragmets(height:int, count:Array, type:String) -> Array:
 	randomize()

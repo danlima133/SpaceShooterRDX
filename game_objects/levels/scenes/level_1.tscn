@@ -1,13 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://members/backgrounds/scenes/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://members/spawner/scene/spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://members/spawner/meta/data/meteors.tres" type="Resource" id=4]
 [ext_resource path="res://members/meteors_fragments/scene/meteors_fragments.tscn" type="PackedScene" id=5]
-[ext_resource path="res://nodes/manager_events/behaviour/scenes/events/event_meteors.tscn" type="PackedScene" id=6]
-[ext_resource path="res://nodes/manager_events/node/ManagerEventsNode.gd" type="Script" id=7]
-[ext_resource path="res://tests/game/scenes/test_execute_meteros_flame.tscn" type="PackedScene" id=8]
 
 [node name="level_1" type="Node2D"]
 
@@ -19,17 +16,6 @@ configBackground = {
 "imageIdx": 5,
 "random": false
 }
-
-[node name="ManagerEvents" type="Node" parent="."]
-script = ExtResource( 7 )
-
-[node name="event_meteors" parent="ManagerEvents" instance=ExtResource( 6 )]
-spawnersRefs = [ NodePath("../../spawner") ]
-
-[node name="test_execute_meteros_flame" parent="." instance=ExtResource( 8 )]
-managerEventsPath = NodePath("../ManagerEvents")
-timeMin = 30.0
-timeMax = 60.0
 
 [node name="spawner" parent="." instance=ExtResource( 3 )]
 __meta__ = {

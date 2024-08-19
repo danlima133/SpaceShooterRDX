@@ -10,7 +10,11 @@
 [ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=10]
 [ext_resource path="res://nodes/motion_engine/meta/data/meteor.tres" type="Resource" id=11]
 
-[node name="meteor" type="Node2D"]
+[node name="meteor" type="RigidBody2D"]
+gravity_scale = 0.0
+contacts_reported = 100
+contact_monitor = true
+angular_damp = 8.0
 
 [node name="readGameRule" parent="." instance=ExtResource( 3 )]
 
@@ -20,7 +24,7 @@
 script = ExtResource( 1 )
 rootMotionPath = NodePath("..")
 motionConfig = ExtResource( 11 )
-initActive = false
+typeMotionBody = 1
 
 [node name="ObjectManager" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -40,15 +44,24 @@ _id = 45
 monitoring = false
 id = 55
 
-[node name="hurt_shape" type="CollisionShape2D" parent="hurt_box"]
+[node name="shape" type="CollisionShape2D" parent="hurt_box"]
+modulate = Color( 0.92549, 0.0745098, 0.0745098, 1 )
 
 [node name="hit_box" parent="." instance=ExtResource( 6 )]
 filterHurtBox = [ 55 ]
 
-[node name="hit_shape" type="CollisionShape2D" parent="hit_box"]
+[node name="shape" type="CollisionShape2D" parent="hit_box"]
+modulate = Color( 0.92549, 0.0745098, 0.0745098, 1 )
 
 [node name="checker" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -5, -5, 10, 10 )
+
+[node name="shape" type="CollisionShape2D" parent="."]
+
+[node name="hurt" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "#/#"
 
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ObjectManager/meteor" method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="hurtEvent" from="hurt_box" to="ObjectManager/meteor" method="_on_hurt_box_hurtEvent"]

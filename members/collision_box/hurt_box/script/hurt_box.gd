@@ -7,8 +7,8 @@ enum propertyNames {
 	HURT_MAX
 }
 
-signal hurtEvent(hurtBox)
-signal hurtNoValue(hurtBox)
+signal hurtEvent(hitBox)
+signal hurtNoValue(hittBox)
 
 enum {
 	PLUS,
@@ -31,7 +31,7 @@ func _collisionExitBox(box):
 
 func _hurtOnTime(hitBox):
 	if hitBox.getHitContinues():
-		hurt(hitBox._hitValue)
+		hurt(hitBox._hitValue, null)
 		timer.start()
 	else:
 		timer.stop()
@@ -66,7 +66,7 @@ func getHurtMax():
 func getHurt() -> float:
 	return _hurtValue
 
-func hurt(value:float, operation:int = SUBTRACT):
+func hurt(value:float, box:CollisionBox, operation:int = SUBTRACT):
 	if value == -1:
 		_hurtValue = 0
 	else:
@@ -78,7 +78,7 @@ func hurt(value:float, operation:int = SUBTRACT):
 		
 		_hurtValue = clamp(_hurtValue, _hurtLimit, _hurtMaxValue)
 	
-	emit_signal("hurtEvent", self)
+	emit_signal("hurtEvent", box)
 	
 	if _hurtValue <= _hurtLimit:
-		emit_signal("hurtNoValue", self)
+		emit_signal("hurtNoValue", box)

@@ -1,27 +1,40 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=1]
 [ext_resource path="res://tests/game/nodes/script/test_motion_engine.gd" type="Script" id=2]
 [ext_resource path="res://nodes/motion_engine/meta/data/test_2.tres" type="Resource" id=3]
 [ext_resource path="res://assets/sprites/meteors/brown/model_3.png" type="Texture" id=4]
+[ext_resource path="res://nodes/motion_engine/meta/data/test_1.tres" type="Resource" id=5]
+[ext_resource path="res://nodes/motion_engine/meta/data/test_3.tres" type="Resource" id=6]
+[ext_resource path="res://nodes/motion_engine/meta/data/test_4.tres" type="Resource" id=7]
+[ext_resource path="res://assets/sprites/laser/laserBlue03.png" type="Texture" id=8]
+[ext_resource path="res://tests/game/scripts/bullet.gd" type="Script" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 41.0122
 
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.0
+height = 28.0
+
 [node name="test_motion_engine" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="body" type="RigidBody2D" parent="."]
-position = Vector2( 66, 134 )
+position = Vector2( 239, 312 )
 gravity_scale = 0.0
 contacts_reported = 100
 contact_monitor = true
-can_sleep = false
-script = ExtResource( 2 )
+angular_velocity = 100.0
+angular_damp = 50.0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="MotionEngine" type="Node" parent="body"]
 script = ExtResource( 1 )
 rootMotionPath = NodePath("..")
-motionConfig = ExtResource( 3 )
+motionConfig = ExtResource( 5 )
 typeMotionBody = 1
 
 [node name="Sprite" type="Sprite" parent="body"]
@@ -30,4 +43,129 @@ texture = ExtResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body"]
 shape = SubResource( 1 )
 
-[connection signal="start" from="body/MotionEngine" to="body" method="_on_MotionEngine_start"]
+[node name="body2" type="RigidBody2D" parent="."]
+position = Vector2( 709, 346 )
+gravity_scale = 0.0
+contacts_reported = 100
+contact_monitor = true
+angular_velocity = 100.0
+angular_damp = 50.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MotionEngine" type="Node" parent="body2"]
+script = ExtResource( 1 )
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 5 )
+typeMotionBody = 1
+
+[node name="Sprite" type="Sprite" parent="body2"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body2"]
+shape = SubResource( 1 )
+
+[node name="body3" type="RigidBody2D" parent="."]
+position = Vector2( 496, 205 )
+gravity_scale = 0.0
+contacts_reported = 100
+contact_monitor = true
+angular_velocity = 100.0
+angular_damp = 50.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MotionEngine" type="Node" parent="body3"]
+script = ExtResource( 1 )
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 6 )
+typeMotionBody = 1
+
+[node name="Sprite" type="Sprite" parent="body3"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body3"]
+shape = SubResource( 1 )
+
+[node name="body4" type="RigidBody2D" parent="."]
+position = Vector2( 628, 209 )
+gravity_scale = 0.0
+contacts_reported = 100
+contact_monitor = true
+angular_velocity = 100.0
+angular_damp = 50.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MotionEngine" type="Node" parent="body4"]
+script = ExtResource( 1 )
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 3 )
+typeMotionBody = 1
+
+[node name="Sprite" type="Sprite" parent="body4"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body4"]
+shape = SubResource( 1 )
+
+[node name="body5" type="RigidBody2D" parent="."]
+position = Vector2( 348, 219 )
+gravity_scale = 0.0
+contacts_reported = 100
+contact_monitor = true
+angular_velocity = 100.0
+angular_damp = 50.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MotionEngine" type="Node" parent="body5"]
+script = ExtResource( 1 )
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 6 )
+typeMotionBody = 1
+
+[node name="Sprite" type="Sprite" parent="body5"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body5"]
+shape = SubResource( 1 )
+
+[node name="bullet" type="RigidBody2D" parent="."]
+position = Vector2( 458, 82 )
+mode = 2
+gravity_scale = 0.0
+contacts_reported = 100
+contact_monitor = true
+angular_velocity = 100.0
+angular_damp = 50.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MotionEngine" type="Node" parent="bullet"]
+script = ExtResource( 1 )
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 7 )
+typeMotionBody = 1
+initActive = false
+
+[node name="Sprite" type="Sprite" parent="bullet"]
+texture = ExtResource( 8 )
+offset = Vector2( 0, -18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bullet"]
+position = Vector2( 0, -18 )
+shape = SubResource( 2 )
+
+[connection signal="start" from="body/MotionEngine" to="." method="_on_MotionEngine_start"]
+[connection signal="start" from="body2/MotionEngine" to="." method="_on_MotionEngine_start"]
+[connection signal="start" from="body3/MotionEngine" to="." method="_on_MotionEngine_start"]
+[connection signal="start" from="body4/MotionEngine" to="." method="_on_MotionEngine_start"]
+[connection signal="start" from="body5/MotionEngine" to="." method="_on_MotionEngine_start"]
+[connection signal="start" from="bullet/MotionEngine" to="." method="_on_MotionEngine_start"]

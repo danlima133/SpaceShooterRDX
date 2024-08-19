@@ -1,5 +1,7 @@
 extends ObjectProcess
 
+onready var motionEngine = $"../MotionEngine"
+
 func _objectEnter():
 	getObjetcRoot().hide()
 
@@ -10,8 +12,8 @@ func _spaw(data:Dictionary):
 	if data.has("damage"):
 		getObjetcRoot().get_node("hit_box").setHit(data["damage"])
 	
-	getObjetcRoot().show()
 	getObjetcRoot().global_position = data["position"]
+	getObjetcRoot().show()
 
 func _reset(data:Dictionary):
 	getObjetcRoot().get_node("hit_box").setActive(false)
@@ -24,6 +26,11 @@ func _on_controller_reset_screen_exited():
 
 # -- This block code is a test --
 func _on_hit_box_hitEvent(hitBox):
+	var root = hitBox.get_parent()
+	var ME = root.get_node("MotionEngine")
+	ME.getObjectMove().setDir(Vector2(0, -1))
+	if ME.typeMotionBody == ME.motionBody.RIGBODY:
+		ME.getObjectMove().impulse(false, 80)
 	getObjectManger()._reset()
 # -- end --
 

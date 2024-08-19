@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://nodes/motion_engine/meta/data/player_laser.tres" type="Resource" id=1]
 [ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://members/collision_box/target_box/scene/target_box.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
+radius = 6.0
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 5.0
 height = 28.0
 
@@ -46,6 +50,9 @@ initActive = false
 [node name="controller_reset" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -9.53674e-07, -63 )
 scale = Vector2( 0.35, 0.35 )
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
 
 [connection signal="hitEvent" from="hit_box" to="laser_process" method="_on_hit_box_hitEvent"]
 [connection signal="action" from="target_box" to="laser_process" method="_on_target_box_action"]
