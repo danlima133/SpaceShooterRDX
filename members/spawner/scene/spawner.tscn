@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=1]
 [ext_resource path="res://members/spawner/script/spawner.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://members/object_pooling/scene/object_pooling.tscn" type="PackedScene" id=4]
 [ext_resource path="res://members/functions/scene/controller_functions.tscn" type="PackedScene" id=5]
 [ext_resource path="res://members/functions/behaviour/scenes/functions/func_const.tscn" type="PackedScene" id=6]
+[ext_resource path="res://members/functions/behaviour/scenes/functions/func_variation.tscn" type="PackedScene" id=7]
+[ext_resource path="res://members/spawner/componets/spaw_functions.gd" type="Script" id=8]
 
 [node name="spawner" type="Node"]
 script = ExtResource( 2 )
@@ -15,6 +17,9 @@ configOnStart = false
 
 [node name="ManagerComponets" type="Node" parent="."]
 script = ExtResource( 1 )
+
+[node name="spaw_function" type="Node" parent="ManagerComponets"]
+script = ExtResource( 8 )
 
 [node name="spaw_runner" type="Node" parent="ManagerComponets"]
 script = ExtResource( 3 )
@@ -27,9 +32,12 @@ one_shot = true
 
 [node name="func_const" parent="controller_functions/functions" index="0" instance=ExtResource( 6 )]
 
+[node name="func_variation" parent="controller_functions/functions" index="1" instance=ExtResource( 7 )]
+
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="timeout" from="ManagerComponets/spaw_runner/spawnerTimer" to="ManagerComponets/spaw_runner" method="_on_spawnerTimer_timeout"]
-[connection signal="functionsInit" from="controller_functions" to="." method="_on_controller_functions_functionsInit"]
-[connection signal="step" from="controller_functions/functions/func_const" to="." method="_on_func_const_step"]
+[connection signal="startFunction" from="controller_functions" to="ManagerComponets/spaw_function" method="_on_controller_functions_startFunction"]
+[connection signal="step" from="controller_functions/functions/func_const" to="ManagerComponets/spaw_function" method="_on_func_const_step"]
+[connection signal="step" from="controller_functions/functions/func_variation" to="ManagerComponets/spaw_function" method="_on_func_variation_step"]
 
 [editable path="controller_functions"]

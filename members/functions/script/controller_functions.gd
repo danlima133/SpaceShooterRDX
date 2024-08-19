@@ -1,10 +1,9 @@
 extends Node
 class_name ControllerFunctions
 
-signal functionsInit(controller)
+signal startFunction(function)
 signal stopFunction(function)
 signal resumeFunction(function)
-signal startFunction(function)
 signal restartFunction(function)
 signal changeFunction(function)
 
@@ -28,13 +27,12 @@ func setFunctionData(functionName:String, dataPath:String):
 	if isFunctionValid(functionName):
 		var function:Function = getFunction(functionName)
 		function.setDataPath(dataPath)
-	else:
-		return ERR_INVALID_PARAMETER
+		return OK
+	return ERR_INVALID_PARAMETER
 
 func configFunctions():
 	for function in functions.get_children():
 		function._config(function.getDataPath(), function.getHead())
-	emit_signal("functionsInit", self)
 
 func start(functionName:String):
 	if hasFunction():
@@ -47,13 +45,19 @@ func start(functionName:String):
 	emit_signal("startFunction", _currentFunction)
 
 func stop():
-	_lastDeley = deley.time_left
-	deley.stop()
-	emit_signal("stopFunction", _currentFunction)
+	if hasFunction():
+		_lastDeley = deley.time_left
+		deley.stop()
+		emit_signal("stopFunction", _currentFunction)
+		return OK
+	return ERR_UNAVAILABLE
 
 func resume():
-	deley.start(_lastDeley)
-	emit_signal("resumeFunction", _currentFunction)
+	if hasFunction():
+		deley.start(_lastDeley)
+		emit_signal("resumeFunction", _currentFunction)
+		return OK
+	return ERR_UNAVAILABLE
 
 func restart(full:bool):
 	if hasFunction():
@@ -64,6 +68,8 @@ func restart(full:bool):
 			_currentFunction._data.empty()
 			_currentFunction._functionGraphObject = null
 		emit_signal("restartFunction", _currentFunction)
+		return OK
+	return ERR_UNAVAILABLE
 
 func getFunction(functionName:String):
 	if isFunctionValid(functionName):

@@ -9,6 +9,10 @@
 
 [node name="test_event_meteors_flame" type="Node"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="ManagerEvents" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -23,17 +27,35 @@ __meta__ = {
 _spawData = ExtResource( 5 )
 configPooling = {
 "entities": {
-"count": 20,
+"count": 100,
 "object": "res://game_objects/enemies/meteors/scene/meteor.tscn"
 }
 }
 positionSpawPath = NodePath("Position2D")
+tolerance = 180
+offset = 50
 
 [node name="Position2D" type="Position2D" parent="spawner"]
-position = Vector2( 3, -51 )
+position = Vector2( 0, -100 )
 
 [node name="player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 515, 532 )
+position = Vector2( 0, 420 )
+
+[node name="player_flags" parent="player/ManagerComponets" index="3"]
+Flags = {
+"bounds": true,
+"game_over": false,
+"movement": true,
+"shoot": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -2178, 0 )
+anchor_mode = 0
+current = true
+zoom = Vector2( 5.5, 5 )
 
 [connection signal="eventFinished" from="ManagerEvents/event_meteors" to="." method="_on_event_meteors_eventFinished"]
 [connection signal="eventStart" from="ManagerEvents/event_meteors" to="." method="_on_event_meteors_eventStart"]
+
+[editable path="player"]

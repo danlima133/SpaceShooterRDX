@@ -2,7 +2,7 @@ extends Node
 
 const resourceDynamic = preload("res://libs/resource_dynamic.lib.gd")
 
-const resource = preload("res://members/spawner/meta/data/test.tres")
+const resource = preload("res://members/spawner/meta/data/meteors.tres")
 
 func _ready():
 	var r1 = resourceDynamic.ResourceDynamic.new(resource, true)

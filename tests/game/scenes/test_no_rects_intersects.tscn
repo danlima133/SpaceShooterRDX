@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tests/game/scripts/test_no_rects_intersects.gd" type="Script" id=1]
+
+[node name="test_no_rects_intersects" type="Node2D"]
+position = Vector2( 354, 294 )
+script = ExtResource( 1 )

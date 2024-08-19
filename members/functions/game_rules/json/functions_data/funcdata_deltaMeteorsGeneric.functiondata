@@ -1,0 +1,16 @@
+{
+    "variation": [
+        {
+            "delta": [8],
+            "nextTime": [10]
+        },
+        {
+            "delta": [4],
+            "nextTime": [10]
+        },
+        {
+            "delta": [2],
+            "nextTime": [10]
+        }
+    ]
+}
