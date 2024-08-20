@@ -3,5 +3,5 @@
 [ext_resource path="res://tests/game/scripts/test_no_rects_intersects.gd" type="Script" id=1]
 
 [node name="test_no_rects_intersects" type="Node2D"]
-position = Vector2( 354, 294 )
+position = Vector2( 453, 231 )
 script = ExtResource( 1 )
