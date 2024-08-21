@@ -1,117 +1,94 @@
 extends Script
 
 class RectsMap:
-	var _config:Dictionary
-	var _map:Map
-
-	class Map:
-		var _rectsMap:RectsMap
-		var _data:Dictionary
+	class Map extends Node2D:
+		var _config:Dictionary
+		var _map:Dictionary
 		
-		func _init(data:Dictionary = {}, rectsMap:RectsMap = null):
-			_data = data
-			_rectsMap = rectsMap
+		var _debug:bool
 		
-		func getAllRectsOnMap():
-			return _data.values()
-
-		func getRectByPosition(position:Vector2):
-			return _data.get(position, null)
+		var sizeX:int
+		var sizeY:int
+		var cellSize:int
 		
-		func getRectsInvalids(rectsGroup:Array):
-			var rectsInvalids:Array = []
-			for rectToValid in _data.values():
-				for rectInGroup in rectsGroup:
-					if rectToValid.intersects(rectInGroup):
-						rectsInvalids.append(rectToValid)
-		
-		func setRectsMap(rectsMap:RectsMap):
-			_rectsMap = rectsMap
-
-		func removeRect(position:Vector2):
-			return _data.erase(position)
-		
-		func addRect(rect:Rect2, parseRects:bool = true):
-			if parseRects:
-				rect = _rectsMap.parseRects(rect)
-			var position = rect.position
-			if not _data.has(position):
-				_data[position] = rect
-				return OK
-			return ERR_ALREADY_EXISTS
-		
-		func clearMap():
-			_data.clear()
-	
-	func _init(map:Map = null, config:Dictionary = {}):
-		self._config = config
-
-		if map == null:
-			_map = Map.new({}, self)
-		else:
-			_map = map
-			_map.setRectsMap(self)
-
-	func _getSideByRectEquals(rectOrigin:Rect2, rectTarget:Rect2):
-		var directionsAnvaliable = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
-		var newRect:Rect2
-		for direction in directionsAnvaliable:
-			if rectOrigin.intersects(rectTarget):
-				newRect = _getSideByDirection(rectOrigin, rectTarget, direction, false)
-				if not newRect.intersects(rectTarget):
-					break
-		return newRect
-
-	func _getSideByDirection(rectOrigin:Rect2, rectTarget:Rect2, direction:Vector2 = Vector2.ZERO, equals:bool = true):
-		if equals:
-			if rectOrigin == rectTarget:
-				return _getSideByRectEquals(rectOrigin, rectTarget)
-		
-		var newRect:Rect2 = Rect2(0, 0, 0, 0)
-		var dir = direction
-
-		if dir == Vector2.ZERO:
-			dir = rectTarget.position
-		
-		if rectOrigin.position.x < dir.x:
-			newRect.position.x = rectTarget.position.x - rectOrigin.size.x
-		elif rectOrigin.position.x > dir.x:
-			newRect.position.x = rectTarget.position.x + rectTarget.size.x
+		func _init(config:Dictionary):
+			_config = config
+			_setConfig()
+			_generateMap()
 			
-		if rectOrigin.position.y < dir.y:
-			newRect.position.y = rectTarget.position.y - rectOrigin.size.y
-		elif rectOrigin.position.y > dir.y:
-			newRect.position.y = rectTarget.position.y + rectTarget.size.y
+			if _debug: update()
 		
-		newRect.size = rectOrigin.size
+		func _draw():
+			if _debug:
+				var cells = getRectsAnvaliables()
+				for cell in cells:
+					draw_rect(cell, Color.red, false)
+					draw_circle(cell.get_center(), 2.5, Color.white)
 		
-		return newRect
-
-	func _getConfig() -> Dictionary:
-		return _config
+		func _setConfig():
+			var _size = _config.get("size", [])
+			if _size.size() > 0:
+				sizeX = _size["x"]
+				sizeY = _size["y"]
+			cellSize = _config.get("cellSize", 0)
+			_debug = _config.get("debug", false)
+		
+		func _generateMap():
+			for x in range(sizeX):
+				for y in range(sizeY):
+					var rect = Rect2(x * cellSize, y * cellSize, cellSize, cellSize)
+					_map[toPositionWolrd2PositionMap(rect.position)] = rect
+		
+		func toPositionWolrd2PositionMap(position:Vector2, cellFit:bool = true):
+			var newPosition:Vector2
+			newPosition.x = position.x / cellSize
+			newPosition.y = position.y / cellSize
+			if cellFit:
+				newPosition.x = int(newPosition.x)
+				newPosition.y = int(newPosition.y)
+			return newPosition
+		
+		func toPositionMap2PositionWolrd(position:Vector2):
+			var newPosition:Vector2
+			newPosition.x = position.x * cellSize
+			newPosition.y = position.y * cellSize
+			return newPosition
+		
+		func getPositionsAnvaliables():
+			return _map.keys()
+		
+		func getRectsAnvaliables():
+			return _map.values()
+		
+		func getRealSize():
+			return Vector2(sizeX * cellSize, sizeY * cellSize)
+		
+		func getRectByPosition(position:Vector2):
+			return _map[position] if _map.has(position) else ERR_INVALID_PARAMETER
+		
+		func debugActive(active:bool):
+			_debug = active
+			if active: update()
 	
-	func parseRects(rectToParse:Rect2, newRectEnterMap:bool = true):
-		var newRect:Rect2
-		var rectsGroup = _map.getAllRectsOnMap()
-		
-		if not rectsGroup.size() > 0:
-			newRect = rectToParse
-		
-		for rect in rectsGroup:
-			if rectToParse.intersects(rect):
-				var refDirection:Vector2 = Vector2.ZERO
-				if _getConfig().has("axisFix"):
-					var axisiFix = _getConfig()["axisFix"]
-					
-					if !axisiFix:
-						refDirection = rect.get_center()
-
-					newRect = _getSideByDirection(rectToParse, rect,  refDirection)
-					rectToParse = newRect
-			else:
-				newRect = rectToParse
-		
-		if newRectEnterMap:
-			_map.addRect(newRect, false)
-					
-		return newRect
+	var _map:Map
+	var _algorithm:RandomNumberGenerator
+	
+	func _init(map:Map, algorithm:RandomNumberGenerator):
+		_map = map
+		_algorithm = algorithm
+	
+	func changeMap(map:Map):
+		_map = map
+	
+	func getPositionsByCount(count:int):
+		var positionsAnvaliables = _map.getPositionsAnvaliables()
+		var positionsByCount:Array
+		for step in range(count):
+			if positionsAnvaliables.size() == 0:
+				break
+			var anvaliableCount = positionsAnvaliables.size()
+			var index = _algorithm.randi() % anvaliableCount
+			var positionChoice = positionsAnvaliables[index]
+			positionsAnvaliables.erase(positionChoice)
+			positionsByCount.append(positionChoice)
+		return positionsByCount
