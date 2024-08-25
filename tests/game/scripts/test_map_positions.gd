@@ -16,9 +16,12 @@ func _ready():
 			"y": 5
 		},
 		"cellSize": 125,
+		"origin": global_position,
 		"debug": true
 	})
 	add_child(map)
+	map.redefineOrigin(Vector2(562-9*125, 312-9*125))
+
 	var algorithm = RandomNumberGenerator.new()
 	algorithm.randomize()
 	var controller = RegularMath.RectsMap.new(map, algorithm)

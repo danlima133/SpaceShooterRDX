@@ -2,6 +2,7 @@ extends Script
 
 class RectsMap:
 	class Map extends Node2D:
+		
 		var _config:Dictionary
 		var _map:Dictionary
 		
@@ -10,13 +11,12 @@ class RectsMap:
 		var sizeX:int
 		var sizeY:int
 		var cellSize:int
+		var origin:Vector2
 		
 		func _init(config:Dictionary):
 			_config = config
 			_setConfig()
 			_generateMap()
-			
-			if _debug: update()
 		
 		func _draw():
 			if _debug:
@@ -31,16 +31,18 @@ class RectsMap:
 				sizeX = _size["x"]
 				sizeY = _size["y"]
 			cellSize = _config.get("cellSize", 0)
-			_debug = _config.get("debug", false)
+			origin = _config.get("origin", Vector2.ZERO)
+			debugActive(_config.get("debug", false))
 		
 		func _generateMap():
 			for x in range(sizeX):
 				for y in range(sizeY):
-					var rect = Rect2(x * cellSize, y * cellSize, cellSize, cellSize)
+					var rect = Rect2((x * cellSize) + origin.x, (y * cellSize) + origin.y, cellSize, cellSize)
 					_map[toPositionWolrd2PositionMap(rect.position)] = rect
 		
 		func toPositionWolrd2PositionMap(position:Vector2, cellFit:bool = true):
 			var newPosition:Vector2
+			
 			newPosition.x = position.x / cellSize
 			newPosition.y = position.y / cellSize
 			if cellFit:
@@ -68,7 +70,19 @@ class RectsMap:
 		
 		func debugActive(active:bool):
 			_debug = active
-			if active: update()
+			update()
+		
+		func redefineMap(config:Dictionary = {}):
+			self._map = {}
+			if not config.empty():
+				self._config = config
+				_setConfig()
+			_generateMap()
+		
+		func redefineOrigin(origin:Vector2):
+			self._map = {}
+			self.origin = origin
+			_generateMap()
 	
 	var _map:Map
 	var _algorithm:RandomNumberGenerator
