@@ -1,5 +1,7 @@
 extends Componet
 
+const DynamicResource = preload("res://libs/resource_dynamic.lib.gd")
+
 const fragamentsBrown = "res://assets/meteors/fragaments/"
 
 onready var texture = $"../../texture"
@@ -8,39 +10,30 @@ onready var motion_engine = $"../../MotionEngine"
 onready var hurt_box = $"../../hurt_box"
 onready var hit_box = $"../../hit_box"
 
-onready var readGameRule = $"../../readGameRule"
+export(Array) var meteors
 
-var _currentData:Dictionary
+var _currentData
 
-var meteorsData:Dictionary
 var treshold_shape:float
 
 func _init_componet():
-	var rulesAnvaliable = readGameRule.getRulesAnvaliable("json")
-	var rule = readGameRule.getRule(readGameRule.RuleJson, rulesAnvaliable["meteors_rule"])
-	
-	meteorsData = rule.content
-	treshold_shape = meteorsData["configs"]["treshold_shape"]
+	setMeteor()
 
-func setMeteor(meteor:Dictionary = {}):
+func setMeteor(meteor:Array = []):
 	randomize()
 	
-	var meteorData:Dictionary
-
-	var meteorIndex = (randi() % meteorsData["meteors"].size())
+	var meteorData
 	
-	if meteor.empty():
-		meteorData = meteorsData["meteors"][meteorIndex]
-	else: meteorData = meteor
+	if meteor.size() > 1:
+		var meteorIndex = randi() % meteors.size()
+		meteorData = meteors[meteorIndex]
+	else:
+		meteorData = meteors[0]
 	
 	_currentData = meteorData
 	
-	var pathImage = "res://assets/sprites/meteors/%s.png" % meteorData["image"]
-	
-	texture.texture = load(pathImage)
-	
 	var shape = CircleShape2D.new()
-	shape.radius = (texture.texture.get_width()/2) - treshold_shape
+	shape.radius = (meteorData.texture.get_width()/2) - meteorData.meteorTreshoald
 	
 	$"../../shape".set_deferred("shape", shape)
 	
@@ -50,51 +43,18 @@ func setMeteor(meteor:Dictionary = {}):
 	hurt_box.get_node("shape").set_deferred("shape", shape2)
 	hit_box.get_node("shape").set_deferred("shape", shape2)
 	
-	hurt_box.setHurtMax(meteorData["resistence"], true)
-	hit_box.setHit(meteorData["damage"])
+	hurt_box.setHurtMax(meteorData.resistence, true)
+	hit_box.setHit(meteorData.damage)
 	
-	var velocity:float
+	texture.texture = meteorData.texture
 	
-	if meteorData["velocity"].size() == 2:
-		velocity = rand_range(meteorData["velocity"][0], meteorData["velocity"][1])
+	var velocity = meteorData.velocity
+	if DynamicResource.isRangeValue(velocity):
+		velocity = DynamicResource.generateRangeValue(meteorData.velocity, DynamicResource.TypeRand.FLOAT)
 	else:
-		velocity = meteorData["velocity"][0]
+		velocity = DynamicResource.getValueFromRand(meteorData.velocity, DynamicResource.Value.DEFAULT)
 	
 	motion_engine.getObjectMove().setVelocity(velocity)
 
-func getFragmets(height:int, count:Array, type:String) -> Array:
-	randomize()
-	
-	var fragaments = []
-	var indexs:int
-	
-	if count.size() == 2:
-		indexs = rand_range(count[0], count[1])
-	else:
-		indexs = count[0]
-	
-	for index in range(indexs):
-		randomize()
-		
-		var factor = (randi() % height) + 1
-		var value = height % factor
-		
-		if value == 0:
-			var meteorIndex = randi() % meteorsData["meteors_small"][type].size()
-			fragaments.append(meteorsData["meteors_small"][type][meteorIndex])
-			continue
-			
-		var meteorIndex = randi() % meteorsData["meteors_high"][type].size()
-		fragaments.append(meteorsData["meteors_high"][type][meteorIndex])
-	
-	return fragaments
-
-func getMeteorData(image:Texture, resistence:int, damage:int, height = 1, fragamentsCount = 1):
-	return {
-		"image": image,
-		"resistence": resistence,
-		"damage": damage
-	}
-
-func getCurrentData() -> Dictionary:
+func getCurrentData():
 	return _currentData

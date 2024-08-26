@@ -17,29 +17,24 @@ func _componetsInit(componetInit, manager:ManagerComponets):
 	spawRunner.connect("spaw", self, "_spawnerToSpaw")
 
 func _spawnerToSpaw(entity):
-	if entity.size() != 0:
-		var object = entity[0].getObjectProcess().getObjetcRoot()
-		
-		var hurtBox = object.get_node("hurt_box")
-		var managerComponet = object.get_node("ManagerComponets")
-		
-		var meteorControl = managerComponet.getComponet(45)
-		
-		var meteorHeight = meteorControl.getCurrentData()["data"]["height"]
-		var meteorCount = meteorControl.getCurrentData()["data"]["fragments"]
-		
-		var fragments = meteorControl.getFragmets(meteorHeight, meteorCount, meteorControl.getCurrentData()["color"])
-		
-		set_meta("fragments", fragments)
-		
+		var hurtBox = entity.get_
 		if !hurtBox.is_connected("hurtNoValue", self, "generateFragments"):
 			hurtBox.connect("hurtNoValue", self, "generateFragments")
 
-func generateFragments(hurtBox):
+func generateFragments(meteor):
+		
+	var managerComponet = meteor.get_node("ManagerComponets")
+		
+	var meteorControl = managerComponet.getComponet(45)
+		
+	var meteorHeight = meteorControl.getCurrentData().height
+	var meteorCount = meteorControl.getCurrentData().fragments
+	print(meteorControl.getCurrentData())
+	var fragments = meteorControl.getFragmets(meteorHeight, meteorControl.getCurrentData().fragments)
 	for fragment in get_meta("fragments"):
 		var obj = objectPooling.spaw({ "group": "meteors" }, {
 			"meteor_data": fragment,
 			"fragment": "",
-			"position": hurtBox.global_position,
+			"position": meteor.global_position,
 			"motion_config": load("res://nodes/motion_engine/meta/data/fragments.tres")
 		})

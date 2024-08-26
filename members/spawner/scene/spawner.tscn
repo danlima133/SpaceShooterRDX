@@ -29,7 +29,6 @@ one_shot = true
 
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="timeout" from="ManagerComponets/spaw_runner/spawnerTimer" to="ManagerComponets/spaw_runner" method="_on_spawnerTimer_timeout"]
-[connection signal="functionsInit" from="controller_functions" to="." method="_on_controller_functions_functionsInit"]
 [connection signal="step" from="controller_functions/functions/func_const" to="." method="_on_func_const_step"]
 
 [editable path="controller_functions"]

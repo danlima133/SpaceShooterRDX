@@ -58,6 +58,17 @@ static func generateRangeValue(value:Array, randType:int, algorithm:RandomNumber
 	elif randType == TypeRand.FLOAT:
 		return randValue
 	else: return ERR_INVALID_PARAMETER
+	
+static func getRandonValueFromRand(value:Array, algorithm:RandomNumberGenerator = null):
+	var indexMax = value.size()
+	var index:int
+	if algorithm == null:
+		randomize()
+		index = randi() % indexMax
+	else:
+		index = algorithm.randi() % indexMax
+		
+	return value[index]
 
 static func getValueFromRand(rand:Array, value:int):
 	if rand.size() == 2 or rand.size() == 1:
