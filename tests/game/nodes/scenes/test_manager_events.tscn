@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://nodes/manager_events/node/ManagerEventsNode.gd" type="Script" id=1]
+[ext_resource path="res://tests/game/behaviour/manager_events/scripts/test_event.gd" type="Script" id=2]
+[ext_resource path="res://tests/game/nodes/test_manager_events.gd" type="Script" id=3]
+
+[node name="test_manager_events" type="Node"]
+script = ExtResource( 3 )
+
+[node name="ManagerEvents" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="test_event" type="Node" parent="ManagerEvents"]
+script = ExtResource( 2 )
+_eventName = "test"
+
+[node name="eventTimer" type="Timer" parent="ManagerEvents/test_event"]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="eventResume" from="ManagerEvents" to="." method="_on_ManagerEvents_eventResume"]
+[connection signal="eventStop" from="ManagerEvents" to="." method="_on_ManagerEvents_eventStop"]
+[connection signal="eventsConfigs" from="ManagerEvents" to="." method="_on_ManagerEvents_eventsConfigs"]
+[connection signal="eventFinished" from="ManagerEvents/test_event" to="." method="_on_test_event_eventFinished"]
+[connection signal="timeout" from="ManagerEvents/test_event/eventTimer" to="ManagerEvents/test_event" method="_on_eventTimer_timeout"]

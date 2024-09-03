@@ -67,13 +67,16 @@ func getHurt() -> float:
 	return _hurtValue
 
 func hurt(value:float, operation:int = SUBTRACT):
-	match operation:
-		PLUS:
-			_hurtValue += value
-		SUBTRACT:
-			_hurtValue -= value
-	
-	_hurtValue = clamp(_hurtValue, _hurtLimit, _hurtMaxValue)
+	if value == -1:
+		_hurtValue = 0
+	else:
+		match operation:
+			PLUS:
+				_hurtValue += value
+			SUBTRACT:
+				_hurtValue -= value
+		
+		_hurtValue = clamp(_hurtValue, _hurtLimit, _hurtMaxValue)
 	
 	emit_signal("hurtEvent", self)
 	

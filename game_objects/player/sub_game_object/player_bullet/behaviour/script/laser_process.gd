@@ -26,3 +26,7 @@ func _on_controller_reset_screen_exited():
 func _on_hit_box_hitEvent(hitBox):
 	getObjectManger()._reset()
 # -- end --
+
+func _on_target_box_action(action:String, triger:CollisionBox, target:TargetBox, type:int):
+	if action == "killPlayerBullet":
+		getObjectManger()._reset()

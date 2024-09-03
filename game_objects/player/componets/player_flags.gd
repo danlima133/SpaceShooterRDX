@@ -3,7 +3,8 @@ extends Componet
 export(Dictionary) var Flags = {
 	"movement": true,
 	"bounds": true,
-	"shoot": true
+	"shoot": true,
+	"game_over": true
 }
 
 func getFlagState(flagId:String) -> int:

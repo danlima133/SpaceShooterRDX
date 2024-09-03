@@ -24,6 +24,9 @@ func setActive(value:bool, config:Dictionary = {}):
 			_controllerShapes(config["shapeIdx"], value)
 	
 
+func checkColliders(idCollider:int, groupCollider:Array):
+	return (idCollider in groupCollider)
+
 func updateProperty(property:int, value, box:CollisionBox):
 	emit_signal("updateProperty", property, value, box)
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://members/functions/behaviour/scripts/functions/func_const.gd" type="Script" id=1]
+
+[node name="func_const" type="Node"]
+script = ExtResource( 1 )
+_functionName = "constValue"

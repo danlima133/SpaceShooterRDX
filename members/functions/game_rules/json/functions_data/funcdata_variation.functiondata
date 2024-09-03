@@ -1,0 +1,16 @@
+{
+	"variation": [
+		{
+			"delta": [1],
+			"nextTime": [1, 5]
+		},
+		{
+			"delta": [3, 5],
+			"nextTime": [2, 8]
+		},
+		{
+			"delta": [-2, -1],
+			"nextTime": [5]
+		}
+	]
+}

@@ -19,6 +19,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interfaces/Componet.gd"
 }, {
+"base": "Node",
+"class": "ControllerFunctions",
+"language": "GDScript",
+"path": "res://members/functions/script/controller_functions.gd"
+}, {
+"base": "Node",
+"class": "Event",
+"language": "GDScript",
+"path": "res://interfaces/Event.gd"
+}, {
+"base": "Node",
+"class": "Function",
+"language": "GDScript",
+"path": "res://interfaces/SpawnFunction.gd"
+}, {
 "base": "CollisionBox",
 "class": "HitBox",
 "language": "GDScript",
@@ -33,6 +48,11 @@ _global_script_classes=[ {
 "class": "ManagerComponets",
 "language": "GDScript",
 "path": "res://nodes/manager_componets/node/ManagerComponetsNode.gd"
+}, {
+"base": "Node",
+"class": "ManagerEvents",
+"language": "GDScript",
+"path": "res://nodes/manager_events/node/ManagerEventsNode.gd"
 }, {
 "base": "Resource",
 "class": "MotionConfig",
@@ -68,20 +88,30 @@ _global_script_classes=[ {
 "class": "SpawData",
 "language": "GDScript",
 "path": "res://members/spawner/meta/bin/spawData.gd"
+}, {
+"base": "CollisionBox",
+"class": "TargetBox",
+"language": "GDScript",
+"path": "res://members/collision_box/target_box/script/target_box.gd"
 } ]
 _global_script_class_icons={
 "CollisionBox": "",
 "Componet": "",
+"ControllerFunctions": "",
+"Event": "",
+"Function": "",
 "HitBox": "",
 "HurtBox": "",
 "ManagerComponets": "res://nodes/manager_componets/icon/node.png",
+"ManagerEvents": "res://nodes/manager_events/icon/node.png",
 "MotionConfig": "",
 "MotionEngine": "res://nodes/motion_engine/icon/node.png",
 "ObjectManager": "res://nodes/manager_object/icon/node.png",
 "ObjectPooling": "",
 "ObjectProcess": "",
 "Player": "",
-"SpawData": ""
+"SpawData": "",
+"TargetBox": ""
 }
 
 [application]
@@ -91,6 +121,9 @@ config/icon="res://icon.png"
 
 [display]
 
+window/size/width=1280
+window/size/height=720
+window/size/resizable=false
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
@@ -126,6 +159,13 @@ player_shoot={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_2="hurt_box"
+2d_physics/layer_3="hit_box"
+2d_physics/layer_4="action_box"
+2d_physics/layer_5="target_box"
 
 [physics]
 

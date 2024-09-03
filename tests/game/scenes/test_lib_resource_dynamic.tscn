@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tests/game/scripts/test_lib_resource_dynamic.gd" type="Script" id=1]
+
+[node name="test_lib_resource_dynamic" type="Node"]
+script = ExtResource( 1 )

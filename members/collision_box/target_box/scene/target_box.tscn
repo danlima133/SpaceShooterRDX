@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://members/collision_box/target_box/script/target_box.gd" type="Script" id=1]
+
+[node name="target_box" type="Area2D"]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource( 1 )

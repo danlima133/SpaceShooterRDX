@@ -1,6 +1,11 @@
 extends Resource
 class_name SpawData
 
+enum Functions {
+	CONST
+	VARIATION
+}
+
 export(PoolIntArray) var timeSpaw
 export(PoolIntArray) var countToSpaw
 
@@ -9,12 +14,20 @@ export(Dictionary) var entityPosition = {
 	"y": []
 }
 
-export(String, FILE, "*.tscn") var entity
-export(int) var countEntities
+export(Dictionary) var spawValues = {
+	"tolerance": -1,
+	"offset": -1
+}
 
 export(bool) var useFunction
-export(Dictionary) var functionData = {
-	"deley": 0,
-	"factor": 0,
-	"limit": 0
-}
+export(Functions) var typeFunction
+export(String, FILE, "*.functiondata") var functionData
+
+func getFunctionAsString(args:Array):
+	var function = args[0]
+	match function:
+		Functions.CONST:
+			return "constValue"
+		Functions.VARIATION:
+			return "deltaValue"
+	return ERR_INVALID_PARAMETER

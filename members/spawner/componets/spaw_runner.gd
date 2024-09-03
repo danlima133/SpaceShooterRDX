@@ -2,35 +2,34 @@ extends Componet
 
 signal spaw(entity)
 
+const dynamicResource = preload("res://libs/resource_dynamic.lib.gd")
+
 onready var spawnerTimer = $spawnerTimer
 onready var spawConfig = $"../.."
 
 onready var object_pooling = $"../../object_pooling"
 
 var lastTimer:float
+var lastPositionSpaw:Vector2
 
 func run():
 	randomize()
 	_setTimer()
-	
+	if spawConfig.getConfig().getValue("useFunction"):
+		var function = spawConfig.getConfig().callMethod("getFunctionAsString", [spawConfig.getConfig().getValue("typeFunction")])
+		spawConfig.controllerFunctions.start(function)
+	spawConfig.getConfig().resetResource()
+
 func _on_spawnerTimer_timeout():
 	_preCalc()
-
-func _on_spaw_function_grow(value):
-	print_debug()
-	spawConfig.getConfig().countToSpaw[0] += value
-	spawConfig.getConfig().countToSpaw[1] += value
-	print(spawConfig.getConfig().countToSpaw[0], spawConfig.getConfig().countToSpaw[1])
 
 func _setTimer():
 	var timer:float
 	
-	if spawConfig.timeIsRandom:
-		var timeMin = spawConfig.getConfig().timeSpaw[0]
-		var timeMax = spawConfig.getConfig().timeSpaw[1]
-		timer = rand_range(timeMin, timeMax)
+	if dynamicResource.isRangeValue(spawConfig.getConfig().getValue("timeSpaw")):
+		timer = dynamicResource.generateRangeValue(spawConfig.getConfig().getValue("timeSpaw"), dynamicResource.TypeRand.FLOAT)
 	else:
-		timer = spawConfig.getConfig().timeSpaw[0]
+		timer = dynamicResource.getValueFromRand(spawConfig.getConfig().getValue("timeSpaw"), dynamicResource.Value.DEFAULT)
 	
 	spawnerTimer.wait_time = timer
 	spawnerTimer.start()
@@ -39,29 +38,53 @@ func _preCalc():
 	var count:int
 	var position = currentManager.get_parent().positionSpaw.global_position
 	
-	if spawConfig.countIsRandom:
-		var countMin = spawConfig.getConfig().countToSpaw[0]
-		var countMax = spawConfig.getConfig().countToSpaw[1]
-		count = round(rand_range(countMin, countMax))
+	if dynamicResource.isRangeValue(spawConfig.getConfig().getValue("countToSpaw")):
+		count = dynamicResource.generateRangeValue(spawConfig.getConfig().getValue("countToSpaw"), dynamicResource.TypeRand.INT)
 	else:
-		count = spawConfig.getConfig().countToSpaw[0]
+		count = dynamicResource.getValueFromRand(spawConfig.getConfig().getValue("countToSpaw"), dynamicResource.Value.DEFAULT)
 	
 	for index in range(count):
 		_spaw()
 	
 	_setTimer()
 
+func _getPositionWithTolerace(testPosition:Vector2, tolerance:int, offset:float) -> Vector2:
+	var newPosition:Vector2
+	var distance = lastPositionSpaw.distance_to(testPosition)
+	if distance <= tolerance:
+		var dir = (testPosition - lastPositionSpaw).normalized() / 2
+		var correctionPos = dir * (tolerance + offset)
+		var diference = lastPositionSpaw - (testPosition + correctionPos)
+		return diference
+	return Vector2.ZERO
+
 func _spaw():
 	var position:Vector2
 	
-	if spawConfig.positionsRandom["x"]:
-		position.x += rand_range(spawConfig.getConfig().entityPosition["x"][0], spawConfig.getConfig().entityPosition["x"][1])
-	if spawConfig.positionsRandom["y"]:
-		position.y += rand_range(spawConfig.getConfig().entityPosition["y"][0], spawConfig.getConfig().entityPosition["y"][1])
+	var entityPosition:Dictionary
+	entityPosition = spawConfig.getConfig().getValue("entityPosition")
 	
-	if not (spawConfig.positionsRandom["x"] and spawConfig.positionsRandom["y"]):
-		position += Vector2(spawConfig.getConfig().entityPosition["x"][0], spawConfig.getConfig().entityPosition["y"][0])
-		
+	var positionXRand:bool
+	var positionYRand:bool
+	
+	positionXRand = dynamicResource.isRangeValue(entityPosition["x"])
+	positionYRand = dynamicResource.isRangeValue(entityPosition["y"])
+	
+	if positionXRand:
+		position.x += dynamicResource.generateRangeValue(entityPosition["x"], dynamicResource.TypeRand.FLOAT)
+	if positionYRand:
+		position.y += dynamicResource.generateRangeValue(entityPosition["y"], dynamicResource.TypeRand.FLOAT)
+	
+	if not (positionXRand and positionYRand):
+		position += Vector2(dynamicResource.getValueFromRand(entityPosition["x"], dynamicResource.Value.DEFAULT), dynamicResource.getValueFromRand(entityPosition["y"], dynamicResource.Value.DEFAULT))
+
+	var pos = _getPositionWithTolerace(position, spawConfig.tolerance, spawConfig.offset)
+	if pos != Vector2.ZERO:
+		if position.x != 0:
+			position.x = pos.x
+		if position.y != 0:
+			position.y = pos.y
+	
 	var entities = object_pooling.spaw({ "group": "entities" }, {
 		"position": position + currentManager.get_parent().positionSpaw.global_position
 	})
@@ -71,9 +94,11 @@ func _spaw():
 func stop():
 	lastTimer = spawnerTimer.time_left
 	spawnerTimer.stop()
+	spawConfig.controllerFunctions.stop()
 
 func resume():
 	spawnerTimer.start(lastTimer)
+	spawConfig.controllerFunctions.resume()
 
 func clearSpawner():
 	object_pooling.reset("entities")

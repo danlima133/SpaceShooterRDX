@@ -13,9 +13,10 @@ var playerLastDir = Vector2.ZERO
 var attributes:Componet
 var player_flgas:Componet
 
-func gameOver(die:String, _data:Dictionary = {}):
-	print('player die: ' + die)
-	queue_free()
+func gameOver(die:String, data:Dictionary = {}):
+	if player_flgas.getFlagState("game_over"):
+		print('player die: ' + die)
+		queue_free()
 
 func _getVectorToInt(x:int, y:int) -> Vector2:
 	return Vector2(x, y)

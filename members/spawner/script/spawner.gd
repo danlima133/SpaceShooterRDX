@@ -1,6 +1,9 @@
 extends Node
 
+const dynamicResources = preload("res://libs/resource_dynamic.lib.gd")
+
 onready var objectPooling = $object_pooling
+onready var controllerFunctions = $controller_functions
 
 export(Resource) var _spawData
 export(Dictionary) var configPooling = {
@@ -10,18 +13,13 @@ export(Dictionary) var configPooling = {
 	}
 }
 export(NodePath) var positionSpawPath
+export(int) var tolerance
+export(int) var offset
+export(bool) var initActive = true
 
 var positionSpaw:Position2D
 
 var spawRunner:Componet
-
-var timeIsRandom:bool
-var countIsRandom:bool
-
-var positionsRandom = {
-	"x": false,
-	"y": false
-}
 
 func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager:ManagerComponets):
 	spawRunner = manager.getComponet(45)
@@ -31,22 +29,29 @@ func _ready():
 	if _spawData != null:
 		_configSpaw()
 	else:
-		printerr("Erro: no SpawData in %s" % self)
+		printerr("Erro: SpawData in %s" % self)
 
 func _configSpaw():
-	
-	if _spawData.timeSpaw.size() == 2:
-		timeIsRandom = true
-	if _spawData.countToSpaw.size() == 2:
-		countIsRandom = true
-	
-	if _spawData.entityPosition["x"].size() == 2:
-		positionsRandom["x"] = true
-	if _spawData.entityPosition["y"].size() == 2:
-		positionsRandom["y"] = true
-	
+	var resourceDynamic = dynamicResources.ResourceDynamic.new(_spawData, false)
+	_spawData = resourceDynamic
 	objectPooling.makeGroupsByConfig(configPooling)
+	if _spawData.getValue("useFunction"):
+		controllerFunctions.configFunctions()
+		controllerFunctions.setFunctionData(_spawData.callMethod("getFunctionAsString", [_spawData.getValue("typeFunction")]), _spawData.getValue("functionData"))
+	_setSpawValue(_spawData.getValue("spawValues"))
+	if initActive:
+		spawRunner.run()
+
+func _setSpawValue(data:Dictionary):
+	var _tolerance = data["tolerance"]
+	var _offset = data["offset"]
+	if _tolerance != -1:
+		tolerance = _tolerance
 	
+	if _offset != -1:
+		offset = _offset
+
+func init():
 	spawRunner.run()
 
 func getConfig() -> SpawData:

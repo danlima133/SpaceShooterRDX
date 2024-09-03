@@ -2,7 +2,6 @@
 
 [ext_resource path="res://members/collision_box/hit_box/script/hit_box.gd" type="Script" id=1]
 
-
 [node name="hit_box" type="Area2D"]
 collision_layer = 4
 collision_mask = 2

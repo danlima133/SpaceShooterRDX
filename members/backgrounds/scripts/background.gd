@@ -54,4 +54,3 @@ func _getBackgroundByConfig(group:int, config:Dictionary = {}) -> Texture:
 
 func _ready():
 	texture.texture = _getBackgroundByConfig(backgroundType, configBackground)
-

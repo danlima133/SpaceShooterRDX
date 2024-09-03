@@ -1,11 +1,12 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://nodes/motion_engine/meta/data/test_config.tres" type="Resource" id=2]
+[ext_resource path="res://nodes/motion_engine/meta/data/meteor_flame.tres" type="Resource" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://tests/game/scripts/test_motion_engine.gd" type="Script" id=4]
 [ext_resource path="res://nodes/motion_engine/meta/data/test_2.tres" type="Resource" id=5]
 [ext_resource path="res://game_objects/player/sub_game_object/player_bullet/scene/player_bullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=7]
+
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
