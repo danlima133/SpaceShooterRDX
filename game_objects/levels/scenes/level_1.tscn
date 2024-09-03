@@ -12,8 +12,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 configBackground = {
-"imageIdx": 5,
-"random": false
+"imageIdx": 0,
+"random": true
 }
 
 [node name="spawner" parent="." instance=ExtResource( 3 )]
@@ -33,7 +33,7 @@ positionSpawPath = NodePath("spaw_position")
 position = Vector2( 0, -100 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 512, 547 )
+position = Vector2( 640, 595 )
 
 [node name="player_flags" parent="player/ManagerComponets" index="3"]
 Flags = {

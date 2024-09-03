@@ -16,7 +16,7 @@ func _object_enter():
 	motion_engine.getObjectMove().connect("event", self, "_motionEngineEvents")
 
 func _spaw(data:Dictionary = {}):
-	getObjetcRoot().global_position = data["position"]
+	getObjetcRoot().position = data["position"]
 	
 	hurt_box.setActive(true)
 	hit_box.setActive(true)
@@ -36,6 +36,8 @@ func _spaw(data:Dictionary = {}):
 
 func _reset(data:Dictionary = {}):
 	getObjetcRoot().hide()
+	getObjetcRoot().global_position = Vector2.ZERO
+	getObjetcRoot().sleeping = true
 	meteorControl._currentData = {}
 	texture.texture = null
 	
@@ -71,8 +73,9 @@ func _on_hurt_box_hurtNoValue(hurtBox):
 	
 	
 	for index in range(countFragments):
-		object_pooling.spaw({ "group": "fragments" }, {
-			"position": getObjetcRoot().global_position,
+		var obj = object_pooling.spaw({ "group": "fragments" }, {
+			"position": getObjetcRoot().position,
 			"fragment": fragment
 		})
+		print(obj[0].get_parent().global_position, getObjetcRoot().global_position)
 	getObjectManger()._reset()

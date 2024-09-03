@@ -19,16 +19,17 @@ var treshold_shape:float
 func _init_componet():
 	setMeteor()
 
-func setMeteor(meteor:Array = []):
+func setMeteor(meteor:MeteorData = null):
 	randomize()
 	
-	var meteorData
+	var meteorData = meteor
 	
-	if meteor.size() > 1:
-		var meteorIndex = randi() % meteors.size()
-		meteorData = meteors[meteorIndex]
-	else:
-		meteorData = meteors[0]
+	if meteor == null:
+		if meteors.size() > 1:
+			var meteorIndex = randi() % meteors.size()
+			meteorData = meteors[meteorIndex]
+		else:
+			meteorData = meteors[0]
 	
 	_currentData = meteorData
 	

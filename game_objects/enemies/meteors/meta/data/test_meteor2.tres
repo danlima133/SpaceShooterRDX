@@ -10,6 +10,6 @@ texture = ExtResource( 2 )
 damage = 5
 resistence = 1
 velocity = [ 40, 80 ]
-meteorTreshoald = 1.608
+meteorTreshoald = 0.0
 fragments = [ ExtResource( 3 ) ]
 fragmentsCount = [ 2, 4 ]

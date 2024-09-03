@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=1]
 [ext_resource path="res://nodes/motion_engine/meta/data/meteor.tres" type="Resource" id=2]
@@ -8,8 +8,11 @@
 [ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=6]
 [ext_resource path="res://game_objects/enemies/meteor_fragments/componets/fragment_data.gd" type="Script" id=7]
 [ext_resource path="res://game_objects/enemies/meteor_fragments/behaviour/scripts/logic.gd" type="Script" id=8]
+[ext_resource path="res://game_objects/enemies/meteor_fragments/script/meteor_fragment.gd" type="Script" id=9]
 
 [node name="meteor_fragment" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource( 9 )
 
 [node name="texture" type="Sprite" parent="."]
 
@@ -38,15 +41,13 @@ _id = 450
 filterHurtBox = [ 55, 23 ]
 
 [node name="shape" type="CollisionShape2D" parent="hit_box"]
-visible = false
 
 [node name="hurt_box" parent="." instance=ExtResource( 4 )]
-id = 55
+id = 23
 
 [node name="shape" type="CollisionShape2D" parent="hurt_box"]
 
 [node name="shape" type="CollisionShape2D" parent="."]
-visible = false
 
 [node name="check" type="VisibilityNotifier2D" parent="."]
 

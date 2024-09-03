@@ -57,8 +57,7 @@ id = 55
 modulate = Color( 0.92549, 0.0745098, 0.0745098, 1 )
 
 [node name="hit_box" parent="." instance=ExtResource( 6 )]
-id = 23
-filterHurtBox = [ 55 ]
+filterHurtBox = [ 55, 23 ]
 
 [node name="shape" type="CollisionShape2D" parent="hit_box"]
 modulate = Color( 0.92549, 0.0745098, 0.0745098, 1 )
