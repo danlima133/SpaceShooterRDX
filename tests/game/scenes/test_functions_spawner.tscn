@@ -17,7 +17,6 @@ _functionDataPath = "res://members/functions/game_rules/json/functions_data/func
 _functionDataPath = "res://members/functions/game_rules/json/functions_data/funcdata_variation.functiondata"
 
 [connection signal="changeFunction" from="controller_functions" to="." method="_on_controller_functions_changeFunction"]
-[connection signal="functionsInit" from="controller_functions" to="." method="_on_controller_functions_functionsInit"]
 [connection signal="restartFunction" from="controller_functions" to="." method="_on_controller_functions_restartFunction"]
 [connection signal="resumeFunction" from="controller_functions" to="." method="_on_controller_functions_resumeFunction"]
 [connection signal="startFunction" from="controller_functions" to="." method="_on_controller_functions_startFunction"]
