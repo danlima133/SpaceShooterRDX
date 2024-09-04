@@ -49,12 +49,6 @@ Flags = {
 "shoot": true
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -2178, 0 )
-anchor_mode = 0
-current = true
-zoom = Vector2( 5.5, 5 )
-
 [connection signal="eventFinished" from="ManagerEvents/event_meteors" to="." method="_on_event_meteors_eventFinished"]
 [connection signal="eventStart" from="ManagerEvents/event_meteors" to="." method="_on_event_meteors_eventStart"]
 

@@ -2,6 +2,9 @@ extends Node
 
 onready var controllerFunctions:ControllerFunctions = $controller_functions
 
+func _ready():
+	controllerFunctions.configFunctions()
+
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:

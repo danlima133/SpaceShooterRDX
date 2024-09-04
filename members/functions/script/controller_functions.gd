@@ -40,6 +40,7 @@ func start(functionName:String):
 		_currentFunction._clearGraph()
 		emit_signal("changeFunction", getFunction(functionName))
 	_currentFunction = getFunction(functionName)
+	
 	_currentFunction._start()
 	_currentFunction._setDeleyTimer()
 	emit_signal("startFunction", _currentFunction)

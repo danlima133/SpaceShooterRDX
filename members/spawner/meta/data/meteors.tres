@@ -14,6 +14,6 @@ spawValues = {
 "offset": -1,
 "tolerance": -1
 }
-useFunction = false
+useFunction = true
 typeFunction = 0
-functionData = "res://members/functions/game_rules/json/functions_data/funcdata_meteorsGeneric.functiondata"
+functionData = "res://members/functions/game_rules/json/functions_data/funcdata_const.functiondata"
