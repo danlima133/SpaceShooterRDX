@@ -4,15 +4,12 @@
 
 [resource]
 script = ExtResource( 1 )
-timeSpaw = PoolIntArray( 8 )
-countToSpaw = PoolIntArray( 8, 12 )
-entityPosition = {
-"x": [ 0, 3350 ],
-"y": [ 0 ]
-}
-spawValues = {
-"offset": -1,
-"tolerance": -1
+timeSpaw = PoolIntArray( 5 )
+countToSpaw = PoolIntArray( 2, 3 )
+mapData = {
+"cell_size": 150,
+"x": 9,
+"y": 1
 }
 useFunction = true
 typeFunction = 0
