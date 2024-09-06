@@ -12,7 +12,8 @@ export(PoolIntArray) var countToSpaw
 export(Dictionary) var mapData = {
 	"x": 1,
 	"y": 1,
-	"cell_size": 0
+	"cell_size": 0,
+	"offset": Vector2.ZERO
 }
 
 export(bool) var useFunction

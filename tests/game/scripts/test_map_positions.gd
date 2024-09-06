@@ -9,17 +9,22 @@ const textures = [
 	preload("res://assets/sprites/enemies/enemyBlue4.png")
 	]
 
+onready var camera_2d = $content/Camera2D
+
+var velocityCamera:Vector2
+
 func _ready():
 	var map = RegularMath.RectsMap.Map.new({
 		"size": {
-			"x": 10,
+			"x": 21,
 			"y": 1
 		},
-		"cellSize": 125,
-		"origin": Vector2(10.24, 0),
+		"cellSize": 120,
+		"origin": global_position,
+		"offset": Vector2(-2520-20, 0),
 		"debug": true
 	})
-	add_child(map)
+	get_node("content").add_child(map)
 
 	var algorithm = RandomNumberGenerator.new()
 	algorithm.randomize()
@@ -31,4 +36,14 @@ func _ready():
 		sprite.texture = texture
 		var r = map.getRectByPosition(pos)
 		sprite.global_position = r.get_center()
-		add_child(sprite)
+		get_node("content").add_child(sprite)
+
+func _process(delta):
+	if Input.is_action_pressed("player_right"):
+		velocityCamera = Vector2.RIGHT
+	elif Input.is_action_pressed("player_left"):
+		velocityCamera = Vector2.LEFT
+	else:
+		velocityCamera = Vector2.ZERO
+
+	camera_2d.translate(velocityCamera * 350 * delta)

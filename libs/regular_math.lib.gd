@@ -12,6 +12,7 @@ class RectsMap:
 		var sizeY:int
 		var cellSize:int
 		var origin:Vector2
+		var offset:Vector2
 		
 		func _init(config:Dictionary):
 			_config = config
@@ -19,11 +20,18 @@ class RectsMap:
 			_generateMap()
 		
 		func _draw():
+			z_index = 100
 			if _debug:
 				var cells = getRectsAnvaliables()
 				for cell in cells:
 					draw_rect(cell, Color.red, false)
+					draw_line(cell.get_center(), cell.get_center() - Vector2(0, cell.size.y/2), Color.black)
+					draw_line(cell.get_center(), cell.get_center() - Vector2(cell.size.x/2, 0), Color.black)
+					draw_line(cell.get_center(), cell.position, Color.gray)
 					draw_circle(cell.get_center(), 2.5, Color.white)
+				draw_circle(origin, 3.5, Color.green)
+				if offset != Vector2.ZERO:
+					draw_circle(origin + offset, 3.5, Color.blue)
 		
 		func _setConfig():
 			var _size = _config.get("size", [])
@@ -32,12 +40,14 @@ class RectsMap:
 				sizeY = _size["y"]
 			cellSize = _config.get("cellSize", 0)
 			origin = _config.get("origin", Vector2.ZERO)
+			offset = _config.get("offset", Vector2.ZERO)
 			debugActive(_config.get("debug", false))
 		
 		func _generateMap():
 			for x in range(sizeX):
 				for y in range(sizeY):
 					var rect = Rect2((x * cellSize) + origin.x, (y * cellSize) + origin.y, cellSize, cellSize)
+					rect.position += offset
 					_map[toPositionWolrd2PositionMap(rect.position)] = rect
 		
 		func toPositionWolrd2PositionMap(position:Vector2, cellFit:bool = true):

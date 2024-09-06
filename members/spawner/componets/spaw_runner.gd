@@ -24,6 +24,7 @@ func run():
 			"y": mapData["y"]
 		},
 		"origin": spawConfig.positionSpaw.global_position,
+		"offset": mapData["offset"],
 		"cellSize": mapData["cell_size"],
 		"debug": true
 	})
