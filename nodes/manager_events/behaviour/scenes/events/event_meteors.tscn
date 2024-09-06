@@ -10,7 +10,7 @@ _eventName = "meteorsFlame"
 _eventCanPaused = false
 
 [node name="duration" type="Timer" parent="."]
-wait_time = 25.0
+wait_time = 30.0
 one_shot = true
 
 [node name="spawner" parent="." instance=ExtResource( 1 )]

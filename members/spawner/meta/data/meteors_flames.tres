@@ -7,8 +7,14 @@ script = ExtResource( 1 )
 timeSpaw = PoolIntArray( 2, 3 )
 countToSpaw = PoolIntArray( 1, 2 )
 entityPosition = {
-"x": [ 0, 1024 ],
+"x": [ 0, 3000 ],
 "y": [ 0 ]
 }
+spawValues = {
+"offset": -1,
+"tolerance": -1
+}
 useFunction = true
-functionData = ""
+
+typeFunction = 1
+functionData = "res://members/functions/game_rules/json/functions_data/funcdata_deltaMeteorsGeneric.functiondata"
