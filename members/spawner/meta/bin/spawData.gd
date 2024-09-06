@@ -9,14 +9,11 @@ enum Functions {
 export(PoolIntArray) var timeSpaw
 export(PoolIntArray) var countToSpaw
 
-export(Dictionary) var entityPosition = {
-	"x": [],
-	"y": []
-}
-
-export(Dictionary) var spawValues = {
-	"tolerance": -1,
-	"offset": -1
+export(Dictionary) var mapData = {
+	"x": 1,
+	"y": 1,
+	"cell_size": 0,
+	"offset": Vector2.ZERO
 }
 
 export(bool) var useFunction

@@ -13,8 +13,6 @@ export(Dictionary) var configPooling = {
 	}
 }
 export(NodePath) var positionSpawPath
-export(int) var tolerance
-export(int) var offset
 export(bool) var initActive = true
 
 var positionSpaw:Position2D
@@ -38,18 +36,8 @@ func _configSpaw():
 	if _spawData.getValue("useFunction"):
 		controllerFunctions.configFunctions()
 		controllerFunctions.setFunctionData(_spawData.callMethod("getFunctionAsString", [_spawData.getValue("typeFunction")]), _spawData.getValue("functionData"))
-	_setSpawValue(_spawData.getValue("spawValues"))
 	if initActive:
 		spawRunner.run()
-
-func _setSpawValue(data:Dictionary):
-	var _tolerance = data["tolerance"]
-	var _offset = data["offset"]
-	if _tolerance != -1:
-		tolerance = _tolerance
-	
-	if _offset != -1:
-		offset = _offset
 
 func init():
 	spawRunner.run()

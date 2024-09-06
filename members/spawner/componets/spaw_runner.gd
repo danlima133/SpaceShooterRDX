@@ -3,6 +3,7 @@ extends Componet
 signal spaw(entity)
 
 const dynamicResource = preload("res://libs/resource_dynamic.lib.gd")
+const RegularMath = preload("res://libs/regular_math.lib.gd")
 
 onready var spawnerTimer = $spawnerTimer
 onready var spawConfig = $"../.."
@@ -12,7 +13,28 @@ onready var object_pooling = $"../../object_pooling"
 var lastTimer:float
 var lastPositionSpaw:Vector2
 
+var mapSpaw
+var controllerMap
+
 func run():
+	var mapData = spawConfig.getConfig().getValue("mapData")
+	mapSpaw = RegularMath.RectsMap.Map.new({
+		"size": {
+			"x": mapData["x"],
+			"y": mapData["y"]
+		},
+		"origin": spawConfig.positionSpaw.global_position,
+		"offset": mapData["offset"],
+		"cellSize": mapData["cell_size"],
+		"debug": true
+	})
+	var root = currentManager.get_parent()
+	root.add_child(mapSpaw)
+	
+	var algorithm = RandomNumberGenerator.new()
+	algorithm.randomize()
+	
+	controllerMap = RegularMath.RectsMap.new(mapSpaw, algorithm)
 	randomize()
 	_setTimer()
 	if spawConfig.getConfig().getValue("useFunction"):
@@ -43,8 +65,15 @@ func _preCalc():
 	else:
 		count = dynamicResource.getValueFromRand(spawConfig.getConfig().getValue("countToSpaw"), dynamicResource.Value.DEFAULT)
 	
-	for index in range(count):
-		_spaw()
+	var positions = controllerMap.getPositionsByCount(count)
+	
+	for positionMap in positions:
+		var rect = mapSpaw.getRectByPosition(positionMap)
+		var entities = object_pooling.spaw({ "group": "entities" }, {
+			"position": rect.get_center()
+		})
+
+		emit_signal("spaw", entities)
 	
 	_setTimer()
 
@@ -84,12 +113,6 @@ func _spaw():
 			position.x = pos.x
 		if position.y != 0:
 			position.y = pos.y
-	
-	var entities = object_pooling.spaw({ "group": "entities" }, {
-		"position": position + currentManager.get_parent().positionSpaw.global_position
-	})
-	
-	emit_signal("spaw", entities)
 
 func stop():
 	lastTimer = spawnerTimer.time_left

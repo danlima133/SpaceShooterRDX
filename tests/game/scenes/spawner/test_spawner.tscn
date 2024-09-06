@@ -18,10 +18,8 @@ configPooling = {
 positionSpawPath = NodePath("Position2D")
 initActive = false
 
-[node name="func_variation" parent="spawner/controller_functions/functions" index="1"]
-isLoop = true
-
 [node name="Position2D" type="Position2D" parent="spawner"]
+position = Vector2( 1280, 65 )
 
 [editable path="spawner"]
 [editable path="spawner/controller_functions"]

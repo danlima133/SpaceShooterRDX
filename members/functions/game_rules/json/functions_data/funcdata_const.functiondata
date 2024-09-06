@@ -1,5 +1,5 @@
 {
-    "deley": [2, 6],
-    "offset": [1, 3],
+    "deley": [10],
+    "offset": [1],
     "limit": 10
 }
