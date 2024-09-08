@@ -14,9 +14,11 @@ class RectsMap:
 		var origin:Vector2
 		var offset:Vector2
 		
-		func _init(config:Dictionary):
+		func _init(config:Dictionary, root = null):
 			_config = config
 			_setConfig()
+			if root != null:
+				root.add_child(self, true)
 			_generateMap()
 		
 		func _draw():
@@ -27,13 +29,15 @@ class RectsMap:
 					draw_rect(cell, Color.red, false)
 					draw_line(cell.get_center(), cell.get_center() - Vector2(0, cell.size.y/2), Color.black)
 					draw_line(cell.get_center(), cell.get_center() - Vector2(cell.size.x/2, 0), Color.black)
-					draw_line(cell.get_center(), cell.position, Color.gray)
+					draw_line(cell.position, cell.position + cell.size, Color.gray)
 					draw_circle(cell.get_center(), 2.5, Color.white)
 				draw_circle(origin, 3.5, Color.green)
 				if offset != Vector2.ZERO:
 					draw_circle(origin + offset, 3.5, Color.blue)
 		
 		func _setConfig():
+			if _config.has("id"):
+				self.name = _config["id"]
 			var _size = _config.get("size", [])
 			if _size.size() > 0:
 				sizeX = _size["x"]
@@ -49,6 +53,7 @@ class RectsMap:
 					var rect = Rect2((x * cellSize) + origin.x, (y * cellSize) + origin.y, cellSize, cellSize)
 					rect.position += offset
 					_map[toPositionWolrd2PositionMap(rect.position)] = rect
+			update()
 		
 		func toPositionWolrd2PositionMap(position:Vector2, cellFit:bool = true):
 			var newPosition:Vector2
@@ -81,6 +86,9 @@ class RectsMap:
 		func debugActive(active:bool):
 			_debug = active
 			update()
+		
+		func isDebug() -> bool:
+			return _debug
 		
 		func redefineMap(config:Dictionary = {}):
 			self._map = {}

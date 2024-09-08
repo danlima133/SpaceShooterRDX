@@ -22,14 +22,15 @@ func _ready():
 		"cellSize": 120,
 		"origin": global_position,
 		"offset": Vector2(-2520-20, 0),
-		"debug": true
-	})
-	get_node("content").add_child(map)
+		"id": "map",
+		"debug": false
+	}, $content)
+	#get_node("content").add_child(map)
 
 	var algorithm = RandomNumberGenerator.new()
 	algorithm.randomize()
 	var controller = RegularMath.RectsMap.new(map, algorithm)
-	var positions = controller.getPositionsByCount(2)
+	var positions = controller.getPositionsByCount(5)
 	for pos in positions:
 		var sprite = Sprite.new()
 		var texture = textures[algorithm.randi() % textures.size()]
@@ -39,6 +40,11 @@ func _ready():
 		get_node("content").add_child(sprite)
 
 func _process(delta):
+	if Input.is_action_just_pressed("player_shoot"):
+		if has_node("content/map"):
+			var map = get_node("content/map")
+			map.debugActive(!map.isDebug())
+	
 	if Input.is_action_pressed("player_right"):
 		velocityCamera = Vector2.RIGHT
 	elif Input.is_action_pressed("player_left"):
