@@ -34,7 +34,7 @@ func _spaw(data:Dictionary = {}):
 	randomize()
 	motion_engine.setActive(true)
 	motion_engine.getObjectMove().setDir(Vector2(rand_range(-1, 1), rand_range(-1, 1)))
-	motion_engine.getObjectMove().impulse(false, 450)
+	motion_engine.getObjectMove().impulse(false, 320)
 
 func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager:ManagerComponets):
 	dataMeteor = manager.getComponet(450)

@@ -60,6 +60,7 @@ static func generateRangeValue(value:Array, randType:int, algorithm:RandomNumber
 	else: return ERR_INVALID_PARAMETER
 	
 static func getRandonValueFromRand(value:Array, algorithm:RandomNumberGenerator = null):
+	if value.size() == 0: return null
 	var indexMax = value.size()
 	var index:int
 	if algorithm == null:
@@ -79,7 +80,7 @@ static func getValueFromRand(rand:Array, value:int):
 				return rand[1]
 			Value.DEFAULT:
 				return rand[0]
-	return ERR_INVALID_PARAMETER
+	return null
 
 static func createNewRand(a, b = null):
 	return [a, b] if b != null else [a]

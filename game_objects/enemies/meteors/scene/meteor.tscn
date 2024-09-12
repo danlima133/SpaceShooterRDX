@@ -1,16 +1,18 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=1]
 [ext_resource path="res://game_objects/enemies/meteors/componets/meteor_control.gd" type="Script" id=2]
+[ext_resource path="res://game_objects/enemies/meteors/meta/data/meteors/browns/meteor_1.tres" type="Resource" id=3]
 [ext_resource path="res://nodes/manager_object/node/ObjectManagerNode.gd" type="Script" id=4]
 [ext_resource path="res://game_objects/enemies/meteors/behaviour/scripts/meteor.gd" type="Script" id=5]
 [ext_resource path="res://members/collision_box/hit_box/scene/hit_box.tscn" type="PackedScene" id=6]
 [ext_resource path="res://members/collision_box/hurt_box/scene/hurt_box.tscn" type="PackedScene" id=7]
-[ext_resource path="res://game_objects/enemies/meteors/meta/data/test_meteor2.tres" type="Resource" id=8]
-[ext_resource path="res://game_objects/enemies/meteors/meta/data/test_meteor.tres" type="Resource" id=9]
+[ext_resource path="res://game_objects/enemies/meteors/meta/data/meteors/browns/meteor_2.tres" type="Resource" id=8]
+[ext_resource path="res://game_objects/enemies/meteors/meta/data/meteors/browns/meteor_3.tres" type="Resource" id=9]
 [ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=10]
 [ext_resource path="res://nodes/motion_engine/meta/data/meteor.tres" type="Resource" id=11]
 [ext_resource path="res://members/object_pooling/scene/object_pooling.tscn" type="PackedScene" id=12]
+[ext_resource path="res://game_objects/enemies/meteors/meta/data/meteors/browns/meteor_4.tres" type="Resource" id=13]
 
 [node name="meteor" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -47,28 +49,30 @@ script = ExtResource( 10 )
 [node name="meteor_control" type="Node" parent="ManagerComponets"]
 script = ExtResource( 2 )
 _id = 45
-meteors = [ ExtResource( 8 ), ExtResource( 9 ) ]
+meteors = [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 13 ) ]
 
 [node name="hurt_box" parent="." instance=ExtResource( 7 )]
 monitoring = false
 id = 55
 
 [node name="shape" type="CollisionShape2D" parent="hurt_box"]
+visible = false
 modulate = Color( 0.92549, 0.0745098, 0.0745098, 1 )
 
 [node name="hit_box" parent="." instance=ExtResource( 6 )]
 filterHurtBox = [ 55, 23 ]
 
 [node name="shape" type="CollisionShape2D" parent="hit_box"]
+visible = false
 modulate = Color( 0.92549, 0.0745098, 0.0745098, 1 )
 
 [node name="checker" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -5, -5, 10, 10 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
-visible = false
 
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ObjectManager/meteor" method="_on_ManagerComponets_MangerComponetsInitialize"]
+[connection signal="hurtEvent" from="hurt_box" to="ObjectManager/meteor" method="_on_hurt_box_hurtEvent"]
 [connection signal="hurtNoValue" from="hurt_box" to="ObjectManager/meteor" method="_on_hurt_box_hurtNoValue"]
 [connection signal="hitEvent" from="hit_box" to="ObjectManager/meteor" method="_on_hit_box_hitEvent"]
 [connection signal="screen_exited" from="checker" to="ObjectManager/meteor" method="_on_checker_screen_exited"]

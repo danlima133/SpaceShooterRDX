@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://game_objects/enemies/meteors/meta/bin/meteorData.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/meteors/brown/model_4.png" type="Texture" id=2]
+[ext_resource path="res://game_objects/enemies/meteor_fragments/meta/data/browns/fragment_1_high.tres" type="Resource" id=3]
+[ext_resource path="res://game_objects/enemies/meteor_fragments/meta/data/browns/fragment_2_high.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+texture = ExtResource( 2 )
+damage = 2
+resistence = 3
+velocity = [ 100, 130 ]
+meteorTreshoald = 2.547
+fragments = [ ExtResource( 3 ), ExtResource( 4 ) ]
+fragmentsCount = [ 1, 2 ]

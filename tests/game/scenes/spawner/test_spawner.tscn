@@ -12,7 +12,7 @@ script = ExtResource( 3 )
 _spawData = ExtResource( 2 )
 configPooling = {
 "entities": {
-"count": 20,
+"count": 50,
 "object": "res://game_objects/enemies/meteors/scene/meteor.tscn"
 }
 }
@@ -20,10 +20,9 @@ positionSpawPath = NodePath("Position2D")
 initActive = false
 
 [node name="Position2D" type="Position2D" parent="spawner"]
-position = Vector2( 0, -161 )
 
 [node name="player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 509, 526 )
+position = Vector2( 654, 631 )
 
 [connection signal="functionsInit" from="spawner/controller_functions" to="." method="_on_controller_functions_functionsInit"]
 

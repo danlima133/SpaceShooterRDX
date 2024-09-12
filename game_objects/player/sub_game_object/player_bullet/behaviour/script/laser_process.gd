@@ -27,10 +27,11 @@ func _on_controller_reset_screen_exited():
 # -- This block code is a test --
 func _on_hit_box_hitEvent(hitBox):
 	var root = hitBox.get_parent()
-	var ME = root.get_node("MotionEngine")
-	ME.getObjectMove().setDir(Vector2(0, -1))
-	if ME.typeMotionBody == ME.motionBody.RIGBODY:
-		ME.getObjectMove().impulse(false, 80)
+	if root.has_node("MotionEngine"):
+		var ME = root.get_node("MotionEngine")
+		ME.getObjectMove().setDir(Vector2(0, -1))
+		if ME.typeMotionBody == ME.motionBody.RIGBODY:
+			ME.getObjectMove().impulse(false, 80)
 	getObjectManger()._reset()
 # -- end --
 

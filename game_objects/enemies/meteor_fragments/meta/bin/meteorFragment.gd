@@ -8,4 +8,4 @@ export(int) var resistence
 
 export(Array) var velocity
 
-export(float, 1, 5) var meteorTreshoald
+export(float, 0, 10) var meteorTreshoald

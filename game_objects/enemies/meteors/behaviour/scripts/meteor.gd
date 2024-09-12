@@ -59,7 +59,8 @@ func _on_hit_box_hitEvent(hurtBox):
 func _on_hurt_box_hurtNoValue(hurtBox):
 	var countFragments = meteorControl.getCurrentData().fragmentsCount
 	var fragmentsAnvaliable = meteorControl.getCurrentData().fragments
-	var fragment:MeteorFragment
+	
+	var fragment
 	
 	if DynamicResources.isRangeValue(countFragments):
 		countFragments = DynamicResources.generateRangeValue(countFragments, DynamicResources.TypeRand.INT)
@@ -70,12 +71,19 @@ func _on_hurt_box_hurtNoValue(hurtBox):
 		fragment = DynamicResources.getRandonValueFromRand(fragmentsAnvaliable)
 	else:
 		fragment = DynamicResources.getValueFromRand(fragmentsAnvaliable, DynamicResources.Value.DEFAULT)
-	
+		
+	if fragment == null:
+		getObjectManger()._reset()
+		return
 	
 	for index in range(countFragments):
 		var obj = object_pooling.spaw({ "group": "fragments" }, {
 			"position": getObjetcRoot().position,
 			"fragment": fragment
 		})
-		print(obj[0].get_parent().global_position, getObjetcRoot().global_position)
 	getObjectManger()._reset()
+
+func _on_hurt_box_hurtEvent(hitBox):
+	pass
+#	motion_engine.getObjectMove().setDir(-(hitBox.global_position).normalized())
+#	motion_engine.getObjectMove().impulse(false, 250)

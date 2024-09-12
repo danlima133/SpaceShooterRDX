@@ -10,6 +10,7 @@ onready var hit_box = $"../../hit_box"
 onready var hurt_box = $"../../hurt_box"
 
 func setData(data:MeteorFragment):
+
 	texture.texture = data.texture
 	
 	var velocity:float

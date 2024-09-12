@@ -90,6 +90,7 @@ class MoveRigiBody extends Move:
 	
 	func _start():
 		move()
+		_resume()
 	
 	func _stop():
 		getRootMotion().sleeping = true
@@ -98,7 +99,7 @@ class MoveRigiBody extends Move:
 		getRootMotion().sleeping = false
 	
 	func _bodyEntered(body):
-		body.apply_impulse(body.global_position, Vector2(80 * getDir(false).x, 80 * getDir(false).y))
+		body.apply_impulse(body.global_position, Vector2(200 * getDir(false).x, 200 * getDir(false).y))
 		event("collideEnter", { "collider": body, "collisor": getRootMotion() })
 	
 	func _bodyExited(body):
