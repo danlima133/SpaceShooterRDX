@@ -15,6 +15,3 @@ func _input(event):
 				KEY_0:
 					spawner.init()
 					print("Init spawner")
-
-func _on_controller_functions_functionsInit(controller:ControllerFunctions):
-	pass

@@ -4,11 +4,14 @@
 
 [resource]
 script = ExtResource( 1 )
-timeSpaw = PoolIntArray( 3, 5 )
-countToSpaw = PoolIntArray( 2, 4 )
-entityPosition = {
-"x": [ 0, 1024 ],
-"y": [ 0 ]
+timeSpaw = PoolIntArray( 5 )
+countToSpaw = PoolIntArray( 2, 3 )
+mapData = {
+"cell_size": 130,
+"offset": Vector2( -1225, -65 ),
+"x": 9,
+"y": 1
 }
+
 useFunction = false
 functionData = "res://members/functions/game_rules/json/functions_data/funcdata_meteorsGeneric.functiondata"

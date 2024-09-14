@@ -22,31 +22,20 @@ var spawRunner:Componet
 func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager:ManagerComponets):
 	spawRunner = manager.getComponet(45)
 
-func _on_func_const_step(value, function, metadado):
-	var _countToSpaw = _spawData.getValue("countToSpaw") as Array
-	var _valueMin = dynamicResources.getValueFromRand(_countToSpaw, dynamicResources.Value.MIN)
-	var _valueMax = dynamicResources.getValueFromRand(_countToSpaw, dynamicResources.Value.MAX)
-	var _newValue:Array
-	if dynamicResources.isRangeValue(_countToSpaw):
-		_newValue = dynamicResources.createNewRand(_valueMin + value, _valueMax + value)
-	else:
-		_newValue = dynamicResources.createNewRand(_valueMin + value)
-	_spawData.setValue("countToSpaw", _newValue)
-	print(_spawData.getValue("countToSpaw"), _newValue)
-
 func _ready():
 	positionSpaw = get_node(positionSpawPath)
 	if _spawData != null:
 		_configSpaw()
 	else:
-		printerr("Erro: no SpawData in %s" % self)
+		printerr("Erro: SpawData in %s" % self)
 
 func _configSpaw():
 	var resourceDynamic = dynamicResources.ResourceDynamic.new(_spawData, false)
 	_spawData = resourceDynamic
 	objectPooling.makeGroupsByConfig(configPooling)
-	controllerFunctions.configFunctions()
-	controllerFunctions.setFunctionData("constValue", _spawData.getValue("functionData"))
+	if _spawData.getValue("useFunction"):
+		controllerFunctions.configFunctions()
+		controllerFunctions.setFunctionData(_spawData.callMethod("getFunctionAsString", [_spawData.getValue("typeFunction")]), _spawData.getValue("functionData"))
 	if initActive:
 		spawRunner.run()
 

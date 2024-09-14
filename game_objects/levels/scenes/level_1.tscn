@@ -30,7 +30,6 @@ configPooling = {
 positionSpawPath = NodePath("spaw_position")
 
 [node name="spaw_position" type="Position2D" parent="spawner"]
-position = Vector2( 0, -100 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 640, 595 )

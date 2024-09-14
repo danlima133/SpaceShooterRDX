@@ -33,10 +33,13 @@ class ResourceDynamic:
 			_resourceBase.set(property, value)
 		return ERR_UNAVAILABLE
 	
-	func getValue(property):
+	func getValue(property:String):
 		if isResouceValid():
 			return _resourceBase.get(property)
 		return ERR_UNAVAILABLE
+	
+	func callMethod(method:String, args:Array):
+		return _resourceBase.call(method, args)
 	
 	func resetResource():
 		if not isUnique:

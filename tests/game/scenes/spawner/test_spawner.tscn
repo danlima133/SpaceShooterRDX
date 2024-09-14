@@ -21,10 +21,7 @@ initActive = false
 
 [node name="Position2D" type="Position2D" parent="spawner"]
 
-[node name="player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 654, 631 )
-
-[connection signal="functionsInit" from="spawner/controller_functions" to="." method="_on_controller_functions_functionsInit"]
+position = Vector2( 1280, 65 )
 
 [editable path="spawner"]
 [editable path="spawner/controller_functions"]

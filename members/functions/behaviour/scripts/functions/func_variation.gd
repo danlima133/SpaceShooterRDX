@@ -20,6 +20,10 @@ func _start():
 	setDeley(_nextTime)
 
 func _action():
+	if _index == getLimit():
+		print("reset index")
+		_index = 0
+	
 	if _index == 0:
 		setStepValue(_delta)
 		setDeley(_nextTime)
