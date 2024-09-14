@@ -9,8 +9,8 @@
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
 damage = 2
-resistence = 3
-velocity = [ 100, 130 ]
+resistence = 4
+velocity = [ 90, 100 ]
 meteorTreshoald = 2.547
 fragments = [ ExtResource( 3 ), ExtResource( 4 ) ]
-fragmentsCount = [ 1, 2 ]
+fragmentsCount = [ 4, 6 ]

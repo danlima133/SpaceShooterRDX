@@ -13,7 +13,7 @@ __meta__ = {
 }
 configBackground = {
 "imageIdx": 0,
-"random": true
+"random": false
 }
 
 [node name="spawner" parent="." instance=ExtResource( 3 )]
