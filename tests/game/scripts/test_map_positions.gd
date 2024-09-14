@@ -23,7 +23,7 @@ func _ready():
 		"origin": global_position,
 		"offset": Vector2(-2520-20, 0),
 		"id": "map",
-		"debug": false
+		"debug": true
 	}, $content)
 	#get_node("content").add_child(map)
 

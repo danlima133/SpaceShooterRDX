@@ -36,7 +36,6 @@ one_shot = true
 
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="timeout" from="ManagerComponets/spaw_runner/spawnerTimer" to="ManagerComponets/spaw_runner" method="_on_spawnerTimer_timeout"]
-
 [connection signal="startFunction" from="controller_functions" to="ManagerComponets/spaw_function" method="_on_controller_functions_startFunction"]
 [connection signal="step" from="controller_functions/functions/func_const" to="ManagerComponets/spaw_function" method="_on_func_const_step"]
 [connection signal="step" from="controller_functions/functions/func_variation" to="ManagerComponets/spaw_function" method="_on_func_variation_step"]

@@ -18,6 +18,7 @@ var controllerMap
 
 func run():
 	var mapData = spawConfig.getConfig().getValue("mapData")
+	print(mapData.get("offset", Vector2.ZERO))
 	mapSpaw = RegularMath.RectsMap.Map.new({
 		"size": {
 			"x": mapData["x"],

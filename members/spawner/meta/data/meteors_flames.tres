@@ -7,11 +7,11 @@ script = ExtResource( 1 )
 timeSpaw = PoolIntArray( 2, 3 )
 countToSpaw = PoolIntArray( 1, 2 )
 mapData = {
-"cell_size": 0,
-"x": 1,
+"cell_size": 130,
+"offset": Vector2( -1225, -65 ),
+"x": 9,
 "y": 1
 }
 useFunction = true
-
 typeFunction = 1
 functionData = "res://members/functions/game_rules/json/functions_data/funcdata_deltaMeteorsGeneric.functiondata"

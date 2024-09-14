@@ -30,6 +30,7 @@ configPooling = {
 positionSpawPath = NodePath("spaw_position")
 
 [node name="spaw_position" type="Position2D" parent="spawner"]
+position = Vector2( 1280, -100 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 640, 595 )
@@ -37,7 +38,7 @@ position = Vector2( 640, 595 )
 [node name="player_flags" parent="player/ManagerComponets" index="3"]
 Flags = {
 "bounds": true,
-"game_over": false,
+"game_over": true,
 "movement": true,
 "shoot": true
 }

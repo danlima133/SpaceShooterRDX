@@ -4,7 +4,7 @@ onready var hit_box = $"../../hit_box"
 onready var action_box = $"../../action_box"
 onready var motion_engine = $"../../MotionEngine"
 
-func _spaw(data:Dictionary):
+func _spaw(data:Dictionary = {}):
 	getObjetcRoot().global_position = data["position"]
 	getObjetcRoot().show()
 	
@@ -12,7 +12,7 @@ func _spaw(data:Dictionary):
 	hit_box.setActive(true)
 	motion_engine.setActive(true)
 
-func _reset(data:Dictionary):
+func _reset(data:Dictionary = {}):
 	getObjetcRoot().hide()
 	getObjetcRoot().global_position = Vector2.ZERO
 	
