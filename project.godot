@@ -55,6 +55,16 @@ _global_script_classes=[ {
 "path": "res://nodes/manager_events/node/ManagerEventsNode.gd"
 }, {
 "base": "Resource",
+"class": "MeteorData",
+"language": "GDScript",
+"path": "res://game_objects/enemies/meteors/meta/bin/meteorData.gd"
+}, {
+"base": "Resource",
+"class": "MeteorFragment",
+"language": "GDScript",
+"path": "res://game_objects/enemies/meteor_fragments/meta/bin/meteorFragment.gd"
+}, {
+"base": "Resource",
 "class": "MotionConfig",
 "language": "GDScript",
 "path": "res://nodes/motion_engine/meta/bin/MotionConfig.gd"
@@ -104,6 +114,8 @@ _global_script_class_icons={
 "HurtBox": "",
 "ManagerComponets": "res://nodes/manager_componets/icon/node.png",
 "ManagerEvents": "res://nodes/manager_events/icon/node.png",
+"MeteorData": "",
+"MeteorFragment": "",
 "MotionConfig": "",
 "MotionEngine": "res://nodes/motion_engine/icon/node.png",
 "ObjectManager": "res://nodes/manager_object/icon/node.png",

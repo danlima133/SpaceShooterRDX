@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tests/game/scripts/test_meteor_data.gd" type="Script" id=1]
+[ext_resource path="res://members/object_pooling/scene/object_pooling.tscn" type="PackedScene" id=2]
+[ext_resource path="res://members/collision_box/hit_box/scene/hit_box.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 30.0666
+
+[node name="test" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="object_pooling" parent="." instance=ExtResource( 2 )]
+configPooling = {
+"test": {
+"count": "10",
+"object": "res://game_objects/enemies/meteors/scene/meteor.tscn"
+}
+}
+
+[node name="hit_box" parent="." instance=ExtResource( 3 )]
+position = Vector2( 231, 184 )
+__meta__ = {
+"_edit_group_": true
+}
+_hitValue = -1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box"]
+shape = SubResource( 1 )

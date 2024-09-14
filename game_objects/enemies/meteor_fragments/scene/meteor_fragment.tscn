@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=1]
+[ext_resource path="res://nodes/motion_engine/meta/data/meteor.tres" type="Resource" id=2]
+[ext_resource path="res://members/collision_box/hit_box/scene/hit_box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://members/collision_box/hurt_box/scene/hurt_box.tscn" type="PackedScene" id=4]
+[ext_resource path="res://nodes/manager_object/node/ObjectManagerNode.gd" type="Script" id=5]
+[ext_resource path="res://nodes/motion_engine/node/MotionEngineNode.gd" type="Script" id=6]
+[ext_resource path="res://game_objects/enemies/meteor_fragments/componets/fragment_data.gd" type="Script" id=7]
+[ext_resource path="res://game_objects/enemies/meteor_fragments/behaviour/scripts/logic.gd" type="Script" id=8]
+[ext_resource path="res://game_objects/enemies/meteor_fragments/script/meteor_fragment.gd" type="Script" id=9]
+
+[node name="meteor_fragment" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource( 9 )
+
+[node name="texture" type="Sprite" parent="."]
+
+[node name="MotionEngine" type="Node" parent="."]
+script = ExtResource( 6 )
+rootMotionPath = NodePath("..")
+motionConfig = ExtResource( 2 )
+typeMotionBody = 1
+initActive = false
+
+[node name="ObjectManager" type="Node" parent="."]
+script = ExtResource( 5 )
+objectProcess = NodePath("logic")
+
+[node name="logic" type="Node" parent="ObjectManager"]
+script = ExtResource( 8 )
+
+[node name="ManagerComponets" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="data" type="Node" parent="ManagerComponets"]
+script = ExtResource( 7 )
+_id = 450
+
+[node name="hit_box" parent="." instance=ExtResource( 3 )]
+filterHurtBox = [ 55, 23 ]
+
+[node name="shape" type="CollisionShape2D" parent="hit_box"]
+
+[node name="hurt_box" parent="." instance=ExtResource( 4 )]
+id = 23
+
+[node name="shape" type="CollisionShape2D" parent="hurt_box"]
+
+[node name="shape" type="CollisionShape2D" parent="."]
+
+[node name="check" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ObjectManager/logic" method="_on_ManagerComponets_MangerComponetsInitialize"]
+[connection signal="hitEvent" from="hit_box" to="ObjectManager/logic" method="_on_hit_box_hitEvent"]
+[connection signal="hurtNoValue" from="hurt_box" to="ObjectManager/logic" method="_on_hurt_box_hurtNoValue"]
+[connection signal="screen_exited" from="check" to="ObjectManager/logic" method="_on_check_screen_exited"]

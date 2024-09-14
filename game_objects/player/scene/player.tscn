@@ -47,7 +47,7 @@ script = ExtResource( 9 )
 
 [node name="attributes" type="Node" parent="ManagerComponets"]
 script = ExtResource( 2 )
-_velocity = 250
+_velocity = 350
 _damage = 1
 _resistence = 10
 

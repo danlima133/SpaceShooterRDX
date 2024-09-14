@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game_objects/enemies/meteors/scene/meteor.tscn" type="PackedScene" id=1]
+
+[node name="test_physics" type="Node2D"]
+
+[node name="meteor" parent="." instance=ExtResource( 1 )]
+position = Vector2( 131, 44 )
+
+[editable path="meteor"]

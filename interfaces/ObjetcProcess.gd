@@ -12,11 +12,12 @@ func getObjectManger():
 func getObjetcRoot():
 	return _objectRoot
 
-func _spaw(data:Dictionary):
+func _spaw(data:Dictionary = {}):
 	pass
 
 func _objectEnter():
 	pass
 
-func _reset(data:Dictionary):
-	pass
+func _reset(data:Dictionary = {}):
+	getObjetcRoot().global_position = data["position"]
+	

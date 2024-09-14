@@ -12,6 +12,6 @@ mapData = {
 "x": 9,
 "y": 1
 }
-useFunction = true
-typeFunction = 0
-functionData = "res://members/functions/game_rules/json/functions_data/funcdata_const.functiondata"
+
+useFunction = false
+functionData = "res://members/functions/game_rules/json/functions_data/funcdata_meteorsGeneric.functiondata"

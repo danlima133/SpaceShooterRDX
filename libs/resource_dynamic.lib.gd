@@ -31,12 +31,12 @@ class ResourceDynamic:
 	func setValue(property:String, value):
 		if isResouceValid():
 			_resourceBase.set(property, value)
-		else: ERR_UNAVAILABLE
+		return ERR_UNAVAILABLE
 	
 	func getValue(property:String):
 		if isResouceValid():
 			return _resourceBase.get(property)
-		else: ERR_UNAVAILABLE
+		return ERR_UNAVAILABLE
 	
 	func callMethod(method:String, args:Array):
 		return _resourceBase.call(method, args)
@@ -61,6 +61,18 @@ static func generateRangeValue(value:Array, randType:int, algorithm:RandomNumber
 	elif randType == TypeRand.FLOAT:
 		return randValue
 	else: return ERR_INVALID_PARAMETER
+	
+static func getRandonValueFromRand(value:Array, algorithm:RandomNumberGenerator = null):
+	if value.size() == 0: return null
+	var indexMax = value.size()
+	var index:int
+	if algorithm == null:
+		randomize()
+		index = randi() % indexMax
+	else:
+		index = algorithm.randi() % indexMax
+		
+	return value[index]
 
 static func getValueFromRand(rand:Array, value:int):
 	if rand.size() == 2 or rand.size() == 1:
@@ -71,7 +83,7 @@ static func getValueFromRand(rand:Array, value:int):
 				return rand[1]
 			Value.DEFAULT:
 				return rand[0]
-	return ERR_INVALID_PARAMETER
+	return null
 
 static func createNewRand(a, b = null):
 	return [a, b] if b != null else [a]

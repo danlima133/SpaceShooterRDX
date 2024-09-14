@@ -4,11 +4,8 @@
 
 [resource]
 script = ExtResource( 1 )
-velocity = 0
-velocityMin = 0
-velocityMax = 0
+velocity = [  ]
 direction = Vector2( 0, 0 )
+dirRandom = false
 xFix = false
 yFix = false
-directionRandom = true
-velocityRandom = true
