@@ -15,4 +15,4 @@ material = ExtResource( 3 )
 position = Vector2( 640, 360 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 1324, 1324 )
+region_rect = Rect2( 0, 0, 1824, 1824 )

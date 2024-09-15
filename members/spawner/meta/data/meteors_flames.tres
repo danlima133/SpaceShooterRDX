@@ -12,6 +12,6 @@ mapData = {
 "x": 9,
 "y": 1
 }
-useFunction = true
+useFunction = false
 typeFunction = 1
 functionData = "res://members/functions/game_rules/json/functions_data/funcdata_deltaMeteorsGeneric.functiondata"

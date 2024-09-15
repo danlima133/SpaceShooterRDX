@@ -29,7 +29,7 @@ texture = ExtResource( 4 )
 rect = Rect2( -5, -5, 10, 10 )
 
 [node name="shoot_point" type="Position2D" parent="."]
-position = Vector2( 0, -42 )
+position = Vector2( 40, 0 )
 __meta__ = {
 "_gizmo_extents_": 20.0
 }

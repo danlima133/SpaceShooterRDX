@@ -19,6 +19,7 @@ height = 28.0
 [node name="player_bullet" type="Node2D"]
 
 [node name="texture" type="Sprite" parent="."]
+rotation = 1.5708
 texture = ExtResource( 4 )
 
 [node name="ObjectManager" type="Node" parent="."]
@@ -29,6 +30,7 @@ objectProcess = NodePath("../laser_process")
 script = ExtResource( 6 )
 
 [node name="hit_box" parent="." instance=ExtResource( 3 )]
+rotation = 1.5708
 id = 50
 filterHurtBox = [ 409 ]
 _hitValue = 1.0
@@ -37,6 +39,7 @@ _hitValue = 1.0
 shape = SubResource( 1 )
 
 [node name="target_box" parent="." instance=ExtResource( 7 )]
+rotation = 1.5708
 
 [node name="shape" type="CollisionShape2D" parent="target_box"]
 shape = SubResource( 1 )
@@ -52,6 +55,7 @@ position = Vector2( -9.53674e-07, -63 )
 scale = Vector2( 0.35, 0.35 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource( 2 )
 
 [connection signal="hitEvent" from="hit_box" to="laser_process" method="_on_hit_box_hitEvent"]

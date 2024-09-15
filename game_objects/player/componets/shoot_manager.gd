@@ -2,6 +2,7 @@ extends Componet
 
 onready var shoot_point = $"../../shoot_point"
 onready var object_pooling = $"../../object_pooling"
+onready var player = $"../.."
 
 var playerFlags:Componet
 var attributes:Componet
@@ -11,7 +12,8 @@ func _process(delta):
 		if playerFlags.getFlagState("shoot"):
 			object_pooling.spaw({ "group": "bullets" }, { 
 				"position": shoot_point.global_position, 
-				"damage": attributes.getDamage()
+				"damage": attributes.getDamage(),
+				"target": player._positionTarget
 				})
 
 func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
