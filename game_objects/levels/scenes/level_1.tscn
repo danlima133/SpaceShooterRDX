@@ -10,6 +10,20 @@
 
 [node name="level_1" type="Node2D"]
 
+[node name="ManagerEvents" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="event_meteors" parent="ManagerEvents" instance=ExtResource( 5 )]
+spawnersRefs = [ NodePath("../../spawner") ]
+
+[node name="position" parent="ManagerEvents/event_meteors/spawner" index="3"]
+position = Vector2( 1280, -100 )
+
+[node name="test_execute_meteros_flame" parent="." instance=ExtResource( 6 )]
+managerEventsPath = NodePath("../ManagerEvents")
+timeMin = 30.0
+timeMax = 50.0
+
 [node name="background" parent="." instance=ExtResource( 1 )]
 __meta__ = {
 "_edit_lock_": true
@@ -36,29 +50,6 @@ positionSpawPath = NodePath("spaw_position")
 position = Vector2( 1280, -100 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 640, 595 )
+position = Vector2( 594, 567 )
 
-[node name="player_flags" parent="player/ManagerComponets" index="3"]
-Flags = {
-"bounds": true,
-"game_over": true,
-"movement": true,
-"shoot": true
-}
-
-[node name="ManagerEvents" type="Node" parent="."]
-script = ExtResource( 7 )
-
-[node name="event_meteors" parent="ManagerEvents" instance=ExtResource( 5 )]
-spawnersRefs = [ NodePath("../../spawner") ]
-
-[node name="position" parent="ManagerEvents/event_meteors/spawner" index="3"]
-position = Vector2( 1280, -100 )
-
-[node name="test_execute_meteros_flame" parent="." instance=ExtResource( 6 )]
-managerEventsPath = NodePath("../ManagerEvents")
-timeMin = 30.0
-timeMax = 50.0
-
-[editable path="player"]
 [editable path="ManagerEvents/event_meteors"]

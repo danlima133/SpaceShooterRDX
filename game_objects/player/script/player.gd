@@ -4,6 +4,7 @@ class_name Player
 onready var visibility = $visibility
 onready var texture = $texture
 onready var hurt_box = $hurt_box
+onready var shoot_point = $shoot_point
 
 var _friction:float = 0.3
 var _dirX:int
@@ -49,6 +50,7 @@ func _draw():
 
 func _ready():
 	if player_flgas.getFlagState("movement"):
+		shoot_point.position = Vector2(43, 0)
 		texture.rotation_degrees = 90
 		hurt_box.rotation_degrees = 90
 
