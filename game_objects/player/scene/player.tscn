@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://game_objects/player/script/player.gd" type="Script" id=1]
 [ext_resource path="res://game_objects/player/componets/attributes.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://members/object_pooling/scene/object_pooling.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game_objects/player/componets/shoot_manager.gd" type="Script" id=8]
 [ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=9]
+[ext_resource path="res://members/collision_box/target_box/scene/target_box.tscn" type="PackedScene" id=10]
+[ext_resource path="res://game_objects/player/componets/collectables.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 13.0
@@ -63,6 +65,9 @@ _id = 10
 script = ExtResource( 3 )
 _id = 1
 
+[node name="collectables" type="Node" parent="ManagerComponets"]
+script = ExtResource( 11 )
+
 [node name="hurt_box" parent="." instance=ExtResource( 6 )]
 id = 409
 
@@ -75,9 +80,21 @@ position = Vector2( 0, 12 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
+[node name="target_box" parent="." instance=ExtResource( 10 )]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="target_box"]
+position = Vector2( 0, 3 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="target_box"]
+position = Vector2( 0, 12 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
 [connection signal="screen_entered" from="visibility" to="ManagerComponets/contetion" method="_on_visibility_screen_entered"]
 [connection signal="screen_exited" from="visibility" to="ManagerComponets/contetion" method="_on_visibility_screen_exited"]
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ManagerComponets/contetion" method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ManagerComponets/shoot_manager" method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="hurtNoValue" from="hurt_box" to="." method="_on_hurt_box_hurtNoValue"]
+[connection signal="action" from="target_box" to="ManagerComponets/collectables" method="_on_target_box_action"]
