@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tests/game/scripts/test_manager_group.gd" type="Script" id=1]
+[ext_resource path="res://nodes/member_group/node/MemberGroupNode.gd" type="Script" id=2]
+
+[node name="test_manager_group" type="Node"]
+script = ExtResource( 1 )
+
+[node name="texture" type="Sprite" parent="."]
+position = Vector2( 57, 77 )
+
+[node name="MemberGroup" type="Node" parent="texture" groups=["sprites"]]
+script = ExtResource( 2 )
+_tag = "texture"
+
+[node name="texture2" type="Sprite" parent="."]
+position = Vector2( 125, 78 )
+
+[node name="MemberGroup" type="Node" parent="texture2" groups=["sprites"]]
+script = ExtResource( 2 )
+_tag = "texture2"
+
+[node name="anim" type="Tween" parent="." groups=["animation"]]
+
+[node name="MemberGroup" type="Node" parent="anim" groups=["animation"]]
+script = ExtResource( 2 )
+_tag = "anim"
+
+[node name="test" type="Node" parent="." groups=["test"]]
