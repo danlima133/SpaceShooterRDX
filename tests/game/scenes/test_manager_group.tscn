@@ -20,10 +20,13 @@ position = Vector2( 125, 78 )
 script = ExtResource( 2 )
 _tag = "texture2"
 
-[node name="anim" type="Tween" parent="." groups=["animation"]]
+[node name="anim" type="Tween" parent="."]
 
 [node name="MemberGroup" type="Node" parent="anim" groups=["animation"]]
 script = ExtResource( 2 )
 _tag = "anim"
 
-[node name="test" type="Node" parent="." groups=["test"]]
+[node name="test" type="Node" parent="."]
+
+[node name="MemberGroup" type="Node" parent="test" groups=["test"]]
+script = ExtResource( 2 )

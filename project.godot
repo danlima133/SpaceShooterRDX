@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://members/collision_box/hurt_box/script/hurt_box.gd"
 }, {
+"base": "Componet",
+"class": "LevelData",
+"language": "GDScript",
+"path": "res://game_objects/levels/componets/LevelData.gd"
+}, {
 "base": "Node",
 "class": "ManagerComponets",
 "language": "GDScript",
@@ -117,6 +122,7 @@ _global_script_class_icons={
 "Function": "",
 "HitBox": "",
 "HurtBox": "",
+"LevelData": "",
 "ManagerComponets": "res://nodes/manager_componets/icon/node.png",
 "ManagerEvents": "res://nodes/manager_events/icon/node.png",
 "MemberGroup": "res://nodes/member_group/icon/node.png",

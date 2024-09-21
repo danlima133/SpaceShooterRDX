@@ -1,6 +1,8 @@
 extends Node2D
 class_name Player
 
+const Groups = preload("res://libs/groups.lib.gd")
+
 onready var visibility = $visibility
 onready var texture = $texture
 
@@ -49,5 +51,11 @@ func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
 
 # ---------- block is test ----------
 func _on_hurt_box_hurtNoValue(hurtBox):
+	var manager = Groups.Manager.new()
+	manager.initManager(self)
+	if manager.hasTagOnGroup("level", "data"):
+		var member = manager.getMemberWithTag("level", "data") as MemberGroup
+		var level_data = member.getOutputObject() as LevelData
+		print(level_data.export_data())
 	gameOver("by ship")
 # --------------- end --------------

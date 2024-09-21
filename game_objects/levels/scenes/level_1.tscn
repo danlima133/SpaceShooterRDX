@@ -1,11 +1,25 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://members/backgrounds/scenes/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://members/spawner/scene/spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://members/spawner/meta/data/meteors.tres" type="Resource" id=4]
+[ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=5]
+[ext_resource path="res://nodes/member_group/node/MemberGroupNode.gd" type="Script" id=6]
+[ext_resource path="res://game_objects/levels/componets/LevelData.gd" type="Script" id=7]
 
 [node name="level_1" type="Node2D"]
+
+[node name="ManagerComponets" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="level_data" type="Node" parent="ManagerComponets"]
+script = ExtResource( 7 )
+_id = 23
+
+[node name="MemberGroup" type="Node" parent="ManagerComponets/level_data" groups=["level"]]
+script = ExtResource( 6 )
+_tag = "data"
 
 [node name="background" parent="." instance=ExtResource( 1 )]
 __meta__ = {
