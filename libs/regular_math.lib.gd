@@ -124,3 +124,31 @@ class RectsMap:
 			positionsAnvaliables.erase(positionChoice)
 			positionsByCount.append(positionChoice)
 		return positionsByCount
+
+class TimeData:
+	var _seconds:float
+	var _minutes:int
+	var _hour:int
+	
+	func get_time_in_seconds() -> float:
+		var _seconds_:float
+		_seconds_ = _hour * 3600
+		_seconds_ += _minutes * 60
+		_seconds_ += _seconds
+		return _seconds_
+	
+	func time() -> Array:
+		return [_seconds, _minutes, _hour]
+	
+	func set_time_by_seconds(seconds):
+		var format_seconds = int((seconds / 60))
+		format_seconds = format_seconds * 60
+		format_seconds = abs(seconds - format_seconds)
+		_seconds = format_seconds
+		_minutes = seconds / 60
+		_hour = _minutes / 60
+	
+	func set_time(seconds, minutes, hours):
+		_seconds = seconds
+		_minutes = minutes
+		_hour = hours

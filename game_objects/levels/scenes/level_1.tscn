@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://members/backgrounds/scenes/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=2]
@@ -7,8 +7,14 @@
 [ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=5]
 [ext_resource path="res://nodes/member_group/node/MemberGroupNode.gd" type="Script" id=6]
 [ext_resource path="res://game_objects/levels/componets/LevelData.gd" type="Script" id=7]
+[ext_resource path="res://game_objects/levels/componets/level_time.gd" type="Script" id=8]
+[ext_resource path="res://nodes/manager_events/node/ManagerEventsNode.gd" type="Script" id=9]
+[ext_resource path="res://nodes/manager_events/behaviour/scenes/events/event_meteors.tscn" type="PackedScene" id=10]
+[ext_resource path="res://tests/game/scenes/test_execute_meteros_flame.tscn" type="PackedScene" id=11]
+[ext_resource path="res://game_objects/levels/scripts/level_1.gd" type="Script" id=12]
 
 [node name="level_1" type="Node2D"]
+script = ExtResource( 12 )
 
 [node name="ManagerComponets" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -20,6 +26,102 @@ _id = 23
 [node name="MemberGroup" type="Node" parent="ManagerComponets/level_data" groups=["level"]]
 script = ExtResource( 6 )
 _tag = "data"
+
+[node name="level_time" type="Node" parent="ManagerComponets"]
+script = ExtResource( 8 )
+_id = 98
+
+[node name="MemberGroup" type="Node" parent="ManagerComponets/level_time" groups=["level"]]
+script = ExtResource( 6 )
+_tag = "time"
+
+[node name="ManagerEvents" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="event_meteors" parent="ManagerEvents" instance=ExtResource( 10 )]
+spawnersRefs = [ NodePath("../../spawner") ]
+
+[node name="test_execute_meteros_flame" parent="." instance=ExtResource( 11 )]
+managerEventsPath = NodePath("../ManagerEvents")
+timeMin = 20.0
+timeMax = 30.0
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+[node name="margin" type="Control" parent="hud"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="hud/margin"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -118.0
+margin_bottom = 76.0
+
+[node name="time_level" type="Label" parent="hud/margin/VBoxContainer"]
+margin_right = 118.0
+margin_bottom = 14.0
+text = "0:0"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="hud/margin/VBoxContainer"]
+margin_top = 18.0
+margin_right = 118.0
+margin_bottom = 22.0
+
+[node name="star_bronze" type="HBoxContainer" parent="hud/margin/VBoxContainer"]
+margin_top = 26.0
+margin_right = 118.0
+margin_bottom = 40.0
+alignment = 1
+
+[node name="label" type="Label" parent="hud/margin/VBoxContainer/star_bronze"]
+margin_left = 29.0
+margin_right = 77.0
+margin_bottom = 14.0
+text = "bronze:"
+
+[node name="value" type="Label" parent="hud/margin/VBoxContainer/star_bronze"]
+margin_left = 81.0
+margin_right = 89.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="star_silvier" type="HBoxContainer" parent="hud/margin/VBoxContainer"]
+margin_top = 44.0
+margin_right = 118.0
+margin_bottom = 58.0
+alignment = 1
+
+[node name="label" type="Label" parent="hud/margin/VBoxContainer/star_silvier"]
+margin_left = 31.0
+margin_right = 74.0
+margin_bottom = 14.0
+text = "silvier:"
+
+[node name="value" type="Label" parent="hud/margin/VBoxContainer/star_silvier"]
+margin_left = 78.0
+margin_right = 86.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="star_gold" type="HBoxContainer" parent="hud/margin/VBoxContainer"]
+margin_top = 62.0
+margin_right = 118.0
+margin_bottom = 76.0
+alignment = 1
+
+[node name="label" type="Label" parent="hud/margin/VBoxContainer/star_gold"]
+margin_left = 37.0
+margin_right = 68.0
+margin_bottom = 14.0
+text = "gold:"
+
+[node name="value" type="Label" parent="hud/margin/VBoxContainer/star_gold"]
+margin_left = 72.0
+margin_right = 80.0
+margin_bottom = 14.0
+text = "0"
 
 [node name="background" parent="." instance=ExtResource( 1 )]
 __meta__ = {
@@ -56,5 +158,9 @@ Flags = {
 "movement": true,
 "shoot": true
 }
+
+[connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
+[connection signal="set_value" from="ManagerComponets/level_data" to="." method="_on_level_data_set_value"]
+[connection signal="eventStart" from="ManagerEvents/event_meteors" to="." method="_on_event_meteors_eventStart"]
 
 [editable path="player"]

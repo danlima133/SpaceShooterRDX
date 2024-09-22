@@ -42,6 +42,12 @@ class Refs:
 
 # --------- END ------------
 
+#---------- Signal ---------
+
+signal set_value(scope, token, value)
+
+#---------- END ------------
+
 # --------- Members ---------
 
 var _level_data = {
@@ -65,6 +71,7 @@ func set_value(scope, token, value, plus_equals = false):
 			_level_data[scope][token] += value
 		else:
 			_level_data[scope][token] = value
+		emit_signal("set_value", scope, token, _level_data[scope][token])
 
 func get_value(scope, token = Refs.Token.NONE):
 	if token == Refs.Token.NONE:
