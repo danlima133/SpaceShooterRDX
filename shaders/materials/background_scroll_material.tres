@@ -4,6 +4,6 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/scroll = true
+shader_param/scroll = false
 shader_param/velocity = 0.5
 shader_param/direction = Vector2( 0, 0.1 )

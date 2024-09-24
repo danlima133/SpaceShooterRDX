@@ -7,6 +7,7 @@ class Move:
 	var _targetDir:Vector2
 	var _velocity:float
 	var _targetVelocity:float
+	var _preConfigs:Dictionary = {}
 	
 	var _active:bool
 	
@@ -35,6 +36,12 @@ class Move:
 		_rootMotion = rootMotion
 		_config()
 	
+	func setPreConfigs(config:Dictionary):
+		_preConfigs = config
+	
+	func getPreConfig() -> Dictionary:
+		return _preConfigs
+	
 	func event(nameEvent:String, data:Dictionary = {}):
 		emit_signal("event", nameEvent, data)
 	
@@ -62,7 +69,7 @@ class MoveObject2D extends Move:
 		event("test", {"start": true})
 	
 	func _update(delta:float):
-		getRootMotion().translate(getDir() * getVelocity() * delta)
+		getRootMotion().translate(getDir(getPreConfig().get("dirTarget", true)) * getVelocity() * delta)
 
 class MoveRigiBody extends Move:
 	func move(dirTarget:bool = true, velocityTarget:bool = true):

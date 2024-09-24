@@ -6,13 +6,17 @@ func _objectEnter():
 	getObjetcRoot().hide()
 
 func _spaw(data:Dictionary = {}):
-	getObjetcRoot().get_node("MotionEngine").setActive(true)
-	
 	getObjetcRoot().get_node("hit_box").setActive(true)
 	if data.has("damage"):
 		getObjetcRoot().get_node("hit_box").setHit(data["damage"])
 	
 	getObjetcRoot().global_position = data["position"]
+	motionEngine.getObjectMove().setPreConfigs({
+		"dirTarget": false
+	})
+	motionEngine.getObjectMove().setDir(getObjetcRoot().global_position.direction_to(data["target"]))
+	motionEngine.setActive(true)
+	getObjetcRoot().look_at(data["target"])
 	getObjetcRoot().show()
 
 func _reset(data:Dictionary = {}):
