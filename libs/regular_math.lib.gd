@@ -152,3 +152,88 @@ class TimeData:
 		_seconds = seconds
 		_minutes = minutes
 		_hour = hours
+
+class Radom extends RandomNumberGenerator:
+	class RandomInput:
+		var _input = {
+			"percent_base": 0,
+			"percent_bonus": 0,
+			"percent_fall": 0
+		}
+		
+		func format_number(input):
+			var size_input = len(input)
+			var percent = input[size_input - 1]
+			if percent == "%":
+				input[size_input - 1] = ""
+				return float(input)
+			return float(input)
+		
+		func set_input(input:Dictionary):
+			for key in input.keys():
+				if _input.has(key):
+					_input[key] = format_number(input[key])
+		
+		func get_input(input):
+			return _input.get(input)
+	
+	class Posibility:
+		enum Cases {
+			OK
+			FAILED
+		}
+		
+		var case
+		var current_percent
+		var falls_count
+		var sucsse_count
+		var falls_percent
+		var sucsse_percent
+		var input:RandomInput
+	
+	var _posibilities = []
+	
+	func percent_to_decimal(percent) -> float:
+		return (percent / 100)
+	
+	func decimal_to_percent(decimal) -> float:
+		return (decimal * 100)
+	
+	func generate_list_posibilities(try_number:int, input:RandomInput):
+		var __list = []
+		var __percent_base = percent_to_decimal(input.get_input("percent_base"))
+		var __percent_bonus = percent_to_decimal(input.get_input("percent_bonus"))
+		var __percent_fall = percent_to_decimal(input.get_input("percent_fall"))
+		var __falls:int
+		var __sucs:int
+		var __sucs_bonus:float
+		var __fall_bonus:float
+		for try in range(try_number):
+			var __posibility = Posibility.new()
+			__posibility.input = input
+			var __value = self.randf_range(0, 1)
+			__sucs_bonus = __percent_bonus * ((__falls + 1) / 3)
+			__fall_bonus = __percent_fall * ((__sucs + 1) / 2)
+			if  __value < __percent_base:
+				__falls = 0
+				__sucs += 1
+				__percent_base -= __fall_bonus
+				__posibility.case = __posibility.Cases.OK
+				__posibility.current_percent = __percent_base
+				__posibility.sucsse_count = __sucs
+				__posibility.falls_count = __falls
+				__posibility.sucsse_percent = __fall_bonus
+				__posibility.falls_percent = __sucs_bonus
+				__list.append(__posibility)
+				continue
+			__falls += 1
+			__sucs = 0
+			__percent_base += __sucs_bonus
+			__posibility.case = __posibility.Cases.FAILED
+			__posibility.current_percent = __percent_base
+			__posibility.sucsse_count = __sucs
+			__posibility.falls_count = __falls
+			__posibility.sucsse_percent = __fall_bonus
+			__posibility.falls_percent = __sucs_bonus
+			__list.append(__posibility)
+		return __list
