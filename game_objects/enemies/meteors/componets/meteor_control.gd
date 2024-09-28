@@ -32,7 +32,6 @@ func setMeteor(meteor:MeteorData = null):
 			meteorData = meteors[0]
 	
 	_currentData = meteorData
-	print(_currentData, " ", meteorData)
 	
 	var shape = CircleShape2D.new()
 	shape.radius = (meteorData.texture.get_width()/2) - meteorData.meteorTreshoald

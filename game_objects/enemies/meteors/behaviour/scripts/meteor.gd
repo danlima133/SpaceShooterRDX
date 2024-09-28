@@ -54,7 +54,7 @@ func _reset(data:Dictionary = {}):
 	getObjetcRoot().hide()
 	getObjetcRoot().global_position = Vector2.ZERO
 	getObjetcRoot().sleeping = true
-	#meteorControl._currentData = null
+	meteorControl._currentData = null
 	texture.texture = null
 	
 	hurt_box.setActive(false)

@@ -21,6 +21,7 @@ func spaw(config:Dictionary, data:Dictionary = {}) -> Array:
 		if config.has("count"):
 			if counter == config["count"]:
 				break
+		else: config["count"] = 1
 		
 		if not object.getActive():
 			objectsManagersSpaw.append(object._spaw(data))
