@@ -18,14 +18,13 @@ func spaw(config:Dictionary, data:Dictionary = {}) -> Array:
 	var objectsManagersSpaw = []
 	
 	for object in controllerObjects[config["group"]]:
-		if object.getActive() == false:
+		if config.has("count"):
+			if counter == config["count"]:
+				break
+		
+		if not object.getActive():
 			objectsManagersSpaw.append(object._spaw(data))
 			counter += 1
-			
-			if config.has("count"):
-				if counter == config["count"]:
-					break
-			else: break
 	
 	return objectsManagersSpaw
 

@@ -1,5 +1,3 @@
-extends Script
-
 class RectsMap:
 	class Map extends Node2D:
 		
@@ -153,87 +151,107 @@ class TimeData:
 		_minutes = minutes
 		_hour = hours
 
-class Radom extends RandomNumberGenerator:
-	class RandomInput:
-		var _input = {
-			"percent_base": 0,
-			"percent_bonus": 0,
-			"percent_fall": 0
-		}
-		
-		func format_number(input):
-			var size_input = len(input)
-			var percent = input[size_input - 1]
-			if percent == "%":
-				input[size_input - 1] = ""
-				return float(input)
-			return float(input)
-		
-		func set_input(input:Dictionary):
-			for key in input.keys():
-				if _input.has(key):
-					_input[key] = format_number(input[key])
-		
-		func get_input(input):
-			return _input.get(input)
-	
+class Radom:
+
 	class Posibility:
 		enum Cases {
-			OK
+			SUCCSSE
 			FAILED
 		}
 		
 		var case
-		var current_percent
-		var falls_count
-		var sucsse_count
-		var falls_percent
-		var sucsse_percent
-		var input:RandomInput
-	
-	var _posibilities = []
-	
-	func percent_to_decimal(percent) -> float:
-		return (percent / 100)
-	
-	func decimal_to_percent(decimal) -> float:
-		return (decimal * 100)
-	
-	func generate_list_posibilities(try_number:int, input:RandomInput):
-		var __list = []
-		var __percent_base = percent_to_decimal(input.get_input("percent_base"))
-		var __percent_bonus = percent_to_decimal(input.get_input("percent_bonus"))
-		var __percent_fall = percent_to_decimal(input.get_input("percent_fall"))
-		var __falls:int
-		var __sucs:int
-		var __sucs_bonus:float
+		var percent
+
+	class DynamicPosibilities extends RandomNumberGenerator:
+		
+		class RandomInput:
+			var _input = {
+				"percent_base": 0,
+				"percent_bonus": 0,
+				"percent_fall": 0,
+				"height_succsse": 5,
+				"height_fall": 3
+			}
+			
+			func set_input(input:Dictionary):
+				for key in input.keys():
+					if _input.has(key):
+						_input[key] = input[key]
+			
+			func get_input(input):
+				return _input.get(input)
+
+		var __percent_base:float
+		var __percent_succsse:float
+		var __percent_fall:float
+		var __height_succsse:int
+		var __height_fall:int
+		var __falls_count:int
+		var __succsse_count:int
+		var __succsse_bonus:float
 		var __fall_bonus:float
-		for try in range(try_number):
+		
+		func set_random_input(input:RandomInput):
+			__percent_base = input.get_input("percent_base")
+			__percent_succsse = input.get_input("percent_bonus")
+			__percent_fall = input.get_input("percent_fall")
+			__height_succsse = int(input.get_input("height_succsse"))
+			__height_fall = int(input.get_input("height_fall"))
+
+		func get_posibility():
 			var __posibility = Posibility.new()
-			__posibility.input = input
 			var __value = self.randf_range(0, 1)
-			__sucs_bonus = __percent_bonus * ((__falls + 1) / 3)
-			__fall_bonus = __percent_fall * ((__sucs + 1) / 2)
+			
+			__succsse_bonus = __percent_succsse * ((__falls_count + 1) / __height_succsse)
+			__fall_bonus = __percent_fall * ((__succsse_count + 1) / __height_fall)
+			
 			if  __value < __percent_base:
-				__falls = 0
-				__sucs += 1
+				__falls_count = 0
+				__succsse_count += 1
 				__percent_base -= __fall_bonus
-				__posibility.case = __posibility.Cases.OK
-				__posibility.current_percent = __percent_base
-				__posibility.sucsse_count = __sucs
-				__posibility.falls_count = __falls
-				__posibility.sucsse_percent = __fall_bonus
-				__posibility.falls_percent = __sucs_bonus
-				__list.append(__posibility)
-				continue
-			__falls += 1
-			__sucs = 0
-			__percent_base += __sucs_bonus
-			__posibility.case = __posibility.Cases.FAILED
-			__posibility.current_percent = __percent_base
-			__posibility.sucsse_count = __sucs
-			__posibility.falls_count = __falls
-			__posibility.sucsse_percent = __fall_bonus
-			__posibility.falls_percent = __sucs_bonus
-			__list.append(__posibility)
-		return __list
+				__posibility.case = __posibility.Cases.SUCCSSE
+			else:
+				__falls_count += 1
+				__succsse_count = 0
+				__percent_base += __succsse_bonus
+				__posibility.case = __posibility.Cases.FAILED
+				
+			__percent_base = clamp(__percent_base, 0, 1)
+			
+			__posibility.percent = __percent_base
+			
+			return __posibility
+	
+		func get_count_with_posibility(counts):
+			var __count:int
+			
+			for count in range(counts):
+				var __posibility = get_posibility()
+				if __posibility.case == Posibility.Cases.SUCCSSE:
+					__count += 1
+			
+			return __count
+
+	static func get_posibility_by_percent(percent, algorithm:RandomNumberGenerator = null):
+		var posibility = Posibility.new()
+		posibility.percent = percent
+		
+		var value:float
+		
+		if algorithm != null:
+			value = algorithm.randf_range(0, 1)
+		else:
+			value = rand_range(0, 1)
+		
+		if value < percent:
+			posibility.case = posibility.Cases.SUCCSSE
+		else:
+			posibility.case = posibility.Cases.FAILED
+		
+		return posibility
+
+static func percent_to_decimal(percent) -> float:
+	return (float(percent) / 100)
+
+static func decimal_to_percent(decimal) -> float:
+	return (decimal * 100)

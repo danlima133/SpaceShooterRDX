@@ -70,50 +70,13 @@ func _preCalc():
 	
 	for positionMap in positions:
 		var rect = mapSpaw.getRectByPosition(positionMap)
-		var entities = object_pooling.spaw({ "group": "entities" }, {
+		var entities = object_pooling.spaw({ "group": "entities", "count": 1 }, {
 			"position": rect.get_center()
 		})
 
 		emit_signal("spaw", entities)
 	
 	_setTimer()
-
-func _getPositionWithTolerace(testPosition:Vector2, tolerance:int, offset:float) -> Vector2:
-	var newPosition:Vector2
-	var distance = lastPositionSpaw.distance_to(testPosition)
-	if distance <= tolerance:
-		var dir = (testPosition - lastPositionSpaw).normalized() / 2
-		var correctionPos = dir * (tolerance + offset)
-		var diference = lastPositionSpaw - (testPosition + correctionPos)
-		return diference
-	return Vector2.ZERO
-
-func _spaw():
-	var position:Vector2
-	
-	var entityPosition:Dictionary
-	entityPosition = spawConfig.getConfig().getValue("entityPosition")
-	
-	var positionXRand:bool
-	var positionYRand:bool
-	
-	positionXRand = dynamicResource.isRangeValue(entityPosition["x"])
-	positionYRand = dynamicResource.isRangeValue(entityPosition["y"])
-	
-	if positionXRand:
-		position.x += dynamicResource.generateRangeValue(entityPosition["x"], dynamicResource.TypeRand.FLOAT)
-	if positionYRand:
-		position.y += dynamicResource.generateRangeValue(entityPosition["y"], dynamicResource.TypeRand.FLOAT)
-	
-	if not (positionXRand and positionYRand):
-		position += Vector2(dynamicResource.getValueFromRand(entityPosition["x"], dynamicResource.Value.DEFAULT), dynamicResource.getValueFromRand(entityPosition["y"], dynamicResource.Value.DEFAULT))
-
-	var pos = _getPositionWithTolerace(position, spawConfig.tolerance, spawConfig.offset)
-	if pos != Vector2.ZERO:
-		if position.x != 0:
-			position.x = pos.x
-		if position.y != 0:
-			position.y = pos.y
 
 func stop():
 	lastTimer = spawnerTimer.time_left
