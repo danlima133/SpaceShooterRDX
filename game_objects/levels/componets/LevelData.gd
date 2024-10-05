@@ -21,6 +21,7 @@ class_name LevelData # <--- Custom Class
 class Refs:
 	enum Scope {
 		STARS
+		PLAYER
 	}
 	
 	enum Token {
@@ -28,16 +29,19 @@ class Refs:
 		BRONZE
 		SILVIER
 		GOLD
+		SCORE
 	}
 	
 	const scopes = {
-		Scope.STARS: "stars"
+		Scope.STARS: "stars",
+		Scope.PLAYER: "player"
 	}
 
 	const tokens = {
 		Token.BRONZE: "bronze",
 		Token.SILVIER: "silvier",
-		Token.GOLD: "gold"
+		Token.GOLD: "gold",
+		Token.SCORE: "score"
 	}
 
 # --------- END ------------
@@ -55,6 +59,9 @@ var _level_data = {
 		Refs.Token.BRONZE: 0,
 		Refs.Token.SILVIER: 0,
 		Refs.Token.GOLD: 0
+	},
+	Refs.Scope.PLAYER: {
+		Refs.Token.SCORE: 0
 	}
 }
 

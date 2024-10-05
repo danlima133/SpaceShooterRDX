@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://game_objects/player/script/player.gd" type="Script" id=1]
 [ext_resource path="res://game_objects/player/componets/attributes.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=9]
 [ext_resource path="res://members/collision_box/target_box/scene/target_box.tscn" type="PackedScene" id=10]
 [ext_resource path="res://game_objects/player/componets/collectables.gd" type="Script" id=11]
+[ext_resource path="res://nodes/member_group/node/MemberGroupNode.gd" type="Script" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 13.0
@@ -35,6 +36,10 @@ position = Vector2( 0, -42 )
 __meta__ = {
 "_gizmo_extents_": 20.0
 }
+
+[node name="MemberGroup" type="Node" parent="." groups=["game"]]
+script = ExtResource( 12 )
+_tag = "player"
 
 [node name="object_pooling" parent="." instance=ExtResource( 7 )]
 configPooling = {
@@ -61,12 +66,12 @@ _id = 2
 script = ExtResource( 8 )
 _id = 10
 
+[node name="collectables" type="Node" parent="ManagerComponets"]
+script = ExtResource( 11 )
+
 [node name="player_flags" type="Node" parent="ManagerComponets"]
 script = ExtResource( 3 )
 _id = 1
-
-[node name="collectables" type="Node" parent="ManagerComponets"]
-script = ExtResource( 11 )
 
 [node name="hurt_box" parent="." instance=ExtResource( 6 )]
 id = 409

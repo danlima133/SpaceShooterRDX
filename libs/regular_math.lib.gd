@@ -222,15 +222,20 @@ class Radom:
 			
 			return __posibility
 	
-		func get_count_with_posibility(counts):
+		func get_posibility_with_count(counts):
 			var __count:int
 			
 			for count in range(counts):
 				var __posibility = get_posibility()
 				if __posibility.case == Posibility.Cases.SUCCSSE:
 					__count += 1
-			
 			return __count
+		
+		func get_posibility_as_list(list_size):
+			var list = []
+			for index in range(list_size):
+				list.append(get_posibility())
+			return list
 
 	static func get_posibility_by_percent(percent, algorithm:RandomNumberGenerator = null):
 		var posibility = Posibility.new()

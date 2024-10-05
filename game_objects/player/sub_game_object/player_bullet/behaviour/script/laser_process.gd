@@ -2,6 +2,10 @@ extends ObjectProcess
 
 onready var motionEngine = $"../MotionEngine"
 
+var safe_position = Vector2.ZERO
+
+var rewards_player:Componet
+
 func _objectEnter():
 	getObjetcRoot().hide()
 
@@ -32,9 +36,17 @@ func _on_hit_box_hitEvent(hitBox):
 		ME.getObjectMove().setDir(Vector2(0, -1))
 		if ME.typeMotionBody == ME.motionBody.RIGBODY:
 			ME.getObjectMove().impulse(false, 80)
+	safe_position = getObjetcRoot().global_position
 	getObjectManger()._reset()
 # -- end --
+
+func _on_hit_box_hitKilledHurt(hurtBox):
+	rewards_player.set_score_player(10)
+	rewards_player.generate_stars(safe_position)
 
 func _on_target_box_action(action:String, triger:CollisionBox, target:TargetBox, type:int):
 	if action == "killPlayerBullet":
 		getObjectManger()._reset()
+
+func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager:ManagerComponets):
+	rewards_player = manager.getComponet(0)

@@ -41,6 +41,9 @@ script = ExtResource( 9 )
 [node name="event_meteors" parent="ManagerEvents" instance=ExtResource( 10 )]
 spawnersRefs = [ NodePath("../../spawner") ]
 
+[node name="position" parent="ManagerEvents/event_meteors/spawner" index="3"]
+position = Vector2( 1280, -100 )
+
 [node name="test_execute_meteros_flame" parent="." instance=ExtResource( 11 )]
 managerEventsPath = NodePath("../ManagerEvents")
 timeMin = 20.0
@@ -55,71 +58,90 @@ anchor_bottom = 1.0
 [node name="VBoxContainer" type="VBoxContainer" parent="hud/margin"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -118.0
+margin_left = -131.0
 margin_bottom = 76.0
 
-[node name="time_level" type="Label" parent="hud/margin/VBoxContainer"]
-margin_right = 118.0
+[node name="HBoxContainer" type="HBoxContainer" parent="hud/margin/VBoxContainer"]
+margin_right = 131.0
+margin_bottom = 14.0
+alignment = 1
+
+[node name="time_level" type="Label" parent="hud/margin/VBoxContainer/HBoxContainer"]
+margin_left = 45.0
+margin_right = 65.0
 margin_bottom = 14.0
 text = "0:0"
 align = 1
 
+[node name="VSeparator" type="VSeparator" parent="hud/margin/VBoxContainer/HBoxContainer"]
+margin_left = 69.0
+margin_right = 73.0
+margin_bottom = 14.0
+
+[node name="score" type="Label" parent="hud/margin/VBoxContainer/HBoxContainer"]
+margin_left = 77.0
+margin_right = 85.0
+margin_bottom = 14.0
+text = "0"
+align = 1
+
 [node name="HSeparator" type="HSeparator" parent="hud/margin/VBoxContainer"]
 margin_top = 18.0
-margin_right = 118.0
+margin_right = 131.0
 margin_bottom = 22.0
 
 [node name="star_bronze" type="HBoxContainer" parent="hud/margin/VBoxContainer"]
 margin_top = 26.0
-margin_right = 118.0
+margin_right = 131.0
 margin_bottom = 40.0
 alignment = 1
 
 [node name="label" type="Label" parent="hud/margin/VBoxContainer/star_bronze"]
-margin_left = 29.0
-margin_right = 77.0
+margin_left = 35.0
+margin_right = 83.0
 margin_bottom = 14.0
+size_flags_horizontal = 0
 text = "bronze:"
 
 [node name="value" type="Label" parent="hud/margin/VBoxContainer/star_bronze"]
-margin_left = 81.0
-margin_right = 89.0
+margin_left = 87.0
+margin_right = 95.0
 margin_bottom = 14.0
 text = "0"
 
 [node name="star_silvier" type="HBoxContainer" parent="hud/margin/VBoxContainer"]
 margin_top = 44.0
-margin_right = 118.0
+margin_right = 131.0
 margin_bottom = 58.0
 alignment = 1
 
 [node name="label" type="Label" parent="hud/margin/VBoxContainer/star_silvier"]
-margin_left = 31.0
-margin_right = 74.0
+margin_left = 38.0
+margin_right = 81.0
 margin_bottom = 14.0
 text = "silvier:"
 
 [node name="value" type="Label" parent="hud/margin/VBoxContainer/star_silvier"]
-margin_left = 78.0
-margin_right = 86.0
+margin_left = 85.0
+margin_right = 93.0
 margin_bottom = 14.0
 text = "0"
 
 [node name="star_gold" type="HBoxContainer" parent="hud/margin/VBoxContainer"]
 margin_top = 62.0
-margin_right = 118.0
+margin_right = 131.0
 margin_bottom = 76.0
 alignment = 1
 
 [node name="label" type="Label" parent="hud/margin/VBoxContainer/star_gold"]
-margin_left = 37.0
-margin_right = 68.0
+margin_left = 44.0
+margin_right = 75.0
 margin_bottom = 14.0
 text = "gold:"
 
 [node name="value" type="Label" parent="hud/margin/VBoxContainer/star_gold"]
-margin_left = 72.0
-margin_right = 80.0
+margin_left = 79.0
+margin_right = 87.0
 margin_bottom = 14.0
 text = "0"
 
@@ -151,10 +173,10 @@ position = Vector2( 1280, -100 )
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 640, 595 )
 
-[node name="player_flags" parent="player/ManagerComponets" index="3"]
+[node name="player_flags" parent="player/ManagerComponets" index="4"]
 Flags = {
 "bounds": true,
-"game_over": true,
+"game_over": false,
 "movement": true,
 "shoot": true
 }
@@ -163,4 +185,5 @@ Flags = {
 [connection signal="set_value" from="ManagerComponets/level_data" to="." method="_on_level_data_set_value"]
 [connection signal="eventStart" from="ManagerEvents/event_meteors" to="." method="_on_event_meteors_eventStart"]
 
+[editable path="ManagerEvents/event_meteors"]
 [editable path="player"]

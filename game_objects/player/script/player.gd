@@ -18,7 +18,12 @@ var player_flgas:Componet
 
 func gameOver(die:String, data:Dictionary = {}):
 	if player_flgas.getFlagState("game_over"):
-		print('player die: ' + die)
+		var manager = Groups.Manager.new()
+		manager.initManager(self)
+		if manager.hasTagOnGroup("level", "data"):
+			var member = manager.getMemberWithTag("level", "data") as MemberGroup
+			var level_data = member.getOutputObject() as LevelData
+			print(level_data.export_data())
 		queue_free()
 
 func _getVectorToInt(x:int, y:int) -> Vector2:
@@ -51,11 +56,5 @@ func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager):
 
 # ---------- block is test ----------
 func _on_hurt_box_hurtNoValue(hurtBox):
-	var manager = Groups.Manager.new()
-	manager.initManager(self)
-	if manager.hasTagOnGroup("level", "data"):
-		var member = manager.getMemberWithTag("level", "data") as MemberGroup
-		var level_data = member.getOutputObject() as LevelData
-		print(level_data.export_data())
 	gameOver("by ship")
 # --------------- end --------------

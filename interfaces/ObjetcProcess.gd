@@ -15,6 +15,9 @@ func getObjetcRoot():
 func _spaw(data:Dictionary = {}):
 	pass
 
+func _process_on_spaw(delta):
+	pass
+
 func _objectEnter():
 	pass
 

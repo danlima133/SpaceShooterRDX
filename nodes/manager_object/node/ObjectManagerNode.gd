@@ -12,6 +12,9 @@ var _active:bool
 
 var _objectProcess:ObjectProcess
 
+func _process(delta):
+	_objectProcess._process_on_spaw(delta)
+
 func _initObject():
 	if !objectProcess.is_empty():
 		_objectProcess = get_node(objectProcess)
@@ -26,6 +29,7 @@ func getObjectProcess():
 
 func _setActive(value):
 	_active = value
+	set_process(_active)
 
 func getActive():
 	return _active

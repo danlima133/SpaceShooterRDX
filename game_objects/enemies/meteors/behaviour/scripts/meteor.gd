@@ -96,10 +96,6 @@ func _on_hurt_box_hurtNoValue(hurtBox):
 			"position": getObjetcRoot().position,
 			"fragment": fragment
 		})
-
-	object_pooling.spaw({ "group": "stars", "count": randi() % 3}, {
-		"position": getObjetcRoot().global_position
-	})
 	getObjectManger()._reset()
 
 func _on_hurt_box_hurtEvent(hitBox):

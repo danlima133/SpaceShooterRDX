@@ -21,6 +21,7 @@ objectProcess = NodePath("star")
 
 [node name="star" type="Node" parent="ObjectManager"]
 script = ExtResource( 6 )
+_velocity_to_target = 750
 
 [node name="ManagerComponets" type="Node" parent="."]
 script = ExtResource( 2 )

@@ -14,7 +14,7 @@ func _ready():
 		"percent_bonus": RegularMath.percent_to_decimal(2),
 		"percent_fall": RegularMath.percent_to_decimal(4),
 		"height_succsse": 6,
-		"height_fall": 3
+		"height_fall": 2
 	})
 	
 	__dynamic_posibilities.set_random_input(random_input)
@@ -25,8 +25,14 @@ func _input(event):
 		if event.pressed:
 			match event.scancode:
 				KEY_0:
-					var counts = __dynamic_posibilities.get_count_with_posibility(3)
-					print(counts)
-					object_pooling.spaw({ "group": "stars", "count": counts}, {
-						"position": Vector2(1280/2, 720/2)
-					})
+					var function = funcref(self, "_data_stars")
+					object_pooling.spaw({ "group": "stars", "count": 3, "metafunction": { "function": function, "args": [] }})
+				KEY_1:
+					object_pooling.reset("stars")
+
+func _data_stars():
+	var posibilities = __dynamic_posibilities.get_posibility_as_list(3)
+	return {
+		"position": $position.global_position,
+		"posibilities": posibilities
+	}

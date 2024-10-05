@@ -33,10 +33,6 @@ configPooling = {
 "fragments": {
 "count": 10,
 "object": "res://game_objects/enemies/meteor_fragments/scene/meteor_fragment.tscn"
-},
-"stars": {
-"count": 3,
-"object": "res://game_objects/star/scene/star.tscn"
 }
 }
 

@@ -8,6 +8,7 @@ enum propertyNames {
 }
 
 signal hitEvent(hurtBox)
+signal hitKilledHurt(hurtBox)
 
 export(Array, int) var filterHurtBox
 
@@ -18,10 +19,12 @@ export(float) var _timerToHit
 func _ready():
 	initCollisionBox(self)
 
-func _collisionEnterBox(box):
+func _collisionEnterBox(box:HurtBox):
 	if !checkColliders(box.id, filterHurtBox):
 		emit_signal("hitEvent", box)
 		box.hurt(_hitValue, box)
+		if box.getHurt() <= box.getHurtLimit():
+			emit_signal("hitKilledHurt", box)
 		if _hitContinues:
 			box.createTimerOrActive(self)
 

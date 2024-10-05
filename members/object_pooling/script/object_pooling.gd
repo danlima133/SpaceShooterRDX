@@ -24,7 +24,12 @@ func spaw(config:Dictionary, data:Dictionary = {}) -> Array:
 		else: config["count"] = 1
 		
 		if not object.getActive():
-			objectsManagersSpaw.append(object._spaw(data))
+			var data_object = data
+			if config.has("metafunction"):
+				var metafunction:FuncRef = config["metafunction"]["function"]
+				data_object = metafunction.call_funcv(config["metafunction"]["args"])
+			var object_spaw = object._spaw(data_object)
+			objectsManagersSpaw.append(object_spaw)
 			counter += 1
 	
 	return objectsManagersSpaw
