@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "CameraSystem",
+"language": "GDScript",
+"path": "res://nodes/camera_system/node/CameraSystemNode.gd"
+}, {
 "base": "Area2D",
 "class": "CollisionBox",
 "language": "GDScript",
@@ -44,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://members/collision_box/hurt_box/script/hurt_box.gd"
 }, {
+"base": "Componet",
+"class": "LevelData",
+"language": "GDScript",
+"path": "res://game_objects/levels/componets/LevelData.gd"
+}, {
 "base": "Node",
 "class": "ManagerComponets",
 "language": "GDScript",
@@ -53,6 +63,11 @@ _global_script_classes=[ {
 "class": "ManagerEvents",
 "language": "GDScript",
 "path": "res://nodes/manager_events/node/ManagerEventsNode.gd"
+}, {
+"base": "Node",
+"class": "MemberGroup",
+"language": "GDScript",
+"path": "res://nodes/member_group/node/MemberGroupNode.gd"
 }, {
 "base": "Resource",
 "class": "MeteorData",
@@ -103,8 +118,14 @@ _global_script_classes=[ {
 "class": "TargetBox",
 "language": "GDScript",
 "path": "res://members/collision_box/target_box/script/target_box.gd"
+}, {
+"base": "Node",
+"class": "ValidatedArea",
+"language": "GDScript",
+"path": "res://nodes/validated_area/node/ValidatedAreaNode.gd"
 } ]
 _global_script_class_icons={
+"CameraSystem": "res://nodes/camera_system/icon/node.png",
 "CollisionBox": "",
 "Componet": "",
 "ControllerFunctions": "",
@@ -112,8 +133,10 @@ _global_script_class_icons={
 "Function": "",
 "HitBox": "",
 "HurtBox": "",
+"LevelData": "",
 "ManagerComponets": "res://nodes/manager_componets/icon/node.png",
 "ManagerEvents": "res://nodes/manager_events/icon/node.png",
+"MemberGroup": "res://nodes/member_group/icon/node.png",
 "MeteorData": "",
 "MeteorFragment": "",
 "MotionConfig": "",
@@ -123,7 +146,8 @@ _global_script_class_icons={
 "ObjectProcess": "",
 "Player": "",
 "SpawData": "",
-"TargetBox": ""
+"TargetBox": "",
+"ValidatedArea": "res://nodes/validated_area/icon/node.png"
 }
 
 [application]

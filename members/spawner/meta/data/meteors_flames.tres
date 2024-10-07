@@ -8,8 +8,8 @@ timeSpaw = PoolIntArray( 2, 3 )
 countToSpaw = PoolIntArray( 1, 2 )
 mapData = {
 "cell_size": 130,
-"offset": Vector2( -1225, -65 ),
-"x": 9,
+"offset": Vector2( -3000, -65 ),
+"x": 23,
 "y": 1
 }
 useFunction = true

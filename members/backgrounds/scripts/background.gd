@@ -1,6 +1,8 @@
 tool
 extends Node2D
 
+const Groups = preload("res://libs/groups.lib.gd")
+
 enum BackgroundVariations {
 	BLUE
 	GREEN
@@ -20,6 +22,8 @@ export(BackgroundVariations) var backgroundType setget _setType
 export(Dictionary) var configBackground setget _setConfig
 
 onready var texture = $texture
+
+var _manager_groups = Groups.Manager.new()
 
 func _setType(new_value):
 	backgroundType = new_value
@@ -52,5 +56,14 @@ func _getBackgroundByConfig(group:int, config:Dictionary = {}) -> Texture:
 		return _getImageByPath(pathFile, null)
 	return null
 
+func _configByLevel():
+	if _manager_groups.hasTagOnGroup("level", "data"):
+		var __member = _manager_groups.getMemberWithTag("level", "data") as MemberGroup
+		var __level_data = __member.getOutputObject() as LevelData
+		
+		texture.region_rect.size = __level_data.level_size
+
 func _ready():
+	_manager_groups.initManager(self)
+	_configByLevel()
 	texture.texture = _getBackgroundByConfig(backgroundType, configBackground)

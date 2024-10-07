@@ -18,14 +18,19 @@ func spaw(config:Dictionary, data:Dictionary = {}) -> Array:
 	var objectsManagersSpaw = []
 	
 	for object in controllerObjects[config["group"]]:
-		if object.getActive() == false:
-			objectsManagersSpaw.append(object._spaw(data))
+		if config.has("count"):
+			if counter == config["count"]:
+				break
+		else: config["count"] = 1
+		
+		if not object.getActive():
+			var data_object = data
+			if config.has("metafunction"):
+				var metafunction:FuncRef = config["metafunction"]["function"]
+				data_object = metafunction.call_funcv(config["metafunction"]["args"])
+			var object_spaw = object._spaw(data_object)
+			objectsManagersSpaw.append(object_spaw)
 			counter += 1
-			
-			if config.has("count"):
-				if counter == config["count"]:
-					break
-			else: break
 	
 	return objectsManagersSpaw
 

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://nodes/manager_componets/node/ManagerComponetsNode.gd" type="Script" id=1]
+[ext_resource path="res://game_objects/camera_level/componets/camera.gd" type="Script" id=2]
+
+[node name="level_camera" type="Camera2D"]
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.5
+drag_margin_top = 0.3
+drag_margin_right = 0.5
+drag_margin_bottom = 0.3
+editor_draw_limits = true
+editor_draw_drag_margin = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ManagerComponets" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="camera" type="Node" parent="ManagerComponets"]
+script = ExtResource( 2 )

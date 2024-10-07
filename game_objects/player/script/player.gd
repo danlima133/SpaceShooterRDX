@@ -1,7 +1,8 @@
 extends Node2D
 class_name Player
 
-onready var visibility = $visibility
+const Groups = preload("res://libs/groups.lib.gd")
+
 onready var texture = $texture
 
 var _dirX:int
@@ -16,7 +17,12 @@ var player_flgas:Componet
 
 func gameOver(die:String, data:Dictionary = {}):
 	if player_flgas.getFlagState("game_over"):
-		print('player die: ' + die)
+		var manager = Groups.Manager.new()
+		manager.initManager(self)
+		if manager.hasTagOnGroup("level", "data"):
+			var member = manager.getMemberWithTag("level", "data") as MemberGroup
+			var level_data = member.getOutputObject() as LevelData
+			print(level_data.export_data())
 		queue_free()
 
 func _getVectorToInt(x:int, y:int) -> Vector2:
@@ -32,9 +38,6 @@ func _movement(delta):
 	playerDir = _getVectorToInt(_dirX, _dirY)
 	
 	translate(playerDir.normalized() * attributes.getVelocity() * delta)
-
-func _draw():
-	draw_rect(Rect2(visibility.position.x + (-5), visibility.position.y + (-5), 10, 10), Color.red, true)
 
 func _process(delta):
 	update()

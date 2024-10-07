@@ -44,7 +44,3 @@ script = ExtResource( 3 )
 rootMotionPath = NodePath("..")
 motionConfig = ExtResource( 1 )
 initActive = false
-
-[node name="checker" type="VisibilityNotifier2D" parent="."]
-
-[connection signal="screen_exited" from="checker" to="ObjectManager/meteor_flame_process" method="_on_checker_screen_exited"]

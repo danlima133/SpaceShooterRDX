@@ -5,6 +5,8 @@ onready var texture = $"../../texture"
 onready var hit_box = $"../../hit_box"
 onready var hurt_box = $"../../hurt_box"
 onready var shape = $"../../shape"
+onready var coldown = $"../../check/coldown"
+
 
 var dataMeteor:Componet
 
@@ -40,12 +42,16 @@ func _on_ManagerComponets_MangerComponetsInitialize(componetsInit, manager:Manag
 	dataMeteor = manager.getComponet(450)
 
 func _on_hurt_box_hurtNoValue(hittBox):
-	print("destroyed")
 	getObjectManger()._reset()
 
 func _on_hit_box_hitEvent(hurtBox):
-	print("hit %s" % hurtBox.id)
 	getObjectManger()._reset()
 
 func _on_check_screen_exited():
+	coldown.start()
+
+func _on_check_screen_entered():
+	coldown.stop()
+
+func _on_coldown_timeout():
 	getObjectManger()._reset()

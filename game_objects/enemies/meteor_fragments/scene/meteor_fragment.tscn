@@ -11,6 +11,7 @@
 [ext_resource path="res://game_objects/enemies/meteor_fragments/script/meteor_fragment.gd" type="Script" id=9]
 
 [node name="meteor_fragment" type="RigidBody2D"]
+mass = 1.5
 gravity_scale = 0.0
 script = ExtResource( 9 )
 
@@ -51,7 +52,13 @@ id = 23
 
 [node name="check" type="VisibilityNotifier2D" parent="."]
 
+[node name="coldown" type="Timer" parent="check"]
+wait_time = 50.0
+one_shot = true
+
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ObjectManager/logic" method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="hitEvent" from="hit_box" to="ObjectManager/logic" method="_on_hit_box_hitEvent"]
 [connection signal="hurtNoValue" from="hurt_box" to="ObjectManager/logic" method="_on_hurt_box_hurtNoValue"]
+[connection signal="screen_entered" from="check" to="ObjectManager/logic" method="_on_check_screen_entered"]
 [connection signal="screen_exited" from="check" to="ObjectManager/logic" method="_on_check_screen_exited"]
+[connection signal="timeout" from="check/coldown" to="ObjectManager/logic" method="_on_coldown_timeout"]
