@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://members/backgrounds/scenes/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game_objects/player/scene/player.tscn" type="PackedScene" id=2]
@@ -12,9 +12,18 @@
 [ext_resource path="res://nodes/manager_events/behaviour/scenes/events/event_meteors.tscn" type="PackedScene" id=10]
 [ext_resource path="res://tests/game/scenes/test_execute_meteros_flame.tscn" type="PackedScene" id=11]
 [ext_resource path="res://game_objects/levels/scripts/level_1.gd" type="Script" id=12]
+[ext_resource path="res://game_objects/camera_level/scene/level_camera.tscn" type="PackedScene" id=13]
+[ext_resource path="res://nodes/validated_area/node/ValidatedAreaNode.gd" type="Script" id=14]
 
 [node name="level_1" type="Node2D"]
 script = ExtResource( 12 )
+
+[node name="ValidatedArea" type="Node2D" parent="."]
+script = ExtResource( 14 )
+
+[node name="MemberGroup" type="Node" parent="ValidatedArea" groups=["level"]]
+script = ExtResource( 6 )
+_tag = "area"
 
 [node name="ManagerComponets" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -22,6 +31,7 @@ script = ExtResource( 5 )
 [node name="level_data" type="Node" parent="ManagerComponets"]
 script = ExtResource( 7 )
 _id = 23
+level_size = Vector2( 3000, 3000 )
 
 [node name="MemberGroup" type="Node" parent="ManagerComponets/level_data" groups=["level"]]
 script = ExtResource( 6 )
@@ -41,8 +51,16 @@ script = ExtResource( 9 )
 [node name="event_meteors" parent="ManagerEvents" instance=ExtResource( 10 )]
 spawnersRefs = [ NodePath("../../spawner") ]
 
+[node name="spawner" parent="ManagerEvents/event_meteors" index="1"]
+configPooling = {
+"entities": {
+"count": 80,
+"object": "res://game_objects/enemies/meteor_flame/scene/meteor_flame.tscn"
+}
+}
+
 [node name="position" parent="ManagerEvents/event_meteors/spawner" index="3"]
-position = Vector2( 1280, -100 )
+position = Vector2( 3000, -100 )
 
 [node name="test_execute_meteros_flame" parent="." instance=ExtResource( 11 )]
 managerEventsPath = NodePath("../ManagerEvents")
@@ -150,7 +168,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 configBackground = {
-"imageIdx": 0,
+"imageIdx": 2,
 "random": false
 }
 
@@ -161,17 +179,17 @@ __meta__ = {
 _spawData = ExtResource( 4 )
 configPooling = {
 "entities": {
-"count": 20,
+"count": 100,
 "object": "res://game_objects/enemies/meteors/scene/meteor.tscn"
 }
 }
 positionSpawPath = NodePath("spaw_position")
 
 [node name="spaw_position" type="Position2D" parent="spawner"]
-position = Vector2( 1280, -100 )
+position = Vector2( 3000, -100 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 640, 595 )
+position = Vector2( 1500, 1500 )
 
 [node name="player_flags" parent="player/ManagerComponets" index="4"]
 Flags = {
@@ -181,9 +199,13 @@ Flags = {
 "shoot": true
 }
 
+[node name="level_camera" parent="player" instance=ExtResource( 13 )]
+current = true
+
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="set_value" from="ManagerComponets/level_data" to="." method="_on_level_data_set_value"]
 [connection signal="eventStart" from="ManagerEvents/event_meteors" to="." method="_on_event_meteors_eventStart"]
+[connection signal="MangerComponetsInitialize" from="player/ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize_player"]
 
 [editable path="ManagerEvents/event_meteors"]
 [editable path="player"]

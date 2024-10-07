@@ -15,10 +15,11 @@
 [ext_resource path="res://game_objects/enemies/meteors/meta/data/meteors/browns/meteor_4.tres" type="Resource" id=13]
 
 [node name="meteor" type="RigidBody2D"]
+mass = 2.3
 gravity_scale = 0.0
 contacts_reported = 100
 contact_monitor = true
-angular_damp = 8.0
+angular_damp = 10.0
 
 [node name="texture" type="Sprite" parent="."]
 
@@ -66,13 +67,9 @@ filterHurtBox = [ 55, 23 ]
 visible = false
 modulate = Color( 0.92549, 0.0745098, 0.0745098, 1 )
 
-[node name="checker" type="VisibilityNotifier2D" parent="."]
-rect = Rect2( -5, -5, 10, 10 )
-
 [node name="shape" type="CollisionShape2D" parent="."]
 
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ObjectManager/meteor" method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="hurtEvent" from="hurt_box" to="ObjectManager/meteor" method="_on_hurt_box_hurtEvent"]
 [connection signal="hurtNoValue" from="hurt_box" to="ObjectManager/meteor" method="_on_hurt_box_hurtNoValue"]
 [connection signal="hitEvent" from="hit_box" to="ObjectManager/meteor" method="_on_hit_box_hitEvent"]
-[connection signal="screen_exited" from="checker" to="ObjectManager/meteor" method="_on_checker_screen_exited"]

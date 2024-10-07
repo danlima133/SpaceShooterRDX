@@ -32,7 +32,6 @@ func _spaw(data:Dictionary = {}):
 	positionX = clamp(positionX, (positionX * 75) / abs(positionX), (positionX * 150) / abs(positionX))
 	positionY = clamp(positionY, (positionY * 75) / abs(positionY), (positionY * 150) / abs(positionY))
 	var position = getObjetcRoot().global_position + Vector2(positionX, positionY)
-	print(position - getObjetcRoot().global_position)
 	
 	anim.set_ease(Tween.EASE_OUT)
 	anim.set_trans(Tween.TRANS_CUBIC)

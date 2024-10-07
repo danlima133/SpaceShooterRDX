@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "CameraSystem",
+"language": "GDScript",
+"path": "res://nodes/camera_system/node/CameraSystemNode.gd"
+}, {
 "base": "Area2D",
 "class": "CollisionBox",
 "language": "GDScript",
@@ -113,8 +118,14 @@ _global_script_classes=[ {
 "class": "TargetBox",
 "language": "GDScript",
 "path": "res://members/collision_box/target_box/script/target_box.gd"
+}, {
+"base": "Node",
+"class": "ValidatedArea",
+"language": "GDScript",
+"path": "res://nodes/validated_area/node/ValidatedAreaNode.gd"
 } ]
 _global_script_class_icons={
+"CameraSystem": "res://nodes/camera_system/icon/node.png",
 "CollisionBox": "",
 "Componet": "",
 "ControllerFunctions": "",
@@ -135,7 +146,8 @@ _global_script_class_icons={
 "ObjectProcess": "",
 "Player": "",
 "SpawData": "",
-"TargetBox": ""
+"TargetBox": "",
+"ValidatedArea": "res://nodes/validated_area/icon/node.png"
 }
 
 [application]

@@ -1,6 +1,7 @@
 extends Node2D
 
 var level_time:Componet
+var player_bounds:Componet
 var level_data:LevelData
 
 onready var time_level = $hud/margin/VBoxContainer/HBoxContainer/time_level
@@ -22,6 +23,10 @@ func _process(delta):
 	var time = level_time.get_time().time()
 	time[0] = int(time[0])
 	time_level.text = "%s:%s" % [time[1], time[0]]
+	
+	if player_bounds != null:
+		if player_bounds.getWarning():
+			get_tree().quit()
 
 func _on_level_data_set_value(scope, token, value):
 	match token:
@@ -33,3 +38,7 @@ func _on_level_data_set_value(scope, token, value):
 			star_gold.get_node("value").text = str(value)
 		level_data.Refs.Token.SCORE:
 			score.text = str(value)
+
+func _on_ManagerComponets_MangerComponetsInitialize_player(componetsInit, manager:ManagerComponets):
+	player_bounds = manager.getComponet(2)
+	

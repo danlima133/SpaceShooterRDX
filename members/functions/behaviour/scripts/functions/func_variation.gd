@@ -21,7 +21,6 @@ func _start():
 
 func _action():
 	if _index == getLimit():
-		print("reset index")
 		_index = 0
 	
 	if _index == 0:

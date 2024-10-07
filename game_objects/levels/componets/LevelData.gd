@@ -46,11 +46,15 @@ class Refs:
 
 # --------- END ------------
 
+const Groups = preload("res://libs/groups.lib.gd")
+
 #---------- Signal ---------
 
 signal set_value(scope, token, value)
 
 #---------- END ------------
+
+export(Vector2) var level_size
 
 # --------- Members ---------
 
@@ -65,7 +69,17 @@ var _level_data = {
 	}
 }
 
+var _manager_group = Groups.Manager.new()
+
 # --------- END ------------
+
+func _ready():
+	_manager_group.initManager(self)
+	
+	if _manager_group.hasTagOnGroup("level", "area"):
+		var __member = _manager_group.getMemberWithTag("level", "area") as MemberGroup
+		var __safe_area_level = __member.getOutputObject() as ValidatedArea
+		__safe_area_level.set_safe_area(Rect2(Vector2.ZERO, level_size))
 
 # --------- Methods (CUSTOM) ---------:
 

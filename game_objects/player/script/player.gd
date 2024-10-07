@@ -3,7 +3,6 @@ class_name Player
 
 const Groups = preload("res://libs/groups.lib.gd")
 
-onready var visibility = $visibility
 onready var texture = $texture
 
 var _dirX:int
@@ -39,9 +38,6 @@ func _movement(delta):
 	playerDir = _getVectorToInt(_dirX, _dirY)
 	
 	translate(playerDir.normalized() * attributes.getVelocity() * delta)
-
-func _draw():
-	draw_rect(Rect2(visibility.position.x + (-5), visibility.position.y + (-5), 10, 10), Color.red, true)
 
 func _process(delta):
 	update()

@@ -13,7 +13,6 @@ func _on_func_const_step(value, function, metadado):
 		_newValue = dynamicResources.createNewRand(_valueMin + value, _valueMax + value)
 	else:
 		_newValue = dynamicResources.createNewRand(_valueMin + value)
-	print(spawnConfig.getConfig().getValue("countToSpaw"))
 	spawnConfig.getConfig().setValue("countToSpaw", _newValue)
 
 

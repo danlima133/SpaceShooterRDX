@@ -4,7 +4,7 @@
 [ext_resource path="res://game_objects/player/componets/attributes.gd" type="Script" id=2]
 [ext_resource path="res://game_objects/player/componets/player_flags.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/player/nvl_2/playerShip2_green.png" type="Texture" id=4]
-[ext_resource path="res://game_objects/player/componets/contetion.gd" type="Script" id=5]
+[ext_resource path="res://game_objects/player/componets/bounds.gd" type="Script" id=5]
 [ext_resource path="res://members/collision_box/hurt_box/scene/hurt_box.tscn" type="PackedScene" id=6]
 [ext_resource path="res://members/object_pooling/scene/object_pooling.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game_objects/player/componets/shoot_manager.gd" type="Script" id=8]
@@ -27,9 +27,6 @@ script = ExtResource( 1 )
 [node name="texture" type="Sprite" parent="."]
 show_behind_parent = true
 texture = ExtResource( 4 )
-
-[node name="visibility" type="VisibilityNotifier2D" parent="."]
-rect = Rect2( -5, -5, 10, 10 )
 
 [node name="shoot_point" type="Position2D" parent="."]
 position = Vector2( 0, -42 )
@@ -54,13 +51,14 @@ script = ExtResource( 9 )
 
 [node name="attributes" type="Node" parent="ManagerComponets"]
 script = ExtResource( 2 )
-_velocity = 350
+_velocity = 450
 _damage = 1
 _resistence = 10
 
-[node name="contetion" type="Node" parent="ManagerComponets"]
+[node name="bounds" type="Node" parent="ManagerComponets"]
 script = ExtResource( 5 )
 _id = 2
+radius = 30.0
 
 [node name="shoot_manager" type="Node" parent="ManagerComponets"]
 script = ExtResource( 8 )
@@ -96,10 +94,8 @@ position = Vector2( 0, 12 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
-[connection signal="screen_entered" from="visibility" to="ManagerComponets/contetion" method="_on_visibility_screen_entered"]
-[connection signal="screen_exited" from="visibility" to="ManagerComponets/contetion" method="_on_visibility_screen_exited"]
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="." method="_on_ManagerComponets_MangerComponetsInitialize"]
-[connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ManagerComponets/contetion" method="_on_ManagerComponets_MangerComponetsInitialize"]
+[connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ManagerComponets/bounds" method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="MangerComponetsInitialize" from="ManagerComponets" to="ManagerComponets/shoot_manager" method="_on_ManagerComponets_MangerComponetsInitialize"]
 [connection signal="hurtNoValue" from="hurt_box" to="." method="_on_hurt_box_hurtNoValue"]
 [connection signal="action" from="target_box" to="ManagerComponets/collectables" method="_on_target_box_action"]
