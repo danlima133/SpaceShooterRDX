@@ -4,9 +4,6 @@
 [ext_resource path="res://nodes/manager_object/node/ObjectManagerNode.gd" type="Script" id=2]
 [ext_resource path="res://tests/game/scenes/poolings/objects_process/test2Object.gd" type="Script" id=3]
 
-
-
-
 [node name="teste_poopling" type="Sprite"]
 modulate = Color( 0.0862745, 0.976471, 0.0117647, 1 )
 texture = ExtResource( 1 )

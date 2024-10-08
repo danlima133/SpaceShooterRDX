@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://members/object_pooling/scene/object_pooling.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tests/game/scripts/test_pooling_objects.gd" type="Script" id=2]
+
+[node name="test_pooling_objects" type="Node"]
+script = ExtResource( 2 )
+
+[node name="object_pooling" parent="." instance=ExtResource( 1 )]
+configPooling = {
+"o1": {
+"batchs": 8,
+"count": 100,
+"object": "res://tests/game/scenes/poolings/teste_poopling.tscn"
+}
+}
+use_batch = true

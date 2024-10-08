@@ -9,7 +9,8 @@ export(Resource) var _spawData
 export(Dictionary) var configPooling = {
 	"entities": {
 		"count": 0,
-		"object": ""
+		"object": "",
+		"batchs": 0
 	}
 }
 export(NodePath) var positionSpawPath

@@ -13,6 +13,7 @@
 script = ExtResource( 2 )
 
 [node name="object_pooling" parent="." instance=ExtResource( 4 )]
+use_batch = true
 configOnStart = false
 
 [node name="ManagerComponets" type="Node" parent="."]

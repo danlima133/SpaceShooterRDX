@@ -54,6 +54,7 @@ spawnersRefs = [ NodePath("../../spawner") ]
 [node name="spawner" parent="ManagerEvents/event_meteors" index="1"]
 configPooling = {
 "entities": {
+"batchs": 5,
 "count": 80,
 "object": "res://game_objects/enemies/meteor_flame/scene/meteor_flame.tscn"
 }
@@ -179,6 +180,7 @@ __meta__ = {
 _spawData = ExtResource( 4 )
 configPooling = {
 "entities": {
+"batchs": 5,
 "count": 100,
 "object": "res://game_objects/enemies/meteors/scene/meteor.tscn"
 }

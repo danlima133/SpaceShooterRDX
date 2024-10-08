@@ -5,10 +5,10 @@ onready var lifetime = $"../lifetime"
 func _objectEnter():
 	getObjetcRoot().hide()
 
-func _reset(data:Dictionary):
+func _reset(data:Dictionary = {}):
 	get_parent().hide()
 
-func _spaw(data:Dictionary):
+func _spaw(data:Dictionary = {}):
 	get_parent().show()
 	get_parent().global_position = data.position
 	lifetime.start()
